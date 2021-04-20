@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam circledCharacterRadius 0
+skinparam circledCharacterFontSize 0
+skinparam classFontStyle Bold
+'autonumber
+
+Fourmis -> Alex: Authentication Request
+
+@enduml
