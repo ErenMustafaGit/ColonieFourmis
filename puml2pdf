@@ -1,0 +1,23 @@
+#!/bin/bash
+
+racine=$PWD
+cd src/main/uml/
+
+if [ "$1" = "-a" ]
+then
+    for file in *.puml
+    do
+		if [ ! -f $racine/src/main/resources/${file%%.*}.pdf ]
+		then 
+			plantuml -tpdf -o $racine/src/main/resources/ $file > /dev/null 2>&1
+			echo $file
+		fi
+	done
+else
+	for file in *.puml
+	do
+    	plantuml -tpdf -o $racine/src/main/resources/ $file  > /dev/null 2>&1
+    	echo $file
+	done
+fi
+
