@@ -7,6 +7,26 @@ skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
 
-Fourmis -> Alex: Authentication Request
+class Graphe {
+    +createGrid(int width, int height)
+    +putObstacle(int row, int column)
+}
+class Noeud{
+    -Obstacle:boolean
+}
+
+abstract Fourmi {
+    +getNoeud()
+}
+class Reine extends Fourmi{
+    +createColony(int row, int column)
+    +createSoldiers(int amount)
+}
+class Soldat extends Fourmi{
+    +deplacer()
+}
+
+Graphe "-noeuds\n0..n" *--> Noeud : composé de >
+Fourmi "-position\n1" -> Graphe : est sur le >
 
 @enduml
