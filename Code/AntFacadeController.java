@@ -6,6 +6,7 @@ import java.util.BitSet;
 public interface AntFacadeController {
 
 
+    //test
     /**
      * Fixe les paramètres de l'application.
      * @param evaporationParam rythme d'évaporation des phéromones. La valeur par défaut est 1 par itération.
