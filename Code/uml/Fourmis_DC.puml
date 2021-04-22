@@ -28,5 +28,6 @@ class Soldat extends Fourmi{
 
 Graphe "-noeuds\n0..n" *--> Noeud : composé de >
 Fourmi "-position\n1" -> Graphe : est sur le >
+Noeud "-voisins\n0..*" -> Noeud : est voisin de >
 
 @enduml
