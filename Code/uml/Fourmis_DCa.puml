@@ -11,7 +11,7 @@ class Graphe {
 noeuds
 }
 class Noeud{
-obstacle
+free
 }
 
 abstract Fourmi {
@@ -22,7 +22,7 @@ class Reine extends Fourmi{
 class Soldat extends Fourmi{
 }
 
-Graphe *--> Noeud : composé de >
-Fourmi  -> Graphe : est sur le >
+Graphe *-u-> Noeud : composé de >
+Fourmi  -> Noeud : est sur le >
 
 @enduml

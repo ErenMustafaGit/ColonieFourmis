@@ -7,10 +7,19 @@ skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
 
+interface AntFacadeController{
+    +setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
+    +createColony(row:Integer,column:Integer)
+    +createGrid(width:Integer, height:Integer)
+    +putObstacle(row:Integer, column:Integer)
+    +putFood( row:Integer, column:Integer, quantity:Integer);
+    +createWorkers( amount:Integer )
+    +createSoldiers(amount:Integer)
+    +setAntFile(antLogFile:String);
+    +play( duration:Integer, record:boolean )
+}
 class Graphe {
-    +createColony(int row, int column)
-    +createGrid(int width, int height)
-    +putObstacle(int row, int column)
+
 }
 class Noeud{
     -free:boolean
@@ -24,11 +33,12 @@ abstract Fourmi {
 }
 class Reine extends Fourmi{
 
-    +createSoldiers(int amount)
+
 }
 class Soldat extends Fourmi{
     +deplacer()
 }
+
 
 Graphe "-noeuds\n0..n" *-u-> Noeud : composé de >
 Fourmi "-position\n1" -> Noeud : est sur le >
