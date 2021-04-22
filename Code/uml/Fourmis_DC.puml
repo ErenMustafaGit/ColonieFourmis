@@ -13,6 +13,8 @@ class Graphe {
 }
 class Noeud{
     -Obstacle:boolean
+    +isFree():boolean
+    +getVoisins():Noeud[*]
 }
 
 abstract Fourmi {
