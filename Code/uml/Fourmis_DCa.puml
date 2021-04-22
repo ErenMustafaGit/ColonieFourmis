@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam circledCharacterRadius 0
+skinparam circledCharacterFontSize 0
+skinparam classFontStyle Bold
+'autonumber
+
+class Graphe {
+noeuds
+}
+class Noeud{
+obstacle
+}
+
+abstract Fourmi {
+position
+}
+class Reine extends Fourmi{
+}
+class Soldat extends Fourmi{
+}
+
+Graphe *--> Noeud : composé de >
+Fourmi  -> Graphe : est sur le >
+
+@enduml
