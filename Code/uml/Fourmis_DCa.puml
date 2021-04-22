@@ -7,8 +7,12 @@ skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
 
+interface AntFacadeController{
+
+}
+
 class Graphe {
-noeuds
+
 }
 class Noeud{
 free
