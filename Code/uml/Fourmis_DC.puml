@@ -8,28 +8,30 @@ skinparam classFontStyle Bold
 'autonumber
 
 class Graphe {
+    +createColony(int row, int column)
     +createGrid(int width, int height)
     +putObstacle(int row, int column)
 }
 class Noeud{
-    -Obstacle:boolean
+    -free:boolean
     +isFree():boolean
+    +setFree(boolean)
     +getVoisins():Noeud[*]
 }
 
 abstract Fourmi {
-    +getNoeud()
+    +getPosition():Noeud
 }
 class Reine extends Fourmi{
-    +createColony(int row, int column)
+
     +createSoldiers(int amount)
 }
 class Soldat extends Fourmi{
     +deplacer()
 }
 
-Graphe "-noeuds\n0..n" *--> Noeud : composé de >
-Fourmi "-position\n1" -> Graphe : est sur le >
+Graphe "-noeuds\n0..n" *-u-> Noeud : composé de >
+Fourmi "-position\n1" -> Noeud : est sur le >
 Noeud "-voisins\n0..*" -> Noeud : est voisin de >
 
 @enduml
