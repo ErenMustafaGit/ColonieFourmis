@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+allow_mixing
 skinparam style strictuml
 skinparam classAttributeIconSize 0
 skinparam circledCharacterRadius 0
@@ -7,28 +8,27 @@ skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
 
-interface AntFacadeController{
-    +setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
+'Controleur
+interface AntFacadeController <<interface>> {
+    '+setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
     +createColony(row:Integer,column:Integer)
     +createGrid(width:Integer, height:Integer)
     +putObstacle(row:Integer, column:Integer)
-    +putFood( row:Integer, column:Integer, quantity:Integer);
-    +createWorkers( amount:Integer )
+    '+putFood( row:Integer, column:Integer, quantity:Integer);
+    '+createWorkers( amount:Integer )
     +createSoldiers(amount:Integer)
-    +setAntFile(antLogFile:String);
+    '+setAntFile(antLogFile:String);
     +play( duration:Integer, record:boolean )
 }
-class Graphe {
 
-}
-class Noeud{
+class Noeud {
     -free:boolean
     +isFree():boolean
     +setFree(boolean)
     +getVoisins():Noeud[*]
 }
 
-abstract Fourmi {
+abstract Fourmi <<abstract>> {
     +getPosition():Noeud
 }
 class Reine extends Fourmi{
@@ -39,9 +39,15 @@ class Soldat extends Fourmi{
     +deplacer()
 }
 
+class Graphe implements AntFacadeController{
 
+}
+
+'actor Professeur
+'Professeur ...> Test_Fourmis
+'Test_Fourmis *-u-> AntFacadeController
 Graphe "-noeuds\n0..n" *-u-> Noeud : composé de >
-Fourmi "-position\n1" -> Noeud : est sur le >
+Fourmi "-position\n1" --> Noeud : est sur un >
 Noeud "-voisins\n0..*" -> Noeud : est voisin de >
 
 @enduml
