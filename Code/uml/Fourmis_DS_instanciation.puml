@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+'autonumber
+hide footbox
+
+'title Méthode jouer()
+participant ":Main" as main
+participant ":ControlFourmi" as controlFourmi
+participant ":Graphe" as graphe
+participant ":Noeud" as noeud
+participant "reine:Reine" as reine
+participant "noeud2:Noeud" as noeud2
+participant "soldat:Soldat" as soldat
+
+activate main
+    create controlFourmi
+    main -->> controlFourmi : instanciate()
+
+    activate controlFourmi
+
+         main -> controlFourmi : createGrid(width:Integer, height:Integer)
+         activate controlFourmi
+            create graphe
+            controlFourmi -->> graphe : instanciate()
+            activate graphe
+                loop width * height
+                    create noeud
+                    graphe -->> noeud : instanciate()
+                    activate noeud
+                    deactivate noeud
+                end
+            deactivate graphe
+        deactivate controlFourmi
+
+
+        main -> controlFourmi : createColony(row:Integer,column:Integer)
+        activate controlFourmi
+            create reine
+            controlFourmi -->> reine : instanciate()
+            activate reine
+            deactivate reine
+        deactivate controlFourmi
+
+
+        main -> controlFourmi : putObstacle(row:Integer, column:Integer)
+        activate controlFourmi
+            controlFourmi -> graphe : getNoeud(row,column)
+            activate graphe
+                return noeud:Noeud
+            deactivate graphe
+            controlFourmi -> noeud2 ++ : setFree(false:boolean)
+            deactivate noeud2
+        deactivate controlFourmi
+
+
+    deactivate controlFourmi
+
+
+
+@enduml
