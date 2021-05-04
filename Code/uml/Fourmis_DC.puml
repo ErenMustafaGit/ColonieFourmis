@@ -31,22 +31,32 @@ class Noeud {
 abstract Fourmi <<abstract>> {
     +getPosition():Noeud
 }
-class Reine extends Fourmi{
+class Reine{
 
 
 }
-class Soldat extends Fourmi{
+class Soldat{
     +deplacer()
 }
 
-class Graphe implements AntFacadeController{
+
+'class Graphe implements AntFacadeController{
+class ControlFourmi implements AntFacadeController{
 
 }
 
-'actor Professeur
-'Professeur ...> Test_Fourmis
-'Test_Fourmis *-u-> AntFacadeController
-Graphe "-noeuds\n0..n" *-u-> Noeud : composé de >
+class ControlFourmi{
+}
+
+
+
+Soldat --|> Fourmi
+Reine -l-|> Fourmi
+
+ControlFourmi "1 " *-l-> Graphe
+ControlFourmi "1..*" *--> Fourmi
+
+Graphe "-noeuds\n0..n" *-r-> Noeud : composé de >
 Fourmi "-position\n1" --> Noeud : est sur un >
 Noeud "-voisins\n0..*" -> Noeud : est voisin de >
 
