@@ -1,5 +1,3 @@
-package projet.v2;
-
 import java.io.IOException;
 import java.util.BitSet;
 
