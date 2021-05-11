@@ -7,26 +7,33 @@ skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
 
-interface AntFacadeController{
+interface AntFacadeController<<interface>>{
 
 }
 
 class Graphe {
 
 }
-class Noeud{
-free
+class Noeuds{
+free:boolean
 }
 
-abstract Fourmi {
-position
+abstract Fourmi <<abstract>>{
+
 }
+
 class Reine extends Fourmi{
 }
 class Soldat extends Fourmi{
 }
 
-Graphe *-u-> Noeud : composé de >
-Fourmi  -> Noeud : est sur le >
+class ControlFourmi implements AntFacadeController{
+}
+
+Noeuds -> Noeuds : est voisin de >
+ControlFourmi --> Graphe
+ControlFourmi ---> Fourmi
+Graphe --> Noeuds : composé de >
+Fourmi  -> Noeuds : est sur le >
 
 @enduml
