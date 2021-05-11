@@ -22,8 +22,6 @@ interface AntFacadeController <<interface>> {
 }
 
 class Noeud {
-    -x:Integer
-    -y:Integer
     -free:boolean
     +isFree():boolean
     +setFree(boolean)
