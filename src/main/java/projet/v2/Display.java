@@ -1,3 +1,5 @@
+package projet.v2;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.BitSet;
