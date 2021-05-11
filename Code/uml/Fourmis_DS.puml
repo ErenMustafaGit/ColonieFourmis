@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+'autonumber
+hide footbox
+
+'title Méthode jouer()
+participant ":Main" as main
+participant "controlFourmi:ControlFourmi" as controlFourmi
+participant ":Graphe" as graphe
+participant ":Noeud" as noeud
+participant "noeud2:Noeud" as noeud2
+participant "soldat:Soldat" as soldat
+
+main -> controlFourmi ++ : play(1, false)
+    loop fourmi : "controlFourmi.Fourmis
+        alt fourmi instanceof Soldat
+            controlFourmi -> soldat : deplacer()
+        end
+    end
+
+deactivate controlFourmi
+
+
+
+
+@enduml

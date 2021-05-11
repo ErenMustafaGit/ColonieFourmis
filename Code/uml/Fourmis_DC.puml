@@ -48,6 +48,9 @@ class ControlFourmi implements AntFacadeController{
 class ControlFourmi{
 }
 
+class Graphe{
+ +getNoeud(row:Integer, column:Integer):Noeud
+}
 
 
 Soldat --|> Fourmi
