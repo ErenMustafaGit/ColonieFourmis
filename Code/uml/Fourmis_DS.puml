@@ -7,19 +7,33 @@ hide footbox
 'title Méthode jouer()
 participant ":Main" as main
 participant "controlFourmi:ControlFourmi" as controlFourmi
-participant ":Graphe" as graphe
-participant ":Noeud" as noeud
-participant "noeud2:Noeud" as noeud2
-participant "fourmi:controlFourmi.Fourmis" as fourmi
+participant "fourmi:Fourmi" as fourmi
+'participant ":Graphe" as graphe
+participant "position:Noeud" as position
+participant "voisin:Noeud" as voisin
+participant "freeVoisin:Noeud[*]" as freeVoisins
 
 main -> controlFourmi ++ : play(1, false)
     loop fourmi : "controlFourmi.Fourmis
     |||
-        controlFourmi -> fourmi : deplacer()
+        controlFourmi -> fourmi ++ : move()
+        fourmi -> fourmi  ++ : getPosition()
+        return position
+
+        fourmi -> position ++ : getFreeVoisins()
+            position -> position ++ : getVoisins()
+            return voisins
+            loop voisin : voisins
+                alt voisin.isFree() == true
+                    position -> freeVoisins : add(voisin)
+                end
+            end
+        return freeVoisins
+        fourmi -> fourmi : setPosition(freeVoisin[i])
+
     end
 
 deactivate controlFourmi
-
 
 
 
