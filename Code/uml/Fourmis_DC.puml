@@ -26,6 +26,7 @@ class Noeud {
     +isFree():boolean
     +setFree(boolean)
     +getVoisins():Noeud[*]
+    +getFreeVoisins():Noeud[*]
 }
 
 abstract Fourmis <<abstract>> {
@@ -44,12 +45,10 @@ class Soldat{
 
 
 'class Graphe implements AntFacadeController{
-class ControlFourmi implements AntFacadeController{
+class ControlFourmis implements AntFacadeController{
     +createGrid(width:Integer, height:Integer)
 }
 
-class ControlFourmi{
-}
 
 class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
@@ -60,8 +59,8 @@ class Graphe{
 Soldat --|> Fourmis
 Reine -l-|> Fourmis
 
-ControlFourmi "1 " *-l-> Graphe
-ControlFourmi "1..*" *--> Fourmis
+ControlFourmis "1 " *-l-> Graphe
+ControlFourmis "1..*" *--> Fourmis
 
 Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 Fourmis "-fourmi\n0..n" --- "-position 1" Noeud  : est sur un >
