@@ -28,22 +28,24 @@ class Noeud {
     +getVoisins():Noeud[*]
 }
 
-abstract Fourmi <<abstract>> {
+abstract Fourmis <<abstract>> {
     +getPosition():Noeud
-    +deplacer()
+    +setPosition(position:Noeud)
+    +move()
 }
 class Reine{
-    +deplacer()
+    +move() <<override>>
+    +createSoldiers(amount:Integer)
 
 }
 class Soldat{
-    +deplacer()
+    +move() <<override>>
 }
 
 
 'class Graphe implements AntFacadeController{
 class ControlFourmi implements AntFacadeController{
-
+    +createGrid(width:Integer, height:Integer)
 }
 
 class ControlFourmi{
@@ -51,17 +53,18 @@ class ControlFourmi{
 
 class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
+ +putObstacle(row:Integer, column:Integer)
 }
 
 
-Soldat --|> Fourmi
-Reine -l-|> Fourmi
+Soldat --|> Fourmis
+Reine -l-|> Fourmis
 
 ControlFourmi "1 " *-l-> Graphe
-ControlFourmi "1..*" *--> Fourmi
+ControlFourmi "1..*" *--> Fourmis
 
 Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
-Fourmi "-fourmi\n0..n" -- "-position\n1" Noeud  : est sur un >
-Noeud "-voisins\n0..*" -> Noeud : est voisin de >
+Fourmis "-fourmi\n0..n" --- "-position 1" Noeud  : est sur un >
+Noeud -> "-voisins\n0..*"  Noeud  : est voisin de >
 
 @enduml
