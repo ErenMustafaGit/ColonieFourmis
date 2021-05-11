@@ -30,9 +30,10 @@ class Noeud {
 
 abstract Fourmi <<abstract>> {
     +getPosition():Noeud
+    +deplacer()
 }
 class Reine{
-
+    +deplacer()
 
 }
 class Soldat{
@@ -59,8 +60,8 @@ Reine -l-|> Fourmi
 ControlFourmi "1 " *-l-> Graphe
 ControlFourmi "1..*" *--> Fourmi
 
-Graphe "-noeuds\n0..n" *-r-> Noeud : composé de >
-Fourmi "-position\n1" --> Noeud : est sur un >
+Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
+Fourmi "-fourmi\n0..n" -- "-position\n1" Noeud  : est sur un >
 Noeud "-voisins\n0..*" -> Noeud : est voisin de >
 
 @enduml

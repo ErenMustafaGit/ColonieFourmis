@@ -10,13 +10,12 @@ participant "controlFourmi:ControlFourmi" as controlFourmi
 participant ":Graphe" as graphe
 participant ":Noeud" as noeud
 participant "noeud2:Noeud" as noeud2
-participant "soldat:Soldat" as soldat
+participant "fourmi:controlFourmi.Fourmis" as fourmi
 
 main -> controlFourmi ++ : play(1, false)
     loop fourmi : "controlFourmi.Fourmis
-        alt fourmi instanceof Soldat
-            controlFourmi -> soldat : deplacer()
-        end
+    |||
+        controlFourmi -> fourmi : deplacer()
     end
 
 deactivate controlFourmi
