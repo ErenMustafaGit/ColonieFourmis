@@ -22,6 +22,8 @@ interface AntFacadeController <<interface>> {
 }
 
 class Noeud {
+    -x:Integer
+    -y:Integer
     -free:boolean
     +isFree():boolean
     +setFree(boolean)
@@ -44,7 +46,7 @@ class Soldat{
 }
 
 
-'class Graphe implements AntFacadeController{
+'class Graphe implements projet.v2.AntFacadeController{
 class ControlFourmis implements AntFacadeController{
     +createGrid(width:Integer, height:Integer)
 }
