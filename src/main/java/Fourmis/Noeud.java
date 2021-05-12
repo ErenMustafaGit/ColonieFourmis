@@ -3,19 +3,26 @@ package Fourmis;
 import java.util.ArrayList;
 
 public class Noeud {
-    private boolean free;
+
+    public enum STATE {
+        FREE,
+        OBSTACLE,
+        ANTHILL //Fourmilliere
+    }
+
     private ArrayList<Noeud> voisins;
+    private STATE noeudState;
 
     public Noeud(){
-        free = true;
+        noeudState = STATE.FREE;
         voisins = new ArrayList<>();
     }
 
-    public boolean isFree(){
-        return this.free;
+    public STATE getNoeudState(){
+        return this.noeudState;
     }
-    public void setFree(boolean val){
-        this.free = val;
+    public void setNoeudState(STATE state){
+        this.noeudState = state;
     }
 
     public ArrayList<Noeud> getVoisins(){
@@ -24,9 +31,11 @@ public class Noeud {
     public ArrayList<Noeud> getFreeVoisins( ){
         ArrayList<Noeud> freeVoisins = new ArrayList<>();
         for(Noeud voisin : this.voisins){
-            if(voisin.isFree())
+            if(this.noeudState == STATE.FREE)
                 freeVoisins.add(voisin);
         }
         return new ArrayList<>(freeVoisins);
     }
 }
+
+

@@ -7,6 +7,7 @@ skinparam circledCharacterRadius 0
 skinparam circledCharacterFontSize 0
 skinparam classFontStyle Bold
 'autonumber
+hide enum methods
 
 'Controleur
 interface AntFacadeController <<interface>> {
@@ -28,6 +29,12 @@ class Noeud {
     +getVoisins():Noeud[*]
     +getFreeVoisins():Noeud[*]
 }
+enum STATE <<enum>> {
+    FREE
+    OBSTACLE
+    ANTHILL
+}
+
 
 abstract Fourmis <<abstract>> {
     +getPosition():Noeud
@@ -53,8 +60,8 @@ class ControlFourmis implements AntFacadeController{
 
 class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
- +instanciateLink()
  +putObstacle(row:Integer, column:Integer)
+ +createColony(row:Integer,column:Integer)
 }
 
 
@@ -69,5 +76,6 @@ Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 '"-position 1\n-historique 0..*"
 Fourmis "-fourmi\n0..n" --- "-position\n1" Noeud  : est sur un >
 Noeud o-> "-voisins\n0..*"  Noeud  : est voisin de >
+Noeud -l->  statut : est >
 
 @enduml
