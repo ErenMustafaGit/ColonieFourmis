@@ -1,5 +1,7 @@
 package Fourmis;
 
+import java.util.ArrayList;
+
 public abstract class Fourmis {
     private Noeud position;
 
