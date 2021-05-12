@@ -66,6 +66,6 @@ ControlFourmis "1..*" *--> Fourmis
 Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 'historique = liste de noeud déjà passé par la fourmi
 Fourmis "-fourmi\n0..n" --- "-position 1\n-historique 0..*" Noeud  : est sur un >
-Noeud -> "-voisins\n0..*"  Noeud  : est voisin de >
+Noeud o-> "-voisins\n0..*"  Noeud  : est voisin de >
 
 @enduml

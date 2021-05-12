@@ -6,6 +6,11 @@ public class Noeud {
     private boolean free;
     private ArrayList<Noeud> voisins;
 
+    public Noeud(){
+        free = true;
+        voisins = new ArrayList<>();
+    }
+
     public boolean isFree(){
         return this.free;
     }
