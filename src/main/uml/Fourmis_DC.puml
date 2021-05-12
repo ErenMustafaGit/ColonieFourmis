@@ -53,6 +53,7 @@ class ControlFourmis implements AntFacadeController{
 
 class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
+ +instanciateLink()
  +putObstacle(row:Integer, column:Integer)
 }
 
@@ -65,7 +66,8 @@ ControlFourmis "1..*" *--> Fourmis
 
 Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 'historique = liste de noeud déjà passé par la fourmi
-Fourmis "-fourmi\n0..n" --- "-position 1\n-historique 0..*" Noeud  : est sur un >
+'"-position 1\n-historique 0..*"
+Fourmis "-fourmi\n0..n" --- "-position\n1" Noeud  : est sur un >
 Noeud o-> "-voisins\n0..*"  Noeud  : est voisin de >
 
 @enduml
