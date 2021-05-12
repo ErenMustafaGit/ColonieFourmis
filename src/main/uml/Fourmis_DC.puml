@@ -53,8 +53,8 @@ class ControlFourmis implements AntFacadeController{
 
 class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
- +instanciateLink()
  +putObstacle(row:Integer, column:Integer)
+ +createColony(row:Integer,column:Integer)
 }
 
 

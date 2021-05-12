@@ -6,19 +6,20 @@ import java.util.List;
 public class Graphe {
     private int width;
     private int height;
-    private List<Noeud> graphe_tab;
+    private List<Noeud> noeudList;
 
     public Graphe(Integer width, Integer height){
-        graphe_tab = new ArrayList<>();
+        noeudList = new ArrayList<>();
+
+        //Ajout des noeuds dans le graphe
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 Noeud n = new Noeud();
-                graphe_tab.add(n);
+                noeudList.add(n);
             }
         }
-    }
 
-    public void instanciateLink(){
+        //Instanciation des liens entre les Noeuds --> Liste de voisins
         for(int x = 0; x < width - 1;x++){
             for(int y = 0;y<height - 1;y++){
                 //Récuperation Noeud actuel
@@ -64,7 +65,7 @@ public class Graphe {
             //Récuperation Noeud actuel
             Noeud n = this.getNoeud(height-1,y);
 
-             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
+            //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
             Noeud nRight = this.getNoeud(height-1,y+1);
 
             //Ajout de noeud voisins (celui de droite)
@@ -75,14 +76,19 @@ public class Graphe {
         }
     }
 
-
-
     public Noeud getNoeud(Integer row, Integer column){
-        return graphe_tab.get(row + column * width);
+        return noeudList.get(row + column * width);
     }
 
     public void putObstacle(Integer row, Integer column){
-        Noeud n = graphe_tab.get(row + column * width);
+        Noeud n = noeudList.get(row + column * width);
         n.setFree(false);
+    }
+
+    //Place la reine à la position donné
+    public void createColony(Integer row,Integer column){
+        Noeud n = getNoeud(row , column);
+        n.setFree(false);
+        Reine r = new Reine(n);
     }
 }
