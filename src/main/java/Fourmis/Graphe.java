@@ -8,6 +8,7 @@ public class Graphe {
     private int height;
     private List<Noeud> noeudList;
 
+
     public Graphe(Integer width, Integer height){
         noeudList = new ArrayList<>();
 
@@ -92,6 +93,18 @@ public class Graphe {
         Noeud n = getNoeud(row , column);
         //n.setNoeudState(Noeud.STATE.ANTHILL);
         Reine r = new Reine(n);
+    }
+
+    public List<Noeud> getNoeudList(){
+        return this.noeudList;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.height;
     }
 
 }

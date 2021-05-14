@@ -23,9 +23,8 @@ interface AntFacadeController <<interface>> {
 }
 
 class Noeud {
-    -free:boolean
-    +isFree():boolean
-    +setFree(boolean)
+    +getNoeudState():STATE
+    +setNoeudState(State:STATE)
     +getVoisins():Noeud[*]
     +getFreeVoisins():Noeud[*]
 }
@@ -54,14 +53,21 @@ class Soldat{
 
 'class Graphe implements projet.v2.AntFacadeController{
 class ControlFourmis implements AntFacadeController{
+    -graphe:Graphe
+    -liste_fourmis:ArrayList<Fourmis>
     +createGrid(width:Integer, height:Integer)
 }
 
 
 class Graphe{
+ -width:Integer
+ -height:Integer
  +getNoeud(row:Integer, column:Integer):Noeud
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
+ +getNoeudList()
+ +getWidth()
+ +getHeight()
 }
 
 
