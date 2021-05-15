@@ -14,7 +14,7 @@ public class Noeud {
 
     private ArrayList<Noeud> voisins;
     private STATE noeudState;
-    private ArrayList<Fourmis> fourmi_noeud;
+
 
     /**
      * Créé un noeud
@@ -22,7 +22,6 @@ public class Noeud {
     public Noeud(){
         noeudState = STATE.FREE;
         voisins = new ArrayList<>();
-        fourmi_noeud = new ArrayList<>();
     }
 
     /**
@@ -41,6 +40,10 @@ public class Noeud {
         this.noeudState = state;
     }
 
+    public void addNoeudVoisin(Noeud noeud){
+        this.voisins.add(noeud);
+    }
+
     /**
      * Permet d'obtenir les voisins d'un noeud
      * @return retourne une Arrayliste de noeud
@@ -54,12 +57,13 @@ public class Noeud {
      * @return retourne une ArrayListe de noeud
      */
     public ArrayList<Noeud> getFreeVoisins(){
-        ArrayList<Noeud> freeVoisins = new ArrayList<>();
-        for(Noeud voisin : this.voisins){
-            if(this.noeudState == STATE.FREE)
-                freeVoisins.add(voisin);
+        ArrayList<Noeud> temp = new ArrayList<>();
+        for(Noeud n : this.voisins){
+            if(n.getNoeudState() == STATE.FREE){
+                temp.add(n);
+            }
         }
-        return new ArrayList<>(freeVoisins);
+        return temp;
     }
 
 }

@@ -19,16 +19,16 @@ public class Graphe {
         this.width = width;
         this.height = height;
         //Ajout des noeuds dans le graphe
-        for(int i = 0; i < width; i++){
-            for(int j = 0; j < height; j++){
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
                 Noeud n = new Noeud();
                 noeudList.add(n);
             }
         }
 
         //Instaciation des liens entre les Noeuds -> Liste de voisins
-        for(int x = 0; x < width - 1;x++){
-            for(int y = 0;y<height - 1;y++){
+        for(int x = 0; x < height - 1;x++){
+            for(int y = 0;y<width - 1;y++){
                 //Récuperation Noeud actuel
                 Noeud n = this.getNoeud(x,y);
 
@@ -42,44 +42,44 @@ public class Graphe {
                 //Noeud nDown = this.graphe_tab.get(x+(y+1)*width);
 
                 //Ajout dans le noeud actuel (n), les voisins du bas et de droite
-                n.getVoisins().add(nRight);
-                n.getVoisins().add(nDown);
+                n.addNoeudVoisin(nRight);
+                n.addNoeudVoisin(nDown);
 
                 //Ajout dans les noeuds de droite et du bas, le voisin : noeud actuel (n)
-                nRight.getVoisins().add(n);
-                nDown.getVoisins().add(n);
+                nRight.addNoeudVoisin(n);
+                nDown.addNoeudVoisin(n);
             }
         }
 
 
         //Noeud de tout à droite
-        for(int x = 0; x<height-1; x++){
+        for(int x = 0; x<width-1; x++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(x,width-1);
+            Noeud n = this.getNoeud(x,height-1);
 
             //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-            Noeud nDown = this.getNoeud(x+1,width-1);
+            Noeud nDown = this.getNoeud(x+1,height-1);
 
             //Ajout dans le noeud actuel (n), le voisins du bas
-            n.getVoisins().add(nDown);
+            n.addNoeudVoisin(nDown);
 
             //Ajout dans le noeuds du bas, le voisin : noeud actuel (n)
-            nDown.getVoisins().add(n);
+            nDown.addNoeudVoisin(n);
         }
 
         //Noeud de tout en bas
-        for(int y = 0; y<width-1; y++){
+        for(int y = 0; y<height-1; y++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(height-1,y);
+            Noeud n = this.getNoeud(width-1,y);
 
             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-            Noeud nRight = this.getNoeud(height-1,y+1);
+            Noeud nRight = this.getNoeud(width-1,y+1);
 
             //Ajout dans le noeud actuel (n), le voisins de droite
-            n.getVoisins().add(nRight);
+            n.addNoeudVoisin(nRight);
 
             //Ajout dans le noeuds de droite, le voisin : noeud actuel (n)
-            nRight.getVoisins().add(n);
+            nRight.addNoeudVoisin(n);
         }
     }
 
@@ -91,7 +91,7 @@ public class Graphe {
      * @return retourne un Noeud
      */
     public Noeud getNoeud(Integer row, Integer column){
-        return noeudList.get(row + column * width);
+        return noeudList.get(column + row * width);
     }
 
     /**
@@ -100,12 +100,12 @@ public class Graphe {
      * @param column : la colonne (y)
      */
     public void putObstacle(Integer row, Integer column){
-        Noeud n = noeudList.get(row + column * width);
+        Noeud n = noeudList.get(column+ row * width);
 
-       // System.out.println(row + ":"+column + "\nstate : " + n.getNoeudState().toString());
+        // System.out.println(row + ":"+column + "\nstate : " + n.getNoeudState().toString());
         if(n.getNoeudState() != Noeud.STATE.ANTHILL){
             n.setNoeudState(Noeud.STATE.OBSTACLE);
-           // System.out.println("new state : " + n.getNoeudState().toString()+"\n");
+            // System.out.println("new state : " + n.getNoeudState().toString()+"\n");
         }
 
         if(row == 0 && column == 0){
@@ -123,7 +123,7 @@ public class Graphe {
     public void createColony(Integer row,Integer column){
         Noeud n = getNoeud(row , column);
         //n.setNoeudState(Noeud.STATE.ANTHILL);
-       // System.out.println(row + ":"+column + " " + n.getNoeudState().toString() + "\n");
+        // System.out.println(row + ":"+column + " " + n.getNoeudState().toString() + "\n");
         Reine r = new Reine(n);
     }
 

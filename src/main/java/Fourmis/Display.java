@@ -21,7 +21,7 @@ public class Display extends JFrame {
             JLabel jlb = new JLabel();
             grid.add(jlb);
             jlb.setOpaque(true);
-            jlb.setBackground(Color.WHITE);
+            jlb.setBackground(Color.DARK_GRAY);
         }
         this.setContentPane( grid );
 
@@ -34,31 +34,28 @@ public class Display extends JFrame {
     public void update( BitSet[][] cells ){
 
         Container grid = this.getContentPane();
-
-        int k = 0; // indice du JLabel dans la grille
-
-        for(int i= 0; i < width; i++)
-            for( int j = 0; j < height; j++) {
-
-                if ( cells[i][j].get( 0 ) ) // fourmilière
-                    ( (JLabel) grid.getComponent( k ) ).setText( "F" );
-
-                else if ( cells[i][j].get( 1 ) ) // obstacle
-                    ( (JLabel) grid.getComponent( k ) ).setText( "O" );
-
-                else if ( cells[i][j].get( 5 ) ) // nourriture
-                    ( (JLabel) grid.getComponent( k ) ).setText( "N" );
-
+        int k = 0;
+        for(int i= 0; i < height; i++)
+            for( int j = 0; j < width; j++) {
+                if ( cells[i][j].get( 0 ) )
+                    grid.getComponent( k ).setBackground( Color.WHITE );
+                else if ( cells[i][j].get( 1 ) )
+                    grid.getComponent( k ).setBackground( Color.BLACK );
                 else {
-                    int r = 255, g = 255, b = 255;
-                    if ( cells[i][j].get( 2 ) ) // soldat
-                        b = 0; // jaune
-                    if ( cells[i][j].get( 3 ) ) // ouvrier aller
-                        g = 0; // magenta
-                    if ( cells[i][j].get( 4 ) ) // ouvrier retour
-                        r -= 128; // (cyan avec phéromones)
-                    if ( cells[i][j].get( 6 ) ) // phéromones
-                        r -= 127;
+                    int r = Color.DARK_GRAY.getRed(), g = r, b = r;
+                    if ( cells[i][j].get( 2 ) ) {
+                        r = 100;
+                        g = 0;
+                        b = 0;
+                    }
+                    if ( cells[i][j].get( 3 ) )
+                        r = 150;
+                    if ( cells[i][j].get( 4 ) )
+                        r = 200;
+                    if ( cells[i][j].get( 5 ) )
+                        g = 255;
+                    if ( cells[i][j].get( 6 ) )
+                        b = 255;
                     grid.getComponent( k ).setBackground( new Color( r, g, b ) );
                 }
                 k++;

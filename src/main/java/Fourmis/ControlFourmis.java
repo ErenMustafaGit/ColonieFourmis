@@ -111,7 +111,8 @@ public class ControlFourmis implements AntFacadeController {
      */
     @Override
     public BitSet[][] play(int duration, boolean record) {
-        BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
+        //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
+        BitSet[][] bit_play = new BitSet[this.graphe.getHeight()][this.graphe.getWidth()];
 
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
@@ -122,15 +123,16 @@ public class ControlFourmis implements AntFacadeController {
             }
         }
 
-        for(int row = 0; row < this.graphe.getWidth(); row++){
-            for(int column = 0; column < this.graphe.getHeight(); column++){
+        for(int row = 0; row < this.graphe.getHeight(); row++){
+            for(int column = 0; column < this.graphe.getWidth(); column++){
+                System.out.println(row + ":"+column);
                 bit_play[row][column]=new BitSet(7);
 
                 //Présence de colonnie
                 if(this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
-                //Présence d'obstacle
+                    //Présence d'obstacle
                 else if (this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
@@ -144,7 +146,6 @@ public class ControlFourmis implements AntFacadeController {
                         }
                     }
                 }
-
                 // la suite dans le v2
             }
         }
@@ -152,4 +153,3 @@ public class ControlFourmis implements AntFacadeController {
         return bit_play;
     }
 }
-
