@@ -1,4 +1,4 @@
-package projet.v2;
+package Fourmis;
 
 import javax.swing.*;
 import java.awt.*;

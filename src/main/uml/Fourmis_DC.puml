@@ -51,7 +51,7 @@ class Soldat{
 }
 
 
-'class Graphe implements projet.v2.AntFacadeController{
+'class Graphe implements Fourmis.AntFacadeController{
 class ControlFourmis implements AntFacadeController{
     -graphe:Graphe
     -liste_fourmis:ArrayList<Fourmis>

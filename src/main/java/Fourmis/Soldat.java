@@ -5,6 +5,10 @@ import java.util.Random;
 
 public class Soldat extends Fourmis{
 
+    /**
+     * Créé un soldat à partir d'un noeud
+     * @param noeud : emplacement de la reine
+     */
     public Soldat(Noeud noeud) {
         super(noeud);
     }
@@ -19,6 +23,9 @@ public class Soldat extends Fourmis{
         Noeud direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
         //Va en direction de ce noeud là
+
+        //position.removeFourmiNoeud(this);
         this.setPosition(direction);
+        //position.addFourmiNoeud(this);
     }
 }

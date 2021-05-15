@@ -9,6 +9,11 @@ public class Graphe {
     private List<Noeud> noeudList;
 
 
+    /**
+     * Créé un graphe, le remplis de noeud, puis ajoute les noeuds voisins des noeuds
+     * @param width : longueur
+     * @param height : hauteur
+     */
     public Graphe(Integer width, Integer height){
         noeudList = new ArrayList<>();
 
@@ -78,31 +83,69 @@ public class Graphe {
     }
 
 
-
+    /**
+     * Permet d'obtenir un noeud à partir d'une coordonné (x=row;y=column)
+     * @param row : la ligne (x)
+     * @param column : la colonne (y)
+     * @return retourne un Noeud
+     */
     public Noeud getNoeud(Integer row, Integer column){
         return noeudList.get(row + column * width);
     }
 
+    /**
+     * Permet de placer un obstacle à une coordonnée donné (x=row;y=column)
+     * @param row : la ligne (x)
+     * @param column : la colonne (y)
+     */
     public void putObstacle(Integer row, Integer column){
         Noeud n = noeudList.get(row + column * width);
-        n.setNoeudState(Noeud.STATE.OBSTACLE);
+
+       // System.out.println(row + ":"+column + "\nstate : " + n.getNoeudState().toString());
+        if(n.getNoeudState() != Noeud.STATE.ANTHILL){
+            n.setNoeudState(Noeud.STATE.OBSTACLE);
+           // System.out.println("new state : " + n.getNoeudState().toString()+"\n");
+        }
+
+        if(row == 0 && column == 0){
+            throw new IllegalArgumentException("Impossible de placer un obstacle sur une fourmillière");
+        }
+
     }
 
-    //Place la reine à la position donné
+    /**
+     * Place la reine à une coordonnée donné (x=row;y=column)
+     * @param row : la ligne (x)
+     * @param column : la colonne (y)
+     */
+
     public void createColony(Integer row,Integer column){
         Noeud n = getNoeud(row , column);
         //n.setNoeudState(Noeud.STATE.ANTHILL);
+       // System.out.println(row + ":"+column + " " + n.getNoeudState().toString() + "\n");
         Reine r = new Reine(n);
     }
 
+    /**
+     * Permet de récuperer les noeuds contenue dans le graphe
+     * @return retourne une Liste de Noeud
+     */
     public List<Noeud> getNoeudList(){
         return this.noeudList;
     }
 
+    /**
+     * Renvoie la longueur de la grille du graphe
+     * @return renvoie la longueur de la grille du graphe
+     */
     public int getWidth(){
         return this.width;
     }
 
+    /**
+     * Renvoie la hauteur de la grille du graphe
+     * @return renvoie la hauteur de la grille du graphe
+     */
     public int getHeight(){
         return this.height;
     }
