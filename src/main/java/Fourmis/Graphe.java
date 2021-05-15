@@ -53,12 +53,12 @@ public class Graphe {
 
 
         //Noeud de tout à droite
-        for(int x = 0; x<width-1; x++){
+        for(int x = 0; x<height-1; x++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(x,height-1);
+            Noeud n = this.getNoeud(x,width-1);
 
             //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-            Noeud nDown = this.getNoeud(x+1,height-1);
+            Noeud nDown = this.getNoeud(x+1,width-1);
 
             //Ajout dans le noeud actuel (n), le voisins du bas
             n.addNoeudVoisin(nDown);
@@ -68,12 +68,12 @@ public class Graphe {
         }
 
         //Noeud de tout en bas
-        for(int y = 0; y<height-1; y++){
+        for(int y = 0; y<width-1; y++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(width-1,y);
+            Noeud n = this.getNoeud(height-1,y);
 
             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-            Noeud nRight = this.getNoeud(width-1,y+1);
+            Noeud nRight = this.getNoeud(height-1,y+1);
 
             //Ajout dans le noeud actuel (n), le voisins de droite
             n.addNoeudVoisin(nRight);

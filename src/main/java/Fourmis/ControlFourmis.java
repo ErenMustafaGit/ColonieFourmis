@@ -123,11 +123,10 @@ public class ControlFourmis implements AntFacadeController {
             }
         }
 
+
         for(int row = 0; row < this.graphe.getHeight(); row++){
             for(int column = 0; column < this.graphe.getWidth(); column++){
-                System.out.println(row + ":"+column);
                 bit_play[row][column]=new BitSet(7);
-
                 //Présence de colonnie
                 if(this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
