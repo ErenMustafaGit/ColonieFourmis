@@ -16,7 +16,8 @@ public class Graphe {
      */
     public Graphe(Integer width, Integer height){
         noeudList = new ArrayList<>();
-
+        this.width = width;
+        this.height = height;
         //Ajout des noeuds dans le graphe
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){

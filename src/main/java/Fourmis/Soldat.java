@@ -23,9 +23,6 @@ public class Soldat extends Fourmis{
         Noeud direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
         //Va en direction de ce noeud là
-
-        //position.removeFourmiNoeud(this);
         this.setPosition(direction);
-        //position.addFourmiNoeud(this);
     }
 }

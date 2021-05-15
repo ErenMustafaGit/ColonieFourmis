@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class Fourmis {
     private Noeud position;
-    private ArrayList<Fourmis> fourmis_sur_noeud;
 
     /**
      * Créé une fourmis à un noeud donné

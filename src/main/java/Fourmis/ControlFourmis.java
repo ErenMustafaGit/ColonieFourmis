@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ControlFourmis implements AntFacadeController {
     private Graphe graphe;
-    private ArrayList<Fourmis> liste_fourmis_all = new ArrayList<>();
+    private ArrayList<Fourmis> listeFourmis = new ArrayList<>();
 
     /**
      * Fixe les paramètres de l'application.
@@ -57,8 +57,7 @@ public class ControlFourmis implements AntFacadeController {
     public void createColony(int row, int column) {
         Reine reine = new Reine(this.graphe.getNoeud(row,column));
         this.graphe.createColony(row, column);
-        liste_fourmis_all.add(reine);
-
+        listeFourmis.add(reine);
     }
 
     /**
@@ -69,17 +68,15 @@ public class ControlFourmis implements AntFacadeController {
     //à reverifier
     public void createSoldiers(int amount) {
         ArrayList<Fourmis> temp_soldat = new ArrayList<>();
-        for(Fourmis fourmis : this.liste_fourmis_all){
+        for(Fourmis fourmis : this.listeFourmis){
             if(fourmis instanceof Reine){
                 for(int i = 0; i < amount; i++){
                     Soldat s = new Soldat(fourmis.getPosition());
-                    Noeud n = fourmis.getPosition();
-                    //n.addFourmiNoeud(s);
                     temp_soldat.add(s);
                 }
             }
         }
-        liste_fourmis_all.addAll(temp_soldat);
+        listeFourmis.addAll(temp_soldat);
     }
 
     /**
@@ -114,40 +111,40 @@ public class ControlFourmis implements AntFacadeController {
      */
     @Override
     public BitSet[][] play(int duration, boolean record) {
-        BitSet[][] bit_play = new BitSet[graphe.getWidth()][graphe.getHeight()];
+        BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
 
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-            for(Fourmis fourmis : this.liste_fourmis_all){
+            for(Fourmis fourmis : this.listeFourmis){
                 if(fourmis instanceof Soldat){
                     fourmis.move();
                 }
             }
         }
 
-        for(int row = 0; row < graphe.getWidth(); row++){
-            for(int column = 0; column < graphe.getHeight(); column++){
+        for(int row = 0; row < this.graphe.getWidth(); row++){
+            for(int column = 0; column < this.graphe.getHeight(); column++){
                 bit_play[row][column]=new BitSet(7);
 
                 //Présence de colonnie
-                if(graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
+                if(this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
-                    //Présence d'obstacle
-                else if (graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.OBSTACLE)
+                //Présence d'obstacle
+                else if (this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
                 //Présence de soldat
-                /*
                 int compteur_soldat = 0;
-                for(Fourmis fourmis : graphe.getNoeud(row, column).getFourmiNoeud()){
-                    if(fourmis instanceof Soldat)
+                for(Fourmis fourmis : this.listeFourmis){
+                    if(fourmis instanceof Soldat && fourmis.getPosition() == this.graphe.getNoeud(row, column)){
                         compteur_soldat++;
+                        if(compteur_soldat > 0){
+                            bit_play[row][column].set(2, true);
+                        }
+                    }
                 }
-                if(compteur_soldat > 0)
-                    bit_play[row][column].set(2, true);
 
-                 */
                 // la suite dans le v2
             }
         }
@@ -155,3 +152,4 @@ public class ControlFourmis implements AntFacadeController {
         return bit_play;
     }
 }
+

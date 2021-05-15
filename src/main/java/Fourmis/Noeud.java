@@ -25,24 +25,6 @@ public class Noeud {
         fourmi_noeud = new ArrayList<>();
     }
 
-    /* A VOIR
-    public ArrayList<Fourmis> getFourmiNoeud(){
-        return  this.fourmi_noeud;
-    }
-
-    public void addFourmiNoeud(Fourmis f){
-        fourmi_noeud.add(f);
-    }
-
-    public void removeFourmiNoeud(Fourmis f){
-        ArrayList<Fourmis> temp_f = new ArrayList<>(fourmi_noeud);
-        for(int i = 0; i < temp_f.size(); i++){
-            if(temp_f.get(i).equals(f)){
-                fourmi_noeud.remove(i);
-            }
-        }
-    }
-     */
     /**
      * permet d'obtenir l'état du noeud
      * @return retourne un STATE

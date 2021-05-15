@@ -54,7 +54,7 @@ class Soldat{
 'class Graphe implements Fourmis.AntFacadeController{
 class ControlFourmis implements AntFacadeController{
     -graphe:Graphe
-    -liste_fourmis:ArrayList<Fourmis>
+    -listeFourmis:ArrayList<Fourmis>
     +createGrid(width:Integer, height:Integer)
 }
 
