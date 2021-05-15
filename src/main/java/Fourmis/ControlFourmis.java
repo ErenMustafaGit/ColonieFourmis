@@ -125,17 +125,9 @@ public class ControlFourmis implements AntFacadeController {
             }
         }
 
-        //Remplissage
-        for(int i = 0; i < graphe.getWidth(); i++){
-            for(int j = 0; j < graphe.getHeight(); j++){
-                BitSet bits = new BitSet(7);
-                bit_play[i][j] = bits;
-            }
-        }
-
-        //
         for(int row = 0; row < graphe.getWidth(); row++){
             for(int column = 0; column < graphe.getHeight(); column++){
+                bit_play[row][column]=new BitSet(7);
 
                 //Présence de colonnie
                 if(graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
