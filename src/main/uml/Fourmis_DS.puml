@@ -35,7 +35,7 @@ main -> controlFourmi ++ : play(1, false)
             end
         return freeVoisins
 
-        'nextInt en Java
+        'nextInt() en Java
         fourmi -> random ++ : getInt(freeVoisins.size)
         return randomInt
 
