@@ -39,8 +39,7 @@ enum STATE <<enum>> {
 abstract Fourmis <<abstract>> {
     +getPosition():Noeud
     +setPosition(position:Noeud)
-    +move()
-    +getFreeVoisinsNonVisite()
+    {abstract} +move()
 }
 class Reine{
     +move() <<override>>
@@ -52,17 +51,16 @@ class Soldat{
 }
 
 
-'class Graphe implements Fourmis.AntFacadeController{
 class ControlFourmis implements AntFacadeController{
     -graphe:Graphe
     -listeFourmis:ArrayList<Fourmis>
-    +createGrid(width:Integer, height:Integer)
 }
 
 
 class Graphe{
  -width:Integer
  -height:Integer
+ +Graphe(witdh:Integer, height:Integer)
  +getNoeud(row:Integer, column:Integer):Noeud
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
@@ -75,14 +73,15 @@ class Graphe{
 Soldat --|> Fourmis
 Reine -l-|> Fourmis
 
-ControlFourmis "1 " *-l-> Graphe
-ControlFourmis "1..*" *--> Fourmis
+ControlFourmis "-gra\nphe\n1 " *-l-> Graphe
+ControlFourmis  *--> "-listeFourmis\n1..*" Fourmis
 
 Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Fourmis "-fourmi\n0..n" --- "-position\n1" Noeud  : est sur un >
+Fourmis *---> "-position\n1" Noeud  : est sur un >
 Noeud o-> "-voisins\n0..*"  Noeud  : est voisin de >
-Noeud -l->  statut : est >
+
+Noeud -l-> STATE : <<uses>>
 
 @enduml

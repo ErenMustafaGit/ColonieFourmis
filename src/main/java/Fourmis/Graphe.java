@@ -18,7 +18,9 @@ public class Graphe {
         noeudList = new ArrayList<>();
         this.width = width;
         this.height = height;
+
         //Ajout des noeuds dans le graphe
+        //Erreur dans le sujet : Height et witdh inversé
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
                 Noeud n = new Noeud();
@@ -105,6 +107,7 @@ public class Graphe {
             n.setNoeudState(Noeud.STATE.OBSTACLE);
         }
 
+        //Pour passer le test n°1, mais illogique ?
         if(row == 0 && column == 0){
             throw new IllegalArgumentException("Impossible de placer un obstacle sur une fourmillière");
         }

@@ -56,7 +56,7 @@ public class Noeud {
     }
 
     /**
-     * Permet d'obtenir les voisins libre du noeud
+     * Permet d'obtenir les voisins libres du noeud
      * @return retourne une ArrayListe de noeud
      */
     public ArrayList<Noeud> getFreeVoisins(){

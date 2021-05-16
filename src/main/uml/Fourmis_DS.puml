@@ -8,10 +8,11 @@ hide footbox
 participant ":Main" as main
 participant "controlFourmi:ControlFourmi" as controlFourmi
 participant "fourmi:Fourmi" as fourmi
-'participant ":Graphe" as graphe
 participant "position:Noeud" as position
 participant "voisin:Noeud" as voisin
 participant "freeVoisin:Noeud[*]" as freeVoisins
+participant ":Graphe" as graphe
+participant "bitPlay:BitSet[][]" as bitPlay
 
 main -> controlFourmi ++ : play(1, false)
     loop fourmi : "controlFourmi.Fourmis
@@ -29,9 +30,25 @@ main -> controlFourmi ++ : play(1, false)
                 end
             end
         return freeVoisins
-        fourmi -> fourmi : setPosition(freeVoisin[i])
 
+        alt freeVoisins.size() != 0
+            fourmi -> fourmi : setPosition(freeVoisin[i])
+        end
+        deactivate fourmi
     end
+|||
+    controlFourmi -> graphe ++ : getHeight
+    return height
+    controlFourmi -> graphe ++ : getWidth
+    return width
+
+    create bitPlay
+    controlFourmi -->> bitPlay : instanciate()
+        loop height
+            loop width
+
+            end
+        end
 
 deactivate controlFourmi
 
