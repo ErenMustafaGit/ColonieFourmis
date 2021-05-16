@@ -29,7 +29,7 @@ public class Noeud {
 
     /**
      * permet d'obtenir l'état du noeud
-     * @return retourne un STATE
+     * @return retourne le STATE du noeud
      */
     public STATE getNoeudState(){
         return this.noeudState;
@@ -43,13 +43,17 @@ public class Noeud {
         this.noeudState = state;
     }
 
+    /**
+     * Ajoute le noeud en paramètre à l'ArrayList "voisins"
+     * @param noeud : Noeud à ajouter à la liste
+     */
     public void addNoeudVoisin(Noeud noeud){
         this.voisins.add(noeud);
     }
 
     /**
      * Permet d'obtenir les voisins d'un noeud
-     * @return retourne une Arrayliste de noeud
+     * @return retourne une ArrayList de noeud
      */
     public ArrayList<Noeud> getVoisins(){
         return new ArrayList<>(this.voisins);
@@ -57,12 +61,12 @@ public class Noeud {
 
     /**
      * Permet d'obtenir les voisins libres du noeud
-     * @return retourne une ArrayListe de noeud
+     * @return retourne une ArrayList de noeud
      */
     public ArrayList<Noeud> getFreeVoisins(){
         ArrayList<Noeud> temp = new ArrayList<>();
         for(Noeud n : this.voisins){
-            if(n.getNoeudState() == STATE.FREE){
+            if(n.getNoeudState() != STATE.OBSTACLE){
                 temp.add(n);
             }
         }

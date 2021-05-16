@@ -10,7 +10,7 @@ participant "controlFourmi:ControlFourmi" as controlFourmi
 participant "fourmi:Fourmi" as fourmi
 participant "position:Noeud" as position
 participant "voisin:Noeud" as voisin
-participant "freeVoisin:Noeud[*]" as freeVoisins
+participant "freeVoisins:Noeud[*]" as freeVoisins
 entity "rand:Random" as random
 
 'Pour le bitset.. prof a dit pas besoin
@@ -29,17 +29,19 @@ main -> controlFourmi ++ : play(1, false)
             position -> position ++ : getVoisins()
             return voisins
             loop voisin : voisins
-                alt voisin.isFree() == true
+                alt voisin.getNoeudState() != STATE.OBSTACLE
                     position -> freeVoisins : add(voisin)
                 end
             end
         return freeVoisins
 
-        'nextInt() en Java
-        fourmi -> random ++ : getInt(freeVoisins.size)
-        return randomInt
+
 
         alt freeVoisins.size() != 0
+            'nextInt() en Java
+            fourmi -> random ++ : getInt(freeVoisins.size)
+            return randomInt
+
             fourmi -> fourmi : setPosition(freeVoisin[randomInt])
         end
         deactivate fourmi
