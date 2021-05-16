@@ -13,6 +13,7 @@ participant "voisin:Noeud" as voisin
 participant "freeVoisin:Noeud[*]" as freeVoisins
 participant ":Graphe" as graphe
 participant "bitPlay:BitSet[][]" as bitPlay
+participant "bitPlay[i][j]:BitSet" as bitSet
 
 main -> controlFourmi ++ : play(1, false)
     loop fourmi : "controlFourmi.Fourmis
@@ -37,18 +38,29 @@ main -> controlFourmi ++ : play(1, false)
         deactivate fourmi
     end
 |||
-    controlFourmi -> graphe ++ : getHeight
-    return height
-    controlFourmi -> graphe ++ : getWidth
-    return width
+    'controlFourmi -> graphe ++ : getHeight
+    'return height
+    'controlFourmi -> graphe ++ : getWidth
+    'return width
 
-    create bitPlay
-    controlFourmi -->> bitPlay : instanciate()
-        loop height
-            loop width
+    'create bitPlay
+    'controlFourmi -->> bitPlay : instanciate(height, width)
+        'loop height
+            'loop width
+                'create bitSet
+                'controlFourmi -->> bitSet : instanciate(7)
 
-            end
-        end
+                'controlFourmi -> graphe ++ : getNoeud(height,width)
+                'return noeud
+                'alt noeud.getNoeudState == STATE.ANTHILL
+                    'controlFourmi -> bitSet : set(0,true)
+                'end
+                'alt noeud.getNoeudState == STATE.ANTHILL
+                    'controlFourmi -> bitSet : set(0,true)
+                'end
+            'end
+            'return bitPlay
+        'end
 
 deactivate controlFourmi
 
