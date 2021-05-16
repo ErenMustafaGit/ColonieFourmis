@@ -101,11 +101,8 @@ public class Graphe {
      */
     public void putObstacle(Integer row, Integer column){
         Noeud n = noeudList.get(column+ row * width);
-
-        // System.out.println(row + ":"+column + "\nstate : " + n.getNoeudState().toString());
         if(n.getNoeudState() != Noeud.STATE.ANTHILL){
             n.setNoeudState(Noeud.STATE.OBSTACLE);
-            // System.out.println("new state : " + n.getNoeudState().toString()+"\n");
         }
 
         if(row == 0 && column == 0){
@@ -122,8 +119,6 @@ public class Graphe {
 
     public void createColony(Integer row,Integer column){
         Noeud n = getNoeud(row , column);
-        //n.setNoeudState(Noeud.STATE.ANTHILL);
-        // System.out.println(row + ":"+column + " " + n.getNoeudState().toString() + "\n");
         Reine r = new Reine(n);
     }
 

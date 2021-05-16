@@ -6,6 +6,9 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Noeud {
 
+    /**
+     * Différent état d'un noeud
+     */
     public enum STATE {
         FREE,
         OBSTACLE,

@@ -11,8 +11,16 @@ interface AntFacadeController<<interface>>{
 
 }
 
-class Graphe {
+enum STATE <<enum>> {
+    FREE
+    OBSTACLE
+    ANTHILL
+}
 
+
+class Graphe {
+     -width:Integer
+     -height:Integer
 }
 class Noeuds{
 free:boolean
@@ -28,6 +36,8 @@ class Soldat extends Fourmi{
 }
 
 class ControlFourmi implements AntFacadeController{
+    -graphe:Graphe
+    -listeFourmis:ArrayList<Fourmis>
 }
 
 Noeuds -> Noeuds : est voisin de >
@@ -35,5 +45,6 @@ ControlFourmi --> Graphe
 ControlFourmi ---> Fourmi
 Graphe --> Noeuds : composé de >
 Fourmi  -> Noeuds : est sur le >
+Noeuds -->  statut : est >
 
 @enduml

@@ -13,10 +13,15 @@ public class Soldat extends Fourmis{
         super(noeud);
     }
 
+    /**
+     * Déplace la fourmis soldat en fonction de ses noeud voisin.
+     */
     @Override
     public void move() {
         Noeud position = this.getPosition();
         ArrayList<Noeud> freeVoisins = new ArrayList<>(position.getFreeVoisins());
+        //Si la fourmis ce trouve sur un noeud qui possède une liste de NoeudVoisin différent de 0,
+        //alors elle peu bouger, sinon elle ne fait rien.
         if(freeVoisins.size() != 0){
             Random rnd = new Random();
 
@@ -26,6 +31,5 @@ public class Soldat extends Fourmis{
             //Va en direction de ce noeud là
             this.setPosition(direction);
         }
-        //this.setPosition(position);
     }
 }

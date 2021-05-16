@@ -25,6 +25,7 @@ interface AntFacadeController <<interface>> {
 class Noeud {
     +getNoeudState():STATE
     +setNoeudState(State:STATE)
+    +addNoeudVoisin(noeud:Noeud)
     +getVoisins():Noeud[*]
     +getFreeVoisins():Noeud[*]
 }
