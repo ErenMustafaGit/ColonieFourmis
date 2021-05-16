@@ -65,19 +65,19 @@ class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
- +getNoeudList()
- +getWidth()
- +getHeight()
+ +getNoeudList():Noeud[*]
+ +getWidth():Integer
+ +getHeight():Integer
 }
 
 
 Soldat --|> Fourmis
 Reine -l-|> Fourmis
 
-ControlFourmis "-graphe\n1 " *-l-> Graphe
+ControlFourmis "-gra\nphe\n1 " *-l-> Graphe
 ControlFourmis  *--> "-listeFourmis\n1..*" Fourmis
 
-Graphe *-r-> "-noeudList \n0..n" Noeud : composé de >
+Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
 Fourmis *---> "-position\n1" Noeud  : est sur un >
