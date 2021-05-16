@@ -21,9 +21,11 @@ enum STATE <<enum>> {
 class Graphe {
      -width:Integer
      -height:Integer
+     -noeudList:List<Noeud>
 }
 class Noeuds{
-free:boolean
+    -voisin:ArrayList<Noeud>
+    -noeudState:STATE
 }
 
 abstract Fourmi <<abstract>>{
@@ -31,20 +33,22 @@ abstract Fourmi <<abstract>>{
 }
 
 class Reine extends Fourmi{
+
 }
+
 class Soldat extends Fourmi{
+
 }
 
 class ControlFourmi implements AntFacadeController{
-    -graphe:Graphe
-    -listeFourmis:ArrayList<Fourmis>
+
 }
 
 Noeuds -> Noeuds : est voisin de >
-ControlFourmi --> Graphe
-ControlFourmi ---> Fourmi
+ControlFourmi --> Graphe : possède un >
+ControlFourmi ---> Fourmi : possède des >
 Graphe --> Noeuds : composé de >
 Fourmi  -> Noeuds : est sur le >
-Noeuds -->  statut : est >
+Noeuds -->  STATE : est >
 
 @enduml
