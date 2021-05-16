@@ -56,7 +56,6 @@ public class ControlFourmis implements AntFacadeController {
     @Override
     public void createColony(int row, int column) {
         Reine reine = new Reine(this.graphe.getNoeud(row,column));
-        this.graphe.createColony(row, column);
         listeFourmis.add(reine);
     }
 
