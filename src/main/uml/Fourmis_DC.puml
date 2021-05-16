@@ -19,7 +19,7 @@ interface AntFacadeController <<interface>> {
     '+createWorkers( amount:Integer )
     +createSoldiers(amount:Integer)
     '+setAntFile(antLogFile:String);
-    +play( duration:Integer, record:boolean )
+    +play(duration:Integer,record:boolean):BitSet[][]
 }
 
 class Noeud {
