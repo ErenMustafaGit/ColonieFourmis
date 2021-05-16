@@ -23,6 +23,7 @@ interface AntFacadeController <<interface>> {
 }
 
 class Noeud {
+    +Noeud()
     +getNoeudState():STATE
     +setNoeudState(State:STATE)
     +addNoeudVoisin(noeud:Noeud)
@@ -42,11 +43,13 @@ abstract Fourmis <<abstract>> {
     {abstract} +move()
 }
 class Reine{
+    +Reine(:Noeud)
     +move() <<override>>
     +createSoldiers(amount:Integer)
 
 }
 class Soldat{
+    +Soldat(:Noeud)
     +move() <<override>>
 }
 
@@ -71,10 +74,10 @@ class Graphe{
 Soldat --|> Fourmis
 Reine -l-|> Fourmis
 
-ControlFourmis "-gra\nphe\n1 " *-l-> Graphe
+ControlFourmis "-graphe\n1 " *-l-> Graphe
 ControlFourmis  *--> "-listeFourmis\n1..*" Fourmis
 
-Graphe *-r-> "-noeuds\n0..n" Noeud : composé de >
+Graphe *-r-> "-noeudList \n0..n" Noeud : composé de >
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
 Fourmis *---> "-position\n1" Noeud  : est sur un >
