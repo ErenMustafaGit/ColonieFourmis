@@ -24,6 +24,9 @@ public class FourmiOurTest {
 
     }
 
+    /**
+     * Test Unitaire de la classe Graphe
+     */
     @Test
     @DisplayName(("Placer 4 obstacles sur la fourmilière"))
     void testPutObstacle()
@@ -33,6 +36,7 @@ public class FourmiOurTest {
             appli.putObstacle(2,2);
             appli.putObstacle(3,2);
             appli.putObstacle(2,3);
+            appli.putObstacle(2,2);
         }catch (IllegalArgumentException exception)
         {
             // OK
@@ -44,6 +48,11 @@ public class FourmiOurTest {
         }
 
     }
+
+
+    /**
+     * Test Unitaire de la classe Soldat
+     */
 
     @Test
     @DisplayName(("Soldat qui se déplacer alors qu'il est entouré d'obstacle"))
@@ -71,6 +80,9 @@ public class FourmiOurTest {
         }
     }
 
+    /**
+     * Test Unitaire de la classe Reine
+     */
     @Test
     @DisplayName(("Reine qui ne doit pas se déplacer"))
     void testMoveReine()
