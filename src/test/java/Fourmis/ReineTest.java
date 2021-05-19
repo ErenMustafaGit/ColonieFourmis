@@ -15,24 +15,25 @@ class ReineTest {
 
     @BeforeEach
     void setUp() {
+        appli = new ControlFourmis();
         appli.createGrid(WIDTH, HEIGHT);
     }
 
     @Test
-    void move() {
-    }
-
-    @Test
-    void createSoldiers() {
-    }
-
-    @Test
     @DisplayName(("Reine qui ne doit pas se déplacer"))
-    void testMoveReine()
-    {
+    void move() {
         appli.createColony(1,2);
         BitSet[][] bitset = appli.play(5,false);
         BitSet actual = bitset[1][2];
         assertTrue(actual.get(0), "Fourmillière ne s'est pas déplacé " + actual);
     }
+
+    @Test
+    void createSoldiers() {
+
+
+
+    }
+
+
 }
