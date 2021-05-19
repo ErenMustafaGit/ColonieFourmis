@@ -26,6 +26,9 @@ class Graph {
 class Node{
 }
 
+class Food{
+}
+
 abstract Ant <<abstract>>{
 
 }
@@ -41,6 +44,7 @@ class Soldier extends Ant{
 class Worker extends Ant{
 }
 
+
 class ControlAnt implements AntFacadeController{
 
 }
@@ -51,5 +55,9 @@ ControlAnt --- Ant : possède des >
 Graph -- Node : composé de >
 Ant  - Node : est sur le >
 Node --  STATE : est >
+Node -- Food : contient >
+Node - Ant : contient >
+
+Ant --- Queen : provient de >
 
 @enduml
