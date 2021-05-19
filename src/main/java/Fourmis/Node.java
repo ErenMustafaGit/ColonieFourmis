@@ -25,6 +25,9 @@ public class Node {
         voisins = new ArrayList<>();
     }
 
+    public boolean isObstacle(){
+        return this.nodeState == STATE.OBSTACLE;
+    }
     /**
      * permet d'obtenir l'état du noeud
      * @return retourne le STATE du noeud
