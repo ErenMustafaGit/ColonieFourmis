@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GrapheTest {
     Graphe graphe;
-    public int WIDTH = 2;
-    public int HEIGHT = 4;
+    public int WIDTH = 13;
+    public int HEIGHT = 19;
 
     @BeforeEach
     void setUp() {
@@ -24,11 +24,11 @@ class GrapheTest {
     @DisplayName("Récuperer un noeud pas dans le graphe")
     void getNoeud() {
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.getNoeud(WIDTH, HEIGHT);
+            graphe.getNoeud(HEIGHT, WIDTH);
         });
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.getNoeud(-1, -1);
+            graphe.getNoeud(-1, 0);
         });
     }
 
@@ -39,7 +39,7 @@ class GrapheTest {
         assertEquals(Noeud.STATE.OBSTACLE, actual.getNoeudState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.putObstacle(WIDTH, HEIGHT);
+            graphe.putObstacle(HEIGHT, WIDTH);
         });
     }
 
@@ -50,7 +50,7 @@ class GrapheTest {
         assertEquals(Noeud.STATE.ANTHILL, actual.getNoeudState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.createColony(WIDTH, HEIGHT);
+            graphe.createColony(HEIGHT, WIDTH);
         });
     }
 

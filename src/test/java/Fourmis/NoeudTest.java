@@ -95,6 +95,11 @@ class NoeudTest {
         Noeud n2 = g.getNoeud(4,4);
         int nb2 = n2.getFreeVoisins().size();
         assertEquals(4, nb2);
+
+        //Noeud en corner
+        Noeud noeudCorner = g.getNoeud(HEIGHT-1,WIDTH-1);
+        int nbCorner = noeudCorner.getFreeVoisins().size();
+        assertEquals(2, nbCorner);
     }
 
     @Test
