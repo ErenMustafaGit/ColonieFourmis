@@ -57,30 +57,16 @@ class NoeudTest {
     @DisplayName(("Ajout d'un noeud voisin à un noeud"))
     void testAddNoeudVoisin(){
         Noeud n = new Noeud();
-        Noeud n_voisin = new Noeud();
-        n.addNoeudVoisin(n_voisin);
-        n_voisin.addNoeudVoisin(n);
+        Noeud n2 = new Noeud();
+        n.addNoeudVoisin(n2);
+        n2.addNoeudVoisin(n);
 
-        boolean n_voisin_de_nvoisin= false;
-        List<Noeud> voisins = n.getVoisins();
-        for(Noeud noeud : voisins){
-            if(noeud.equals(n_voisin)){
-                n_voisin_de_nvoisin = true;
-                break;
-            }
-        }
+        List<Noeud> nvoisins = n.getVoisins();
+        List<Noeud> n2voisins = n2.getVoisins();
 
-        boolean nvoisin_de_n = false;
-        List<Noeud> nvoisins = n_voisin.getVoisins();
-        for(Noeud noeud : nvoisins){
-            if(noeud.equals(n)){
-                nvoisin_de_n = true;
-                break;
-            }
-        }
+        assertTrue(nvoisins.contains(n2));
+        assertTrue(n2voisins.contains(n));
 
-        assertTrue(n_voisin_de_nvoisin);
-        assertTrue(nvoisin_de_n);
     }
 
     @Test
@@ -106,22 +92,12 @@ class NoeudTest {
     @DisplayName(("Voisins d'un noeud"))
     void testVoisinNoeud(){
         Noeud n = g.getNoeud(0,0);
-        List<Noeud>Voisin = n.getVoisins();
+        List<Noeud> voisins = n.getVoisins();
         Noeud n1 = g.getNoeud(0,1);
         Noeud n2 = g.getNoeud(1,0);
 
-        boolean voisin_droite = false;
-        boolean voisin_bas = false;
-        for(Noeud noeud : Voisin){
-            if(noeud.equals(n1)){
-                voisin_droite = true;
-            }
-            else if (noeud.equals(n2)){
-                voisin_bas = true;
-            }
-        }
-        assertTrue(voisin_bas);
-        assertTrue(voisin_droite);
+        assertTrue(voisins.contains(n1));
+        assertTrue(voisins.contains(n2));
     }
 
 }
