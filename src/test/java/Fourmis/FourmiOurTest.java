@@ -5,9 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.BitSet;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FourmiOurTest {
     AntFacadeController appli;
@@ -23,32 +23,6 @@ public class FourmiOurTest {
         appli.createColony(2,2);
 
     }
-
-    /**
-     * Test Unitaire de la classe Graphe
-     */
-    @Test
-    @DisplayName(("Placer 4 obstacles sur la fourmilière"))
-    void testPutObstacle()
-    {
-        try{
-            appli.putObstacle(2,1);
-            appli.putObstacle(2,2);
-            appli.putObstacle(3,2);
-            appli.putObstacle(2,3);
-            appli.putObstacle(2,2);
-        }catch (IllegalArgumentException exception)
-        {
-            // OK
-        }
-        catch (Exception exception)
-        {
-            fail("Exception de mauvais type : "
-                    + exception.getClass().getSimpleName());
-        }
-
-    }
-
 
     /**
      * Test Unitaire de la classe Soldat
@@ -80,16 +54,5 @@ public class FourmiOurTest {
         }
     }
 
-    /**
-     * Test Unitaire de la classe Reine
-     */
-    @Test
-    @DisplayName(("Reine qui ne doit pas se déplacer"))
-    void testMoveReine()
-    {
-        appli.createColony(1,1);
-        BitSet[][] bitset = appli.play(5,false);
-        BitSet actual = bitset[1][1];
-        assertTrue(actual.get(0), "Fourmillière ne s'est pas déplacé " + actual);
-    }
+
 }
