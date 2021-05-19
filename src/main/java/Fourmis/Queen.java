@@ -7,6 +7,7 @@ public class Queen extends Ant {
      */
     public Queen(Node node) {
         super(node);
+        super.colony = this;
         node.setNodeState(Node.STATE.ANTHILL);
     }
 
@@ -23,7 +24,7 @@ public class Queen extends Ant {
      */
     public void createSoldiers(int amount) {
         for(int i = 0; i<amount; i++){
-            Soldier soldier = new Soldier(this.getPosition());
+            Soldier soldier = new Soldier(this.getPosition(), this);
         }
     }
 }

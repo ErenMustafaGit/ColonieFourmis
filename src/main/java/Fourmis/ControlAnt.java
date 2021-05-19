@@ -68,9 +68,10 @@ public class ControlAnt implements AntFacadeController {
     public void createSoldiers(int amount) {
         ArrayList<Ant> temp_soldat = new ArrayList<>();
         for(Ant ant : this.listeFourmis){
+            //Si la fourmis est une reine (donc colonie)
             if(ant instanceof Queen){
                 for(int i = 0; i < amount; i++){
-                    Soldier s = new Soldier(ant.getPosition());
+                    Soldier s = new Soldier(ant.getPosition(), (Queen)ant);
                     temp_soldat.add(s);
                 }
             }
