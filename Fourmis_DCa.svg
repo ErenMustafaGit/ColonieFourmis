@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="612px" preserveAspectRatio="none" style="width:422px;height:612px;" version="1.1" viewBox="0 0 422 612" width="422px" zoomAndPan="magnify"><defs/><g><!--MD5=[e5168f4970614e1706ed633636598618]
-class AntFacadeController--><rect codeLine="10" fill="#FEFECE" height="53.9375" id="AntFacadeController" style="stroke:#A80036;stroke-width:1.5;" width="146" x="23" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="67" x="62.5" y="23.1387">«interface»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="140" x="26" y="37.1074">AntFacadeController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="24" x2="168" y1="44.9375" y2="44.9375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="24" x2="168" y1="52.9375" y2="52.9375"/><!--MD5=[0caaa4f4bb527f49867a40fa01201f55]
-class STATE--><rect codeLine="14" fill="#FEFECE" height="92.3516" id="STATE" style="stroke:#A80036;stroke-width:1.5;" width="72" x="208" y="513"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49" x="219.5" y="529.1387">«enum»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="223" y="543.1074">STATE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="209" x2="279" y1="550.9375" y2="550.9375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="214" y="565.1479">FREE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="214" y="577.9526">OBSTACLE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="46" x="214" y="590.7573">ANTHILL</text><line style="stroke:#A80036;stroke-width:1.5;" x1="209" x2="279" y1="597.3516" y2="597.3516"/><!--MD5=[af0a8305a588b84ac555c67f9d0f0fdf]
-class Graphe--><rect codeLine="21" fill="#FEFECE" height="65.5781" id="Graphe" style="stroke:#A80036;stroke-width:1.5;" width="95" x="198.5" y="239"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="221" y="255.1387">Graphe</text><line style="stroke:#A80036;stroke-width:1.5;" x1="199.5" x2="292.5" y1="262.9688" y2="262.9688"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="204.5" y="277.1792">-width:Integer</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="204.5" y="289.9839">-height:Integer</text><line style="stroke:#A80036;stroke-width:1.5;" x1="199.5" x2="292.5" y1="296.5781" y2="296.5781"/><!--MD5=[fd9e3ce0b909c62540b54cfff271f57f]
-class Noeuds--><rect codeLine="25" fill="#FEFECE" height="39.9688" id="Noeuds" style="stroke:#A80036;stroke-width:1.5;" width="57" x="215.5" y="389"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="218.5" y="405.1387">Noeuds</text><line style="stroke:#A80036;stroke-width:1.5;" x1="216.5" x2="271.5" y1="412.9688" y2="412.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="216.5" x2="271.5" y1="420.9688" y2="420.9688"/><!--MD5=[ada397b649420ec721dc9cc2c99e8045]
-class Fourmi--><rect codeLine="28" fill="#FEFECE" height="53.9375" id="Fourmi" style="stroke:#A80036;stroke-width:1.5;" width="66" x="38" y="382"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="64" x="39" y="398.1387">«abstract»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="48" x="47" y="412.1074">Fourmi</text><line style="stroke:#A80036;stroke-width:1.5;" x1="39" x2="103" y1="419.9375" y2="419.9375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="39" x2="103" y1="427.9375" y2="427.9375"/><!--MD5=[fb42f63e3a0f62f73f4fc52c072eeb9a]
-class Reine--><rect codeLine="32" fill="#FEFECE" height="39.9688" id="Reine" style="stroke:#A80036;stroke-width:1.5;" width="44" x="7" y="539"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="38" x="10" y="555.1387">Reine</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="50" y1="562.9688" y2="562.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="50" y1="570.9688" y2="570.9688"/><!--MD5=[eaecdb4d60f1acc22a4989f71e32ee67]
-class Soldat--><rect codeLine="36" fill="#FEFECE" height="39.9688" id="Soldat" style="stroke:#A80036;stroke-width:1.5;" width="50" x="86" y="539"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="89" y="555.1387">Soldat</text><line style="stroke:#A80036;stroke-width:1.5;" x1="87" x2="135" y1="562.9688" y2="562.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="87" x2="135" y1="570.9688" y2="570.9688"/><!--MD5=[807a20bcaed3377ca02dc550bfc1f6ac]
-class ControlFourmi--><rect codeLine="40" fill="#FEFECE" height="39.9688" id="ControlFourmi" style="stroke:#A80036;stroke-width:1.5;" width="104" x="44" y="122"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="98" x="47" y="138.1387">ControlFourmi</text><line style="stroke:#A80036;stroke-width:1.5;" x1="45" x2="147" y1="145.9688" y2="145.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="45" x2="147" y1="153.9688" y2="153.9688"/><!--MD5=[150ad93d41980f0109ce774ea247ec9b]
-reverse link Fourmi to Reine--><path d="M57.9645,455.5554 C50.1498,483.4648 40.6078,517.5435 34.666,538.7642 " fill="none" id="Fourmi-backto-Reine" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="51.2607,453.5357,63.3941,436.1639,64.7422,457.3106,51.2607,453.5357" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b4cb33dcbe836530f458d8962bd9df06]
-reverse link Fourmi to Soldat--><path d="M83.4148,455.5554 C90.8573,483.4648 99.9449,517.5435 105.6038,538.7642 " fill="none" id="Fourmi-backto-Soldat" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="76.6334,457.2922,78.2437,436.1639,90.1607,453.6849,76.6334,457.2922" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9ad4adce9abdeadd441e92d9c2474b13]
-reverse link AntFacadeController to ControlFourmi--><path d="M96,81.7363 C96,95.8621 96,110.5674 96,121.9155 " fill="none" id="AntFacadeController-backto-ControlFourmi" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="89.0001,81.253,96,61.253,103.0001,81.2529,89.0001,81.253" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3c70f0f538697fc77483be4444dc0d7c]
-link Noeuds to Noeuds--><path codeLine="44" d="M272.7342,397.8467 C290.5475,395.1572 307.5,398.875 307.5,409 C307.5,419.125 290.5475,422.8428 272.7342,420.1533 " fill="none" id="Noeuds-Noeuds" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="311.7535,414.0104,316.0099,405.5054,310.1979,404.6279,311.7535,414.0104" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="326.5" y="413.5669">est voisin de</text><!--MD5=[39beaa571a0a976e01c059ed34d87645]
-link ControlFourmi to Graphe--><path codeLine="45" d="M119.1088,162.0276 C142.6945,182.4685 179.7092,214.548 207.6869,238.7953 " fill="none" id="ControlFourmi-Graphe" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="179.7784,203.8411,174.868,195.6962,171.0184,200.1381,179.7784,203.8411" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="185" y="205.0669">possède un</text><!--MD5=[f611150883cc2c78b8a79478b62aa9c0]
-link ControlFourmi to Fourmi--><path codeLine="46" d="M93.5447,162.0447 C91.1868,181.6461 87.6079,212.3491 85,239 C80.0683,289.3989 75.4785,348.319 72.9743,381.8894 " fill="none" id="ControlFourmi-Fourmi" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="89.5342,277.0447,93.303,268.3127,87.4507,267.7651,89.5342,277.0447" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="99" y="276.5669">possède des</text><!--MD5=[854f6d70cc5a7d3e8088f855b84e905d]
-link Graphe to Noeuds--><path codeLine="47" d="M245.5159,305.1639 C245.1344,331.2967 244.6149,366.8784 244.2938,388.8726 " fill="none" id="Graphe-Noeuds" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="249.927,348.5659,252.9977,339.5647,247.1204,339.4789,249.927,348.5659" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="79" x="259" y="348.0669">composé de</text><!--MD5=[24eb72fb222a0c04b17ac1a2ee42cee0]
-link Fourmi to Noeuds--><path codeLine="48" d="M104.3561,409 C136.5615,409 184.8136,409 215.3355,409 " fill="none" id="Fourmi-Noeuds" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="132.25,397.5664,123.2049,394.6275,123.2049,400.5053,132.25,397.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="136.25" y="402.0669">est sur le</text><!--MD5=[7007218038c9d65e999d6075ca6c6f26]
-link Noeuds to STATE--><path codeLine="49" d="M244,429.2297 C244,450.5811 244,484.9542 244,512.9613 " fill="none" id="Noeuds-STATE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="249,479.5664,251.9389,470.5213,246.0611,470.5213,249,479.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="258" y="479.0669">est</text><!--MD5=[0410338e0d5405749fccb0eddc6f7b92]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="612px" preserveAspectRatio="none" style="width:465px;height:612px;" version="1.1" viewBox="0 0 465 612" width="465px" zoomAndPan="magnify"><defs/><g><!--MD5=[e5168f4970614e1706ed633636598618]
+class AntFacadeController--><rect codeLine="10" fill="#FEFECE" height="53.9375" id="AntFacadeController" style="stroke:#A80036;stroke-width:1.5;" width="146" x="92" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="67" x="131.5" y="23.1387">«interface»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="140" x="95" y="37.1074">AntFacadeController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="93" x2="237" y1="44.9375" y2="44.9375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="93" x2="237" y1="52.9375" y2="52.9375"/><!--MD5=[0caaa4f4bb527f49867a40fa01201f55]
+class STATE--><rect codeLine="14" fill="#FEFECE" height="92.3516" id="STATE" style="stroke:#A80036;stroke-width:1.5;" width="72" x="272" y="513"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49" x="283.5" y="529.1387">«enum»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="287" y="543.1074">STATE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="273" x2="343" y1="550.9375" y2="550.9375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="278" y="565.1479">FREE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="278" y="577.9526">OBSTACLE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="46" x="278" y="590.7573">ANTHILL</text><line style="stroke:#A80036;stroke-width:1.5;" x1="273" x2="343" y1="597.3516" y2="597.3516"/><!--MD5=[706e73df52f3df32f52be1ce9adb217e]
+class Graph--><rect codeLine="21" fill="#FEFECE" height="65.5781" id="Graph" style="stroke:#A80036;stroke-width:1.5;" width="48" x="269" y="239"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="272" y="255.1387">Graph</text><line style="stroke:#A80036;stroke-width:1.5;" x1="270" x2="316" y1="262.9688" y2="262.9688"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="275" y="277.1792">width</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="35" x="275" y="289.9839">height</text><line style="stroke:#A80036;stroke-width:1.5;" x1="270" x2="316" y1="296.5781" y2="296.5781"/><!--MD5=[3fee75583bb7a64f68d843a3c9534ab3]
+class Node--><rect codeLine="25" fill="#FEFECE" height="39.9688" id="Node" style="stroke:#A80036;stroke-width:1.5;" width="41" x="274.5" y="389"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35" x="277.5" y="405.1387">Node</text><line style="stroke:#A80036;stroke-width:1.5;" x1="275.5" x2="314.5" y1="412.9688" y2="412.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="275.5" x2="314.5" y1="420.9688" y2="420.9688"/><!--MD5=[10c50c2e3150e634e5ce95ceba89a534]
+class Ant--><rect codeLine="28" fill="#FEFECE" height="53.9375" id="Ant" style="stroke:#A80036;stroke-width:1.5;" width="66" x="99" y="382"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="64" x="100" y="398.1387">«abstract»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="24" x="120" y="412.1074">Ant</text><line style="stroke:#A80036;stroke-width:1.5;" x1="100" x2="164" y1="419.9375" y2="419.9375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="100" x2="164" y1="427.9375" y2="427.9375"/><!--MD5=[b5524c1f1cf4f7aeecdc9b5af5b05d87]
+class Queen--><rect codeLine="32" fill="#FEFECE" height="39.9688" id="Queen" style="stroke:#A80036;stroke-width:1.5;" width="50" x="7" y="539"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="10" y="555.1387">Queen</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="56" y1="562.9688" y2="562.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="56" y1="570.9688" y2="570.9688"/><!--MD5=[ab18ab109d20d07a46d8dcc7319a218d]
+class Soldier--><rect codeLine="36" fill="#FEFECE" height="39.9688" id="Soldier" style="stroke:#A80036;stroke-width:1.5;" width="54" x="92" y="539"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="48" x="95" y="555.1387">Soldier</text><line style="stroke:#A80036;stroke-width:1.5;" x1="93" x2="145" y1="562.9688" y2="562.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="93" x2="145" y1="570.9688" y2="570.9688"/><!--MD5=[7b5bd88a8a025decccf0c9eac4aaabe9]
+class Worker--><rect codeLine="40" fill="#FEFECE" height="39.9688" id="Worker" style="stroke:#A80036;stroke-width:1.5;" width="55" x="181.5" y="539"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="49" x="184.5" y="555.1387">Worker</text><line style="stroke:#A80036;stroke-width:1.5;" x1="182.5" x2="235.5" y1="562.9688" y2="562.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="182.5" x2="235.5" y1="570.9688" y2="570.9688"/><!--MD5=[9bc19fadb5fbcea8e0ad391b542b362d]
+class ControlAnt--><rect codeLine="43" fill="#FEFECE" height="39.9688" id="ControlAnt" style="stroke:#A80036;stroke-width:1.5;" width="80" x="125" y="122"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="74" x="128" y="138.1387">ControlAnt</text><line style="stroke:#A80036;stroke-width:1.5;" x1="126" x2="204" y1="145.9688" y2="145.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="126" x2="204" y1="153.9688" y2="153.9688"/><!--MD5=[e328c16c177ae1fede888adf58d4460f]
+reverse link Ant to Queen--><path d="M102.5859,453.1211 C83.694,481.459 60.0517,516.9224 45.4905,538.7642 " fill="none" id="Ant-backto-Queen" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="96.9723,448.922,113.8908,436.1639,108.6211,456.6878,96.9723,448.922" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[aa722b09dfa1cf5a63ede336d4349abe]
+reverse link Ant to Soldier--><path d="M127.8943,456.374 C125.4889,484.1285 122.575,517.7505 120.7538,538.7642 " fill="none" id="Ant-backto-Soldier" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="120.945,455.4847,129.6458,436.1639,134.8927,456.6936,120.945,455.4847" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c8892067b2ec4d30e44d5d5d2177d5b0]
+reverse link Ant to Worker--><path d="M155.2715,454.3341 C169.7119,482.4646 187.5596,517.2329 198.6123,538.7642 " fill="none" id="Ant-backto-Worker" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="148.8503,457.1533,145.9441,436.1639,161.3052,450.7598,148.8503,457.1533" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ec5b6763ef85bdc9e5bae8dc40bc12c1]
+reverse link AntFacadeController to ControlAnt--><path d="M165,81.7363 C165,95.8621 165,110.5674 165,121.9155 " fill="none" id="AntFacadeController-backto-ControlAnt" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="158.0001,81.253,165,61.253,172.0001,81.2529,158.0001,81.253" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[fb7add3d04029a548e9a9a347d9aecd1]
+link Node to Node--><path codeLine="47" d="M315.7812,398.7585 C332.8124,394.5237 350.5,397.9375 350.5,409 C350.5,420.0625 332.8124,423.4763 315.7812,419.2415 " fill="none" id="Node-Node" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="354.2935,413.9187,359.3282,405.85,353.624,404.4317,354.2935,413.9187" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="369.5" y="413.5669">est voisin de</text><!--MD5=[e361e0ddab4ffa591fd2417aaf2f2025]
+link ControlAnt to Graph--><path codeLine="48" d="M184.7195,162.0276 C207.3004,184.9613 244.3062,222.5453 268.6618,247.2815 " fill="none" id="ControlAnt-Graph" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="237.508,204.1292,233.2561,195.622,229.0678,199.746,237.508,204.1292" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="243" y="205.0669">possède un</text><!--MD5=[42aa1678406e0a1c0ab74f7eb572cf90]
+link ControlAnt to Ant--><path codeLine="49" d="M162.5196,162.0684 C156.6738,209.3665 142.0258,327.8824 135.377,381.6772 " fill="none" id="ControlAnt-Ant" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="157.3867,277.0286,161.4129,268.4124,155.5794,267.6914,157.3867,277.0286" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="167" y="276.5669">possède des</text><!--MD5=[b633099da10ac253e099b79efabfb3de]
+link Graph to Node--><path codeLine="50" d="M293.4841,305.1639 C293.8656,331.2967 294.3851,366.8784 294.7062,388.8726 " fill="none" id="Graph-Node" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="299.073,348.5659,301.8796,339.4789,296.0023,339.5647,299.073,348.5659" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="79" x="308" y="348.0669">composé de</text><!--MD5=[44a0082c4d57b8b9ae054de3f547280a]
+link Ant to Node--><path codeLine="51" d="M165.3788,409 C197.9779,409 246.58,409 274.0724,409 " fill="none" id="Ant-Node" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="192.25,397.5664,183.2049,394.6275,183.2049,400.5053,192.25,397.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="196.25" y="402.0669">est sur le</text><!--MD5=[4ccebe792655e42faea681608e0ad2d9]
+link Node to STATE--><path codeLine="52" d="M296.7532,429.2297 C298.6037,450.5811 301.5827,484.9542 304.01,512.9613 " fill="none" id="Node-STATE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="306.4317,479.5477,308.5787,470.2827,302.7228,470.7902,306.4317,479.5477" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="315" y="479.0669">est</text><!--MD5=[4fb3db02e58af1b5bd3663bcf688917a]
 @startuml
 'https://plantuml.com/sequence-diagram
 skinparam style strictuml
@@ -37,35 +39,38 @@ enum STATE <<enum>> {
 }
 
 
-class Graphe {
-     -width:Integer
-     -height:Integer
+class Graph {
+     width
+     height
 }
-class Noeuds{
-}
-
-abstract Fourmi <<abstract>>{
-
+class Node{
 }
 
-class Reine extends Fourmi{
+abstract Ant <<abstract>>{
 
 }
 
-class Soldat extends Fourmi{
+class Queen extends Ant{
 
 }
 
-class ControlFourmi implements AntFacadeController{
+class Soldier extends Ant{
 
 }
 
-Noeuds - Noeuds : est voisin de >
-ControlFourmi - - Graphe : possède un >
-ControlFourmi - - - Fourmi : possède des >
-Graphe - - Noeuds : composé de >
-Fourmi  - Noeuds : est sur le >
-Noeuds - -  STATE : est >
+class Worker extends Ant{
+}
+
+class ControlAnt implements AntFacadeController{
+
+}
+
+Node - Node : est voisin de >
+ControlAnt - - Graph : possède un >
+ControlAnt - - - Ant : possède des >
+Graph - - Node : composé de >
+Ant  - Node : est sur le >
+Node - -  STATE : est >
 
 @enduml
 
@@ -88,35 +93,38 @@ enum STATE <<enum>> {
 }
 
 
-class Graphe {
-     -width:Integer
-     -height:Integer
+class Graph {
+     width
+     height
 }
-class Noeuds{
-}
-
-abstract Fourmi <<abstract>>{
-
+class Node{
 }
 
-class Reine extends Fourmi{
+abstract Ant <<abstract>>{
 
 }
 
-class Soldat extends Fourmi{
+class Queen extends Ant{
 
 }
 
-class ControlFourmi implements AntFacadeController{
+class Soldier extends Ant{
 
 }
 
-Noeuds - Noeuds : est voisin de >
-ControlFourmi - - Graphe : possède un >
-ControlFourmi - - - Fourmi : possède des >
-Graphe - - Noeuds : composé de >
-Fourmi  - Noeuds : est sur le >
-Noeuds - -  STATE : est >
+class Worker extends Ant{
+}
+
+class ControlAnt implements AntFacadeController{
+
+}
+
+Node - Node : est voisin de >
+ControlAnt - - Graph : possède un >
+ControlAnt - - - Ant : possède des >
+Graph - - Node : composé de >
+Ant  - Node : est sur le >
+Node - -  STATE : est >
 
 @enduml
 
