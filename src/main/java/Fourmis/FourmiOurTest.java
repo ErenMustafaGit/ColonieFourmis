@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.BitSet;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class FourmiOurTest {
@@ -42,5 +43,57 @@ public class FourmiOurTest {
                     + exception.getClass().getSimpleName());
         }
 
+    }
+
+    @Test
+    @DisplayName(("Soldat qui se déplacer alors qu'il est entouré d'obstacle"))
+    void testMove()
+    {
+        appli.putObstacle(0,1);
+        appli.putObstacle(1,0);
+        appli.putObstacle(2,1);
+        appli.putObstacle(1,2);
+        try{
+            appli.createColony(1,1);
+            appli.createSoldiers(2);
+            BitSet[][] bitset = appli.play(1,false);
+            BitSet actual = bitset[1][1];
+            assertTrue(actual.get(0), "Fourmillière bien présente sur le noeud placé " + actual);
+            assertTrue(actual.get(2), "Soldat bien présent sur le noeud placé, ils ne se sont donc pas déplacé " + actual);
+        }catch (IllegalArgumentException exception)
+        {
+            // OK
+        }
+        catch (Exception exception)
+        {
+            fail("Exception de mauvais type : "
+                    + exception.getClass().getSimpleName());
+        }
+    }
+
+    @Test
+    @DisplayName(("Reine qui ne doit pas se déplacer"))
+    void testMoveReine()
+    {
+        appli.putObstacle(0,1);
+        appli.putObstacle(1,0);
+        appli.putObstacle(2,1);
+        appli.putObstacle(1,2);
+        try{
+            appli.createColony(1,1);
+            appli.createSoldiers(2);
+            BitSet[][] bitset = appli.play(1,false);
+            BitSet actual = bitset[1][1];
+            assertTrue(actual.get(0), "Fourmillière bien présente sur le noeud placé " + actual);
+            assertTrue(actual.get(2), "Soldat bien présent sur le noeud placé, ils ne se sont donc pas déplacé " + actual);
+        }catch (IllegalArgumentException exception)
+        {
+            // OK
+        }
+        catch (Exception exception)
+        {
+            fail("Exception de mauvais type : "
+                    + exception.getClass().getSimpleName());
+        }
     }
 }
