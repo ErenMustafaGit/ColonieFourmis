@@ -3,10 +3,10 @@ package Fourmis;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graphe {
+public class Graph {
     private int width;
     private int height;
-    private List<Noeud> noeudList;
+    private List<Node> nodeList;
 
 
     /**
@@ -14,8 +14,8 @@ public class Graphe {
      * @param width : longueur
      * @param height : hauteur
      */
-    public Graphe(Integer width, Integer height){
-        noeudList = new ArrayList<>();
+    public Graph(Integer width, Integer height){
+        nodeList = new ArrayList<>();
         this.width = width;
         this.height = height;
 
@@ -23,8 +23,8 @@ public class Graphe {
         //Erreur dans le sujet : Height et witdh inversé
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
-                Noeud n = new Noeud();
-                noeudList.add(n);
+                Node n = new Node();
+                nodeList.add(n);
             }
         }
 
@@ -32,15 +32,15 @@ public class Graphe {
         for(int x = 0; x < height - 1;x++){
             for(int y = 0;y<width - 1;y++){
                 //Récuperation Noeud actuel
-                Noeud n = this.getNoeud(x,y);
+                Node n = this.getNoeud(x,y);
 
                 //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-                Noeud nRight = this.getNoeud(x+1,y);
+                Node nRight = this.getNoeud(x+1,y);
                 //Noeud nRight = this.graphe_tab.get(x+y*width+1);
 
 
                 //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-                Noeud nDown = this.getNoeud(x,y+1);
+                Node nDown = this.getNoeud(x,y+1);
                 //Noeud nDown = this.graphe_tab.get(x+(y+1)*width);
 
                 //Ajout dans le noeud actuel (n), les voisins du bas et de droite
@@ -57,10 +57,10 @@ public class Graphe {
         //Noeud de tout à droite
         for(int x = 0; x<height-1; x++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(x,width-1);
+            Node n = this.getNoeud(x,width-1);
 
             //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-            Noeud nDown = this.getNoeud(x+1,width-1);
+            Node nDown = this.getNoeud(x+1,width-1);
 
             //Ajout dans le noeud actuel (n), le voisins du bas
             n.addNoeudVoisin(nDown);
@@ -72,10 +72,10 @@ public class Graphe {
         //Noeud de tout en bas
         for(int y = 0; y<width-1; y++){
             //Récuperation Noeud actuel
-            Noeud n = this.getNoeud(height-1,y);
+            Node n = this.getNoeud(height-1,y);
 
             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-            Noeud nRight = this.getNoeud(height-1,y+1);
+            Node nRight = this.getNoeud(height-1,y+1);
 
             //Ajout dans le noeud actuel (n), le voisins de droite
             n.addNoeudVoisin(nRight);
@@ -92,8 +92,8 @@ public class Graphe {
      * @param column : la colonne (y)
      * @return retourne un Noeud
      */
-    public Noeud getNoeud(Integer row, Integer column){
-        return noeudList.get(column + row * width);
+    public Node getNoeud(Integer row, Integer column){
+        return nodeList.get(column + row * width);
     }
 
     /**
@@ -102,9 +102,9 @@ public class Graphe {
      * @param column : la colonne (y)
      */
     public void putObstacle(Integer row, Integer column){
-        Noeud n = noeudList.get(column+ row * width);
-        if(n.getNoeudState() != Noeud.STATE.ANTHILL){
-            n.setNoeudState(Noeud.STATE.OBSTACLE);
+        Node n = nodeList.get(column+ row * width);
+        if(n.getNodeState() != Node.STATE.ANTHILL){
+            n.setNodeState(Node.STATE.OBSTACLE);
         }
 
         //Pour passer le test n°1, mais illogique ?
@@ -121,16 +121,16 @@ public class Graphe {
      */
 
     public void createColony(Integer row,Integer column){
-        Noeud n = getNoeud(row , column);
-        Reine r = new Reine(n);
+        Node n = getNoeud(row , column);
+        Queen r = new Queen(n);
     }
 
     /**
      * Permet de récuperer les noeuds contenue dans le graphe
      * @return retourne une Liste de Noeud
      */
-    public List<Noeud> getNoeudList(){
-        return this.noeudList;
+    public List<Node> getNoeudList(){
+        return this.nodeList;
     }
 
     /**

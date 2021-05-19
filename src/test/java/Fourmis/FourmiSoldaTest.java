@@ -8,7 +8,7 @@ import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FourmiSoldatTest
+class FourmiSoldierTest
 {
     static final int WIDTH = 13;
     static final int HEIGHT = 19;
@@ -19,7 +19,7 @@ class FourmiSoldatTest
     @BeforeEach
     void setUp()
     {
-        appli = new ControlFourmis();
+        appli = new ControlAnt();
         appli.createGrid(WIDTH, HEIGHT);
         appli.createColony(0,0);
 

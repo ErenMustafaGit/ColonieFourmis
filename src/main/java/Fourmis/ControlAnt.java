@@ -2,9 +2,9 @@ package Fourmis;
 
 import java.util.*;
 
-public class ControlFourmis implements AntFacadeController {
-    private Graphe graphe;
-    private ArrayList<Fourmis> listeFourmis = new ArrayList<>();
+public class ControlAnt implements AntFacadeController {
+    private Graph graph;
+    private ArrayList<Ant> listeFourmis = new ArrayList<>();
 
     /**
      * Fixe les paramètres de l'application.
@@ -24,7 +24,7 @@ public class ControlFourmis implements AntFacadeController {
      */
     @Override
     public void createGrid(int width, int height) {
-        this.graphe = new Graphe(width, height);
+        this.graph = new Graph(width, height);
     }
 
     /**
@@ -34,7 +34,7 @@ public class ControlFourmis implements AntFacadeController {
      */
     @Override
     public void putObstacle(int row, int column) {
-        this.graphe.putObstacle(row, column);
+        this.graph.putObstacle(row, column);
     }
 
     /**
@@ -55,8 +55,8 @@ public class ControlFourmis implements AntFacadeController {
      */
     @Override
     public void createColony(int row, int column) {
-        Reine reine = new Reine(this.graphe.getNoeud(row,column));
-        listeFourmis.add(reine);
+        Queen queen = new Queen(this.graph.getNoeud(row,column));
+        listeFourmis.add(queen);
     }
 
     /**
@@ -66,11 +66,11 @@ public class ControlFourmis implements AntFacadeController {
     @Override
     //à reverifier
     public void createSoldiers(int amount) {
-        ArrayList<Fourmis> temp_soldat = new ArrayList<>();
-        for(Fourmis fourmis : this.listeFourmis){
-            if(fourmis instanceof Reine){
+        ArrayList<Ant> temp_soldat = new ArrayList<>();
+        for(Ant ant : this.listeFourmis){
+            if(ant instanceof Queen){
                 for(int i = 0; i < amount; i++){
-                    Soldat s = new Soldat(fourmis.getPosition());
+                    Soldier s = new Soldier(ant.getPosition());
                     temp_soldat.add(s);
                 }
             }
@@ -111,33 +111,33 @@ public class ControlFourmis implements AntFacadeController {
     @Override
     public BitSet[][] play(int duration, boolean record) {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
-        BitSet[][] bit_play = new BitSet[this.graphe.getHeight()][this.graphe.getWidth()];
+        BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
 
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-            for(Fourmis fourmis : this.listeFourmis){
-                if(fourmis instanceof Soldat){
-                    fourmis.move();
+            for(Ant ant : this.listeFourmis){
+                if(ant instanceof Soldier){
+                    ant.move();
                 }
             }
         }
 
 
-        for(int row = 0; row < this.graphe.getHeight(); row++){
-            for(int column = 0; column < this.graphe.getWidth(); column++){
+        for(int row = 0; row < this.graph.getHeight(); row++){
+            for(int column = 0; column < this.graph.getWidth(); column++){
                 bit_play[row][column]=new BitSet(7);
                 //Présence de colonnie
-                if(this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.ANTHILL)
+                if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
                     //Présence d'obstacle
-                else if (this.graphe.getNoeud(row, column).getNoeudState() == Noeud.STATE.OBSTACLE)
+                else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
                 //Présence de soldat
                 int compteur_soldat = 0;
-                for(Fourmis fourmis : this.listeFourmis){
-                    if(fourmis instanceof Soldat && fourmis.getPosition() == this.graphe.getNoeud(row, column)){
+                for(Ant ant : this.listeFourmis){
+                    if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
                         compteur_soldat++;
                         if(compteur_soldat > 0){
                             bit_play[row][column].set(2, true);

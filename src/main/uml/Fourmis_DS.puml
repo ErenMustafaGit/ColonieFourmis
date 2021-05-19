@@ -6,8 +6,8 @@ hide footbox
 
 'title Méthode jouer()
 participant ":Main" as main
-participant "controlFourmi:ControlFourmi" as controlFourmi
-participant "fourmi:Fourmi" as fourmi
+participant "controlAnt:ControlAnt" as controlAnt
+participant "fourmi:Fourmi" as ant
 participant "position:Noeud" as position
 participant "voisin:Noeud" as voisin
 participant "freeVoisins:Noeud[*]" as freeVoisins
@@ -18,14 +18,14 @@ entity "rand:Random" as random
 'participant "bitPlay:BitSet[][]" as bitPlay
 'participant "bitPlay[i][j]:BitSet" as bitSet
 
-main -> controlFourmi ++ : play(1, false)
-    loop fourmi : "controlFourmi.Fourmis
+main -> controlAnt ++ : play(1, false)
+    loop ant : controlAnt.Ant
     |||
-        controlFourmi -> fourmi ++ : move()
-        fourmi -> fourmi  ++ : getPosition()
+        controlAnt -> ant ++ : move()
+        ant -> ant  ++ : getPosition()
         return position
 
-        fourmi -> position ++ : getFreeVoisins()
+        ant -> position ++ : getFreeVoisins()
             position -> position ++ : getVoisins()
             return voisins
             loop voisin : voisins
@@ -39,12 +39,12 @@ main -> controlFourmi ++ : play(1, false)
 
         alt freeVoisins.size() != 0
             'nextInt() en Java
-            fourmi -> random ++ : getInt(freeVoisins.size)
+            ant -> random ++ : getInt(freeVoisins.size)
             return randomInt
 
-            fourmi -> fourmi : setPosition(freeVoisin[randomInt])
+            ant -> ant : setPosition(freeVoisin[randomInt])
         end
-        deactivate fourmi
+        deactivate ant
     end
 |||
     'controlFourmi -> graphe ++ : getHeight
@@ -71,7 +71,7 @@ main -> controlFourmi ++ : play(1, false)
             'return bitPlay
         'end
 
-deactivate controlFourmi
+deactivate controlAnt
 
 
 

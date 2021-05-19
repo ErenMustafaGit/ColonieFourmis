@@ -22,13 +22,13 @@ interface AntFacadeController <<interface>> {
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
-class Noeud {
-    +Noeud()
+class Node {
+    +Node()
     +getNoeudState():STATE
     +setNoeudState(State:STATE)
     +addNoeudVoisin(noeud:Noeud)
-    +getVoisins():Noeud[*]
-    +getFreeVoisins():Noeud[*]
+    +getVoisins():Node[*]
+    +getFreeVoisins():Node[*]
 }
 enum STATE <<enum>> {
     FREE
@@ -37,52 +37,58 @@ enum STATE <<enum>> {
 }
 
 
-abstract Fourmis <<abstract>> {
-    +getPosition():Noeud
+abstract Ant <<abstract>> {
+    +getPosition():Node
     +setPosition(position:Noeud)
     {abstract} +move()
 }
-class Reine{
-    +Reine(:Noeud)
+class Queen{
+    +Queen(:Noeud)
     +move() <<override>>
     +createSoldiers(amount:Integer)
 
 }
-class Soldat{
-    +Soldat(:Noeud)
+class Soldier{
+    +Soldier(:Noeud)
+    +move() <<override>>
+}
+
+class Worker {
+    +Worder(:Noeud)
     +move() <<override>>
 }
 
 
-class ControlFourmis implements AntFacadeController{
+class ControlAnt implements AntFacadeController{
 }
 
 
-class Graphe{
+class Graph{
  -width:Integer
  -height:Integer
- +Graphe(witdh:Integer, height:Integer)
- +getNoeud(row:Integer, column:Integer):Noeud
+ +Graph(witdh:Integer, height:Integer)
+ +getNoeud(row:Integer, column:Integer):Node
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
- +getNoeudList():Noeud[*]
+ +getNoeudList():Node[*]
  +getWidth():Integer
  +getHeight():Integer
 }
 
 
-Soldat --|> Fourmis
-Reine -l-|> Fourmis
+Soldier --|> Ant
+Queen -l-|> Ant
+Worker --|> Ant
 
-ControlFourmis "-graphe\n1 " *-l-> Graphe
-ControlFourmis  *--> "-listeFourmis\n1..*" Fourmis
+ControlAnt "-graphe\n1 " *-l-> Graph
+ControlAnt  *--> "-listeFourmis\n1..*" Ant
 
-Graphe *-r-> "-noeudList \n0..n" Noeud : composé de >
+Graph *-r-> "-noeudList \n0..n" Node : composé de >
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Fourmis *---> "-position\n1" Noeud  : est sur un >
-Noeud o-> "-voisins\n0..*"  Noeud  : est voisin de >
+Ant *---> "-position\n1" Node  : est sur un >
+Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
-Noeud -l-> STATE : <<uses>>
+Node -l-> STATE : <<uses>>
 
 @enduml

@@ -4,64 +4,63 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GrapheTest {
-    Graphe graphe;
+class GraphTest {
+    Graph graph;
     public int WIDTH = 13;
     public int HEIGHT = 19;
 
     @BeforeEach
     void setUp() {
 
-        graphe = new Graphe(WIDTH,HEIGHT);
+        graph = new Graph(WIDTH,HEIGHT);
     }
 
     @Test
     @DisplayName("Récuperer un noeud pas dans le graphe")
     void getNoeud() {
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.getNoeud(HEIGHT, WIDTH);
+            graph.getNoeud(HEIGHT, WIDTH);
         });
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.getNoeud(-1, 0);
+            graph.getNoeud(-1, 0);
         });
     }
 
     @Test
     void putObstacle() {
-        graphe.putObstacle(2,1);
-        Noeud actual = graphe.getNoeud(2,1);
-        assertEquals(Noeud.STATE.OBSTACLE, actual.getNoeudState());
+        graph.putObstacle(2,1);
+        Node actual = graph.getNoeud(2,1);
+        assertEquals(Node.STATE.OBSTACLE, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.putObstacle(HEIGHT, WIDTH);
+            graph.putObstacle(HEIGHT, WIDTH);
         });
     }
 
     @Test
     void createColony() {
-        graphe.createColony(1,2);
-        Noeud actual = graphe.getNoeud(1,2);
-        assertEquals(Noeud.STATE.ANTHILL, actual.getNoeudState());
+        graph.createColony(1,2);
+        Node actual = graph.getNoeud(1,2);
+        assertEquals(Node.STATE.ANTHILL, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graphe.createColony(HEIGHT, WIDTH);
+            graph.createColony(HEIGHT, WIDTH);
         });
     }
 
     @Test
     @DisplayName("NoeudList contient tout les noeuds du Graphe")
     void getNoeudList() {
-        List<Noeud> noeudList = graphe.getNoeudList();
+        List<Node> nodeList = graph.getNoeudList();
 
         for(int i = 0; i<WIDTH;i++){
             for(int j = 0; j<HEIGHT;j++){
-                assertTrue(noeudList.contains(graphe.getNoeud(i,j)));
+                assertTrue(nodeList.contains(graph.getNoeud(i,j)));
             }
         }
 
@@ -70,13 +69,13 @@ class GrapheTest {
     @Test
     @DisplayName(("Longueur du graphe"))
     void getWidth() {
-        assertEquals(WIDTH, graphe.getWidth());
+        assertEquals(WIDTH, graph.getWidth());
     }
 
     @Test
     @DisplayName(("Hauteur du graphe"))
     void getHeight() {
-        assertEquals(HEIGHT, graphe.getHeight());
+        assertEquals(HEIGHT, graph.getHeight());
     }
 
 
@@ -84,8 +83,8 @@ class GrapheTest {
     @DisplayName("Nombre de noeud dans le Graphe")
     void nbNoeud()
     {
-        List<Noeud> noeudList = graphe.getNoeudList();
-        assertEquals(WIDTH*HEIGHT, noeudList.size());
+        List<Node> nodeList = graph.getNoeudList();
+        assertEquals(WIDTH*HEIGHT, nodeList.size());
     }
 
 }

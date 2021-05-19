@@ -1,10 +1,8 @@
 package Fourmis;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.concurrent.ForkJoinPool;
 
-public class Noeud {
+public class Node {
 
     /**
      * Différent état d'un noeud
@@ -15,15 +13,15 @@ public class Noeud {
         ANTHILL //Fourmilliere
     }
 
-    private ArrayList<Noeud> voisins;
-    private STATE noeudState;
+    private ArrayList<Node> voisins;
+    private STATE nodeState;
 
 
     /**
      * Créé un noeud
      */
-    public Noeud(){
-        noeudState = STATE.FREE;
+    public Node(){
+        nodeState = STATE.FREE;
         voisins = new ArrayList<>();
     }
 
@@ -31,31 +29,31 @@ public class Noeud {
      * permet d'obtenir l'état du noeud
      * @return retourne le STATE du noeud
      */
-    public STATE getNoeudState(){
-        return this.noeudState;
+    public STATE getNodeState(){
+        return this.nodeState;
     }
 
     /**
      * Permet d'établir l'état du noeud
      * @param state nouveau état du noeud
      */
-    public void setNoeudState(STATE state){
-        this.noeudState = state;
+    public void setNodeState(STATE state){
+        this.nodeState = state;
     }
 
     /**
      * Ajoute le noeud en paramètre à l'ArrayList "voisins"
-     * @param noeud : Noeud à ajouter à la liste
+     * @param node : Noeud à ajouter à la liste
      */
-    public void addNoeudVoisin(Noeud noeud){
-        this.voisins.add(noeud);
+    public void addNoeudVoisin(Node node){
+        this.voisins.add(node);
     }
 
     /**
      * Permet d'obtenir les voisins d'un noeud
      * @return retourne une ArrayList de noeud
      */
-    public ArrayList<Noeud> getVoisins(){
+    public ArrayList<Node> getVoisins(){
         return new ArrayList<>(this.voisins);
     }
 
@@ -63,10 +61,10 @@ public class Noeud {
      * Permet d'obtenir les voisins libres du noeud
      * @return retourne une ArrayList de noeud
      */
-    public ArrayList<Noeud> getFreeVoisins(){
-        ArrayList<Noeud> temp = new ArrayList<>();
-        for(Noeud n : this.voisins){
-            if(n.getNoeudState() != STATE.OBSTACLE){
+    public ArrayList<Node> getFreeVoisins(){
+        ArrayList<Node> temp = new ArrayList<>();
+        for(Node n : this.voisins){
+            if(n.getNodeState() != STATE.OBSTACLE){
                 temp.add(n);
             }
         }

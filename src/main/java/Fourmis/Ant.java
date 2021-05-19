@@ -1,16 +1,14 @@
 package Fourmis;
 
-import java.util.ArrayList;
-
-public abstract class Fourmis {
-    private Noeud position;
+public abstract class Ant {
+    private Node position;
 
     /**
      * Créé une fourmis à un noeud donné
-     * @param noeud : emplacement de la fourmis
+     * @param node : emplacement de la fourmis
      */
-    public Fourmis(Noeud noeud){
-        this.position = noeud;
+    public Ant(Node node){
+        this.position = node;
     }
 
     /**
@@ -22,16 +20,16 @@ public abstract class Fourmis {
      * Récupère la position d'une fourmis
      * @return retourne le noeud ou ce trouve la fourmis
      */
-    public Noeud getPosition(){
+    public Node getPosition(){
         return this.position;
     }
 
     /**
      * Etabli la position d'une fourmis
-     * @param noeud : nouvelle position
+     * @param node : nouvelle position
      */
-    public void setPosition(Noeud noeud){
-        this.position = noeud;
+    public void setPosition(Node node){
+        this.position = node;
     }
 
 }

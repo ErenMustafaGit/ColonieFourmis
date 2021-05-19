@@ -8,25 +8,25 @@ import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReineTest {
+class QueenTest {
     AntFacadeController appli;
     static final int WIDTH = 3;
     static final int HEIGHT = 4;
-    Graphe graphe;
+    Graph graph;
 
     @BeforeEach
     void setUp() {
-        appli = new ControlFourmis();
+        appli = new ControlAnt();
         appli.createGrid(WIDTH, HEIGHT);
-        graphe = new Graphe(WIDTH, HEIGHT);
+        graph = new Graph(WIDTH, HEIGHT);
     }
 
     @Test
     @DisplayName(("Reine qui ne doit pas se déplacer"))
     void move() {
-        Reine reine = new Reine(graphe.getNoeud(0,0));
-        reine.move();
-        assertEquals(graphe.getNoeud(0,0), reine.getPosition());
+        Queen queen = new Queen(graph.getNoeud(0,0));
+        queen.move();
+        assertEquals(graph.getNoeud(0,0), queen.getPosition());
     }
 
     @Test

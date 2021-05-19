@@ -61,11 +61,11 @@ main -> controlFourmi ++ : play(1, false)
                 'controlFourmi - ->> bitSet : instanciate(7)
 
                 'controlFourmi -> graphe ++ : getNoeud(height,width)
-                'return noeud
-                'alt noeud.getNoeudState == STATE.ANTHILL
+                'return node
+                'alt node.getNoeudState == STATE.ANTHILL
                     'controlFourmi -> bitSet : set(0,true)
                 'end
-                'alt noeud.getNoeudState == STATE.ANTHILL
+                'alt node.getNoeudState == STATE.ANTHILL
                     'controlFourmi -> bitSet : set(0,true)
                 'end
             'end

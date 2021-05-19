@@ -1,15 +1,13 @@
 package Fourmis;
 
-import java.util.ArrayList;
-
-public class Reine extends Fourmis{
+public class Queen extends Ant {
     /**
      * Créé une reine à partir d'un noeud donné
-     * @param noeud : Noeud ou la reine sera créé
+     * @param node : Noeud ou la reine sera créé
      */
-    public Reine(Noeud noeud) {
-        super(noeud);
-        noeud.setNoeudState(Noeud.STATE.ANTHILL);
+    public Queen(Node node) {
+        super(node);
+        node.setNodeState(Node.STATE.ANTHILL);
     }
 
     /**
@@ -25,7 +23,7 @@ public class Reine extends Fourmis{
      */
     public void createSoldiers(int amount) {
         for(int i = 0; i<amount; i++){
-            Soldat soldat = new Soldat(this.getPosition());
+            Soldier soldier = new Soldier(this.getPosition());
         }
     }
 }
