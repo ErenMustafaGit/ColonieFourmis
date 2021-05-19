@@ -30,10 +30,10 @@ class ReineTest {
 
     @Test
     void createSoldiers() {
-
-
-
+        appli.createColony(1,2);
+        appli.createSoldiers(5);
+        BitSet[][] bitset = appli.play(0,false);
+        BitSet actual = bitset[1][2];
+        assertTrue(actual.get(2), "Il n'y a pas de soldat : " + actual);
     }
-
-
 }
