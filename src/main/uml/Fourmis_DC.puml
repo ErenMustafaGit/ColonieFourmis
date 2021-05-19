@@ -65,9 +65,9 @@ class Graphe{
  +getNoeud(row:Integer, column:Integer):Noeud
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
- +getNoeudList()
- +getWidth()
- +getHeight()
+ +getNoeudList():Noeud[*]
+ +getWidth():Integer
+ +getHeight():Integer
 }
 
 
