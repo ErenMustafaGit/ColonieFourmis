@@ -105,10 +105,8 @@ public class Graph {
         Node n = nodeList.get(column+ row * width);
         if(n.getNodeState() != Node.STATE.ANTHILL){
             n.setNodeState(Node.STATE.OBSTACLE);
-        }
 
-        //Pour passer le test n°1, mais illogique ?
-        if(row == 0 && column == 0){
+        } else{
             throw new IllegalArgumentException("Impossible de placer un obstacle sur une fourmillière");
         }
 
