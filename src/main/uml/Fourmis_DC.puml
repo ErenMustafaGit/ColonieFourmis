@@ -11,18 +11,19 @@ hide enum methods
 
 'Controleur
 interface AntFacadeController <<interface>> {
-    '+setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
+    +setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
     +createColony(row:Integer,column:Integer)
     +createGrid(width:Integer, height:Integer)
     +putObstacle(row:Integer, column:Integer)
-    '+putFood( row:Integer, column:Integer, quantity:Integer);
-    '+createWorkers( amount:Integer )
+    +putFood( row:Integer, column:Integer, quantity:Integer);
+    +createWorkers( amount:Integer )
     +createSoldiers(amount:Integer)
-    '+setAntFile(antLogFile:String);
+    +setAntFile(antLogFile:String);
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
 class Node {
+    -food:Integer
     -pheromones:Integer
     +Node()
     +getNoeudState():STATE
@@ -31,6 +32,7 @@ class Node {
     +getVoisins():Node[*]
     +getFreeVoisins():Node[*]
     +getPheromones:Integer
+    +setFood(amount:Integer)
 }
 enum STATE <<enum>> {
     FREE
@@ -38,10 +40,10 @@ enum STATE <<enum>> {
     ANTHILL
 }
 
-class Food{
-    -amount:Integer
-    +Food()
-}
+'class Food{
+'    -amount:Integer
+'    +Food()
+'}
 class Pheromone{
 }
 
@@ -53,10 +55,11 @@ abstract Ant <<abstract>> {
 }
 class Queen{
     -collectCapacity:Integer
-    +Queen(:Noeud)
+    +Queen(position:Noeud, collectCapacity:Integer)
     +move() <<override>>
     +createSoldiers(amount:Integer)
-
+    +setCollectCapacity(:Integer)
+    +getCollectCapacity():Integer
 }
 class Soldier{
     +Soldier(position:Node, colony:Queen)
@@ -71,6 +74,7 @@ class Worker {
 
 
 class ControlAnt implements AntFacadeController{
+    -collectCapacity:Integer
 }
 
 
@@ -101,7 +105,7 @@ Ant *---> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
 Node -l-> STATE : <<uses>>
-Node --> "-food\n1" Food : contient >
+'Node --> "-food\n1" Food : contient >
 
 Soldier *---> "-colony\n1" Queen : provient de >
 Worker *--> "-colony\n1" Queen : provient de >
