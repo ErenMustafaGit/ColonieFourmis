@@ -13,6 +13,9 @@ public class ControlAnt implements AntFacadeController {
     public Graph getGraph(){
         return this.graph;
     }
+    public ArrayList<Ant> getListeFourmis(){
+        return new ArrayList<>(this.listeFourmis);
+    }
 
     /**
      * Fixe les paramètres de l'application.
