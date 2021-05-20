@@ -5,6 +5,7 @@ import java.util.*;
 public class ControlAnt implements AntFacadeController {
     private Graph graph;
     private ArrayList<Ant> listeFourmis = new ArrayList<>();
+    private int collectCapacity = 0;
 
     /**
      * Fixe les paramètres de l'application.
@@ -14,7 +15,19 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void setParameters(int evaporationParam, int foodParam, int pheromoneParam) {
-        //V2
+        //s'il n'y a pas de reine.
+        if(listeFourmis.isEmpty()){
+            this.collectCapacity = foodParam;
+        }
+        //si les reines sont déjà existente.
+        else {
+            for(Ant ant : listeFourmis){
+                if(ant instanceof Queen){
+                    ((Queen) ant).setCollectCapacity(foodParam);
+                }
+            }
+        }
+
     }
 
     /**
@@ -45,7 +58,8 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void putFood(int row, int column, int quantity) {
-        //V2
+        Node n = this.graph.getNoeud(row, column);
+        n.setFood(quantity);
     }
 
     /**
@@ -55,7 +69,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createColony(int row, int column) {
-        Queen queen = new Queen(this.graph.getNoeud(row,column));
+        Queen queen = new Queen(this.graph.getNoeud(row,column), this.collectCapacity);
         listeFourmis.add(queen);
     }
 
@@ -85,7 +99,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createWorkers(int amount) {
-        //V2
+
     }
 
     /**

@@ -15,7 +15,7 @@ public class Node {
 
     private ArrayList<Node> voisins;
     private STATE nodeState;
-
+    private int food;
 
     /**
      * Créé un noeud
@@ -23,6 +23,7 @@ public class Node {
     public Node(){
         nodeState = STATE.FREE;
         voisins = new ArrayList<>();
+        this.food = 0;
     }
 
     public boolean isObstacle(){
@@ -72,6 +73,14 @@ public class Node {
             }
         }
         return temp;
+    }
+
+    public void setFood(int amount){
+        this.food = amount;
+    }
+
+    public int getFood(){
+        return this.food;
     }
 
 }

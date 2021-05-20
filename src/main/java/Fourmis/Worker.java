@@ -31,7 +31,9 @@ public class Worker extends Ant {
     }
 
     public void collect(){
+        if(this.getPosition().getFood() != 0){
 
+        }
     }
 
 }

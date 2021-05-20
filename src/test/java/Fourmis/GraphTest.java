@@ -12,10 +12,12 @@ class GraphTest {
     Graph graph;
     public int WIDTH = 13;
     public int HEIGHT = 19;
+    ControlAnt controller;
 
     @BeforeEach
     void setUp() {
-
+        controller = new ControlAnt();
+        graph = controller.getGraph();
         graph = new Graph(WIDTH,HEIGHT);
     }
 
