@@ -30,6 +30,8 @@ public class Soldier extends Ant {
 
             //Va en direction de ce noeud là
             this.setPosition(direction);
+        }else{
+            System.out.println("Bloqué");
         }
     }
 }

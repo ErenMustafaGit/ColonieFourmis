@@ -9,22 +9,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NodeTest {
-    AntFacadeController appli;
+    ControlAnt appli;
     static final int WIDTH = 13;
     static final int HEIGHT = 19;
     Graph g;
 
 
+
     @BeforeEach
     void setUp()
     {
-        /*
-        appli = new ControlFourmis();
+        appli = new ControlAnt();
         appli.createGrid(WIDTH, HEIGHT);
+        g = appli.getGraph();
         appli.createColony(2,2);
-         */
-        g = new Graph(WIDTH, HEIGHT);
-        g.createColony(2,2);
         g.putObstacle(0,1);
         g.putObstacle(1,0);
     }
