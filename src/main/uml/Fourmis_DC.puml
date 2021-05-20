@@ -11,14 +11,14 @@ hide enum methods
 
 'Controleur
 interface AntFacadeController <<interface>> {
-    '+setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
+    +setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
     +createColony(row:Integer,column:Integer)
     +createGrid(width:Integer, height:Integer)
     +putObstacle(row:Integer, column:Integer)
-    '+putFood( row:Integer, column:Integer, quantity:Integer);
-    '+createWorkers( amount:Integer )
+    +putFood( row:Integer, column:Integer, quantity:Integer);
+    +createWorkers( amount:Integer )
     +createSoldiers(amount:Integer)
-    '+setAntFile(antLogFile:String);
+    +setAntFile(antLogFile:String);
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
@@ -74,6 +74,7 @@ class Worker {
 
 
 class ControlAnt implements AntFacadeController{
+    -collectCapacity:Integer
 }
 
 
