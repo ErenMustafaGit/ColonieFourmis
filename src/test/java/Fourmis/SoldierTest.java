@@ -19,4 +19,20 @@ class SoldierTest {
         Node n = g.getNoeud(0, 1);
         assertEquals(n, s.getPosition());
     }
+
+    @Test
+    @DisplayName(("mouvement soldat bloqué"))
+    void moveBlocked() {
+        Graph g = new Graph(5,5);
+        g.putObstacle(1,0);
+        g.putObstacle(1,1);
+        g.putObstacle(0,1);
+        Node position = g.getNoeud(0,0);
+
+
+        Soldier s = new Soldier(g.getNoeud(0,0));
+        s.move();
+        assertEquals(position, s.getPosition());
+    }
+
 }
