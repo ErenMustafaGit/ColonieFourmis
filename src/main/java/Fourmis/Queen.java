@@ -22,12 +22,21 @@ public class Queen extends Ant {
     public void move() {
     }
 
+
     public void setCollectCapacity(int capacity){
         this.collectCapicty = capacity;
     }
 
     public void setPheromoneQuantity(int pheromoneQuantity){
         this.pheromoneQuantity = pheromoneQuantity;
+    }
+
+    public int getPheromoneQuantity(){
+        return this.pheromoneQuantity;
+    }
+
+    public int getCollectCapicty(){
+        return this.collectCapicty;
     }
 
     /**

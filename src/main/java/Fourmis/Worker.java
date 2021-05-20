@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Worker extends Ant {
+    private int foodCollected;
     /**
      * Créé une fourmis à un noeud donné
      *
@@ -31,9 +32,22 @@ public class Worker extends Ant {
     }
 
     public void collect(){
-        if(this.getPosition().getFood() != 0){
-
+        int foodQuantity = this.getPosition().getFood();
+        if(foodQuantity != 0){
+            if(foodQuantity < this.colony.getCollectCapicty()){
+                this.foodCollected = foodQuantity;
+                this.getPosition().setFood(0);
+            }
+            else{
+                this.foodCollected = this.colony.getCollectCapicty();
+                this.getPosition().setFood(foodQuantity - this.foodCollected);
+            }
         }
+
     }
 
+    public void putPheromone(){
+        Pheromone pheromone = new Pheromone(super.colony.getPheromoneQuantity(), this.colony);
+        this.getPosition().addPheromone(pheromone);
+    }
 }

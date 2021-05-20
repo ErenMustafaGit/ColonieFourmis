@@ -1,6 +1,7 @@
 package Fourmis;
 
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 public class Node {
 
@@ -16,6 +17,7 @@ public class Node {
     private ArrayList<Node> voisins;
     private STATE nodeState;
     private int food;
+    private ArrayList<Pheromone> listePheromone;
 
     /**
      * Créé un noeud
@@ -24,6 +26,7 @@ public class Node {
         nodeState = STATE.FREE;
         voisins = new ArrayList<>();
         this.food = 0;
+        this.listePheromone = new ArrayList<>();
     }
 
     public boolean isObstacle(){
@@ -83,6 +86,9 @@ public class Node {
         return this.food;
     }
 
+    public void addPheromone(Pheromone pheromone){
+        this.listePheromone.add(pheromone);
+    }
 
 
 }
