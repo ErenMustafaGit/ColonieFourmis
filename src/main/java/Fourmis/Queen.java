@@ -1,18 +1,17 @@
 package Fourmis;
 
 public class Queen extends Ant {
+    private int pheromoneQuantity = 0;
+    private int collectCapicty = 0;
+
     /**
      * Créé une reine à partir d'un noeud donné
      * @param node : Noeud ou la reine sera créé
      */
-
-    private int collectCapicty;
-
-    public Queen(Node node, int collectCapicty) {
+    public Queen(Node node) {
         super(node);
         super.colony = this;
         node.setNodeState(Node.STATE.ANTHILL);
-        this.collectCapicty = collectCapicty;
     }
 
 
@@ -25,6 +24,10 @@ public class Queen extends Ant {
 
     public void setCollectCapacity(int capacity){
         this.collectCapicty = capacity;
+    }
+
+    public void setPheromoneQuantity(int pheromoneQuantity){
+        this.pheromoneQuantity = pheromoneQuantity;
     }
 
     /**
