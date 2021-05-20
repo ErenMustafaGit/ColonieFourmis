@@ -8,6 +8,12 @@ public class ControlAnt implements AntFacadeController {
     private int collectCapacity = 0;
     private int pheromoneQuantity = 0;
 
+
+
+    public Graph getGraph(){
+        return this.graph;
+    }
+
     /**
      * Fixe les paramètres de l'application.
      * @param evaporationParam rythme d'évaporation des phéromones. La valeur par défaut est 1 par itération.

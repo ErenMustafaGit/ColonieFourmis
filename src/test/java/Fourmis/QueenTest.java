@@ -9,7 +9,7 @@ import java.util.BitSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QueenTest {
-    AntFacadeController appli;
+    ControlAnt appli;
     static final int WIDTH = 3;
     static final int HEIGHT = 4;
     Graph graph;
@@ -18,7 +18,7 @@ class QueenTest {
     void setUp() {
         appli = new ControlAnt();
         appli.createGrid(WIDTH, HEIGHT);
-        graph = new Graph(WIDTH, HEIGHT);
+        graph = appli.getGraph();
     }
 
     @Test
