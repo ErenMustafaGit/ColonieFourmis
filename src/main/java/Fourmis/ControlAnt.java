@@ -6,6 +6,23 @@ public class ControlAnt implements AntFacadeController {
     private Graph graph;
     private ArrayList<Ant> listeFourmis = new ArrayList<>();
 
+
+    /**
+     * Retourne le graphe de l'instance de contrôle
+     * @return this.graphe : le graphe de l'application
+     */
+    public Graph getGraph(){
+        return this.graph;
+    }
+
+    /**
+     * Retourne la liste de fourmis de l'instance
+     * @return this.graphe : la liste de fourmis de l'application
+     */
+    public ArrayList<Ant> getListeFourmis (){
+        return new ArrayList<>(listeFourmis);
+    }
+
     /**
      * Fixe les paramètres de l'application.
      * @param evaporationParam rythme d'évaporation des phéromones. La valeur par défaut est 1 par itération.
