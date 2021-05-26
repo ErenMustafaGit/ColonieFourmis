@@ -26,8 +26,7 @@ class Graph {
 class Node{
 }
 
-class Food{
-}
+
 
 abstract Ant <<abstract>>{
 
@@ -55,7 +54,6 @@ ControlAnt --- Ant : possède des >
 Graph -- Node : composé de >
 Ant  - Node : est sur le >
 Node --  STATE : est >
-Node -- Food : contient >
 Node - Ant : contient >
 
 Ant --- Queen : provient de >

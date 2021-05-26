@@ -24,7 +24,6 @@ interface AntFacadeController <<interface>> {
 
 class Node {
     -food:Integer
-    -pheromones:Integer
     +Node()
     +getNoeudState():STATE
     +setNoeudState(State:STATE)
@@ -107,7 +106,8 @@ Node o-> "-voisins\n0..*"  Node  : est voisin de >
 Node -l-> STATE : <<uses>>
 'Node --> "-food\n1" Food : contient >
 
-Soldier *---> "-colony\n1" Queen : provient de >
-Worker *--> "-colony\n1" Queen : provient de >
+Ant *-> "-colony\n1" Queen : provient de >
+Pheromone *-u-> "-colony\n1" Queen : provient de >
+Pheromone -> "-pheromone\n..*" Node : est sur >
 
 @enduml
