@@ -1,9 +1,23 @@
 package Fourmis;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.concurrent.Semaphore;
 
-public class Node {
+public class Node implements Comparable<Node> {
+
+    @Override
+    public int compareTo(Node node) {
+        ArrayList<Pheromone> listPheromone = new ArrayList<>(node.getPheromone());
+        int quantityPheromone = 0;
+        //Ne prend pas en compte les différentes colony, cad que lorsque la fourmis
+        // appel les noeuds voisins, les pheromones ne sont pas distinct
+        for(Pheromone pheromone : listPheromone){
+            quantityPheromone += pheromone.getQuantity();
+        }
+        return quantityPheromone;
+
+    }
 
     /**
      * Différent état d'un noeud
@@ -90,6 +104,9 @@ public class Node {
         this.listePheromone.add(pheromone);
     }
 
+    public ArrayList<Pheromone> getPheromone(){
+        return new ArrayList<>(listePheromone);
+    }
 
 }
 

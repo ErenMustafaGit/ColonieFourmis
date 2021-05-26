@@ -38,6 +38,4 @@ public abstract class Ant {
     public void setPosition(Node node){
         this.position = node;
     }
-
-
 }
