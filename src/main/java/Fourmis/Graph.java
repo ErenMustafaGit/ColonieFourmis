@@ -88,8 +88,8 @@ public class Graph {
 
     /**
      * Permet d'obtenir un noeud à partir d'une coordonné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      * @return retourne un Noeud
      */
     public Node getNoeud(Integer row, Integer column){
@@ -98,8 +98,8 @@ public class Graph {
 
     /**
      * Permet de placer un obstacle à une coordonnée donné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      */
     public void putObstacle(Integer row, Integer column){
         Node n = nodeList.get(column+ row * width);
@@ -114,8 +114,8 @@ public class Graph {
 
     /**
      * Place la reine à une coordonnée donné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      */
 
     public void createColony(Integer row,Integer column){
