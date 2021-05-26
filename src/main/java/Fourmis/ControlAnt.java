@@ -7,6 +7,7 @@ public class ControlAnt implements AntFacadeController {
     private ArrayList<Ant> antList = new ArrayList<>();
     private int collectCapacity = 0;
     private int pheromoneQuantity = 0;
+    private int evaporationQuantity = 0;
 
 
 
@@ -27,6 +28,7 @@ public class ControlAnt implements AntFacadeController {
     public void setParameters(int evaporationParam, int foodParam, int pheromoneParam) {
         //s'il n'y a pas de reine.
         if(antList.isEmpty()){
+            this.evaporationQuantity = evaporationParam;
             this.collectCapacity = foodParam;
             this.pheromoneQuantity = pheromoneParam;
         }
@@ -143,18 +145,19 @@ public class ControlAnt implements AntFacadeController {
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
 
 
+        //Récupération de tout les noeuds du graphe
         for(Node node : this.graph.getNoeudList()){
-            for(Pheromone pheromone : node.getPheromone()){
 
+            //Récupération de tout les noeuds du graphe
+            for(Pheromone pheromone : node.getPheromone()){
+                pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
             }
         }
 
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
             for(Ant ant : this.antList){
-                if(ant instanceof Soldier){
-                    ant.move();
-                }
+                ant.move();
             }
         }
 
