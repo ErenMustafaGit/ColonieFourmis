@@ -16,7 +16,6 @@ public class Node implements Comparable<Node> {
             quantityPheromone += pheromone.getQuantity();
         }
         return quantityPheromone;
-
     }
 
     /**
