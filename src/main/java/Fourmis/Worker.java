@@ -10,7 +10,7 @@ public class Worker extends Ant {
      *
      * @param node : emplacement de la fourmis
      */
-    public Worker(Node node, Queen colony) {
+    public Worker(Node node, AntHill colony) {
         super(node, colony);
     }
 

@@ -30,7 +30,7 @@ class Node {
     +addNoeudVoisin(noeud:Noeud)
     +getVoisins():Node[*]
     +getFreeVoisins():Node[*]
-    +getPheromones:Integer
+    +getPheromones():Pheromone[*]
     +setFood(amount:Integer)
 }
 enum STATE <<enum>> {
@@ -44,6 +44,8 @@ enum STATE <<enum>> {
 '    +Food()
 '}
 class Pheromone{
+    +quantity:Integer
+    +getQuantity():Integer
 }
 
 
@@ -52,22 +54,23 @@ abstract Ant <<abstract>> {
     +setPosition(position:Noeud)
     {abstract} +move()
 }
-class Queen{
+class AntHill{
     -collectCapacity:Integer
-    +Queen(position:Noeud, collectCapacity:Integer)
-    +move() <<override>>
+    +AntHill(position:Noeud, collectCapacity:Integer)
+    +getPosition():Node
     +createSoldiers(amount:Integer)
     +setCollectCapacity(:Integer)
     +getCollectCapacity():Integer
 }
 class Soldier{
-    +Soldier(position:Node, colony:Queen)
+    +Soldier(position:Node, colony:AntHill)
     +move() <<override>>
 }
 
 class Worker {
-    +Worker(position:Node , colony:Queen)
+    +Worker(position:Node , colony:AntHill)
     +move() <<override>>
+    +putPheromone()
     +collect()
 }
 
@@ -91,23 +94,25 @@ class Graph{
 
 
 Soldier --|> Ant
-Queen -l-|> Ant
 Worker --|> Ant
 
 ControlAnt "-graphe\n1 " *-l-> Graph
-ControlAnt  *--> "-listeFourmis\n1..*" Ant
+ControlAnt  *-r-> "-antList\n1..*" Ant
+ControlAnt  *--> "-antHillList\n1..*" AntHill
 
-Graph *-r-> "-noeudList \n0..n" Node : composé de >
+Graph *-r-> "-nodeList \n0..n" Node : composé de >
+
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Ant *---> "-position\n1" Node  : est sur un >
+Ant *--> "-position\n1" Node  : est sur un >
+AntHill *---> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
 Node -l-> STATE : <<uses>>
-'Node --> "-food\n1" Food : contient >
 
-Ant *-> "-colony\n1" Queen : provient de >
-Pheromone *-u-> "-colony\n1" Queen : provient de >
-Pheromone -> "-pheromone\n..*" Node : est sur >
+Ant *-> "-colony\n1" AntHill : provient de >
+Pheromone *-u-> "-colony\n1" AntHill : provient de >
+Node o-u-> "-pheromones\n..*" Pheromone : contient >
+
 
 @enduml

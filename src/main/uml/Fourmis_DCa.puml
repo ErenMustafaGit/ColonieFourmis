@@ -24,6 +24,7 @@ class Graph {
      height
 }
 class Node{
+    food
 }
 
 
@@ -32,7 +33,7 @@ abstract Ant <<abstract>>{
 
 }
 
-class Queen extends Ant{
+class AntHill {
 
 }
 
@@ -45,17 +46,24 @@ class Worker extends Ant{
 
 
 class ControlAnt implements AntFacadeController{
+}
 
+class Pheromone{
+    quantity
 }
 
 Node - Node : est voisin de >
 ControlAnt -- Graph : possède un >
 ControlAnt --- Ant : possède des >
+ControlAnt -- AntHill : possède des >
 Graph -- Node : composé de >
 Ant  - Node : est sur le >
 Node --  STATE : est >
-Node - Ant : contient >
+Node - Pheromone : contient >
+Node - AntHill : est sur le <
 
-Ant --- Queen : provient de >
+Ant -u- AntHill : provient de >
+Pheromone - AntHill : provient de >
+
 
 @enduml

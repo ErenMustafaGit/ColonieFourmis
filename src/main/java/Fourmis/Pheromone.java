@@ -2,9 +2,9 @@ package Fourmis;
 
 public class Pheromone {
     private int quantity;
-    private Queen colony;
+    private AntHill colony;
 
-    public Pheromone(int quantity, Queen colony){
+    public Pheromone(int quantity, AntHill colony){
         this.quantity = quantity;
         this.colony = colony;
     }

@@ -43,28 +43,28 @@ class ControlAntTest {
     void createSoldiers() {
         //Création de soldat sans reine
         appli.createSoldiers(10);
-        assertEquals(0, appli.getListeFourmis().size());
+        assertEquals(0, appli.getAntList().size());
 
         //Création de soldat avec 2 reines
         appli.createColony(0,0);
         appli.createColony(1,1);
         appli.createSoldiers(10);
         //22 = 2 Reine + 20 Soldats
-        assertEquals(22, appli.getListeFourmis().size());
+        assertEquals(22, appli.getAntList().size());
     }
 
     @Test
     void createWorkers() {
         //Création d'ouvrier sans reine
         appli.createWorkers(10);
-        assertEquals(0, appli.getListeFourmis().size());
+        assertEquals(0, appli.getAntList().size());
 
         //Création d'ouvrer avec 2 reines
         appli.createColony(0,0);
         appli.createColony(1,1);
         appli.createWorkers(10);
         //22 = 2 Reine + 20 Soldats
-        assertEquals(22, appli.getListeFourmis().size());
+        assertEquals(22, appli.getAntList().size());
     }
 
     @Test

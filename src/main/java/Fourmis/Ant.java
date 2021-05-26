@@ -2,13 +2,13 @@ package Fourmis;
 
 public abstract class Ant {
     private Node position;
-    protected Queen colony;
+    protected AntHill colony;
 
     /**
      * Créé une fourmis à un noeud donné
      * @param node : emplacement de la fourmis
      */
-    public Ant(Node node, Queen colony){
+    public Ant(Node node, AntHill colony){
         this.position = node;
         this.colony = colony;
     }

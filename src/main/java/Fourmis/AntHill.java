@@ -1,6 +1,6 @@
 package Fourmis;
 
-public class Queen extends Ant {
+public class AntHill extends Ant {
     private int pheromoneQuantity = 0;
     private int collectCapicty = 0;
 
@@ -8,7 +8,7 @@ public class Queen extends Ant {
      * Créé une reine à partir d'un noeud donné
      * @param node : Noeud ou la reine sera créé
      */
-    public Queen(Node node) {
+    public AntHill(Node node) {
         super(node);
         super.colony = this;
         node.setNodeState(Node.STATE.ANTHILL);
@@ -16,7 +16,7 @@ public class Queen extends Ant {
 
 
     /**
-     * La reine ne peu pas bouger
+     * La reine ne peut pas bouger
      */
     @Override
     public void move() {

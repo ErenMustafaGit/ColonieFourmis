@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ControlAnt implements AntFacadeController {
     private Graph graph;
-    private ArrayList<Ant> listeFourmis = new ArrayList<>();
+    private ArrayList<Ant> antList = new ArrayList<>();
     private int collectCapacity = 0;
     private int pheromoneQuantity = 0;
 
@@ -13,8 +13,8 @@ public class ControlAnt implements AntFacadeController {
     public Graph getGraph(){
         return this.graph;
     }
-    public ArrayList<Ant> getListeFourmis(){
-        return new ArrayList<>(this.listeFourmis);
+    public ArrayList<Ant> getAntList(){
+        return new ArrayList<>(this.antList);
     }
 
     /**
@@ -26,16 +26,16 @@ public class ControlAnt implements AntFacadeController {
     @Override
     public void setParameters(int evaporationParam, int foodParam, int pheromoneParam) {
         //s'il n'y a pas de reine.
-        if(listeFourmis.isEmpty()){
+        if(antList.isEmpty()){
             this.collectCapacity = foodParam;
             this.pheromoneQuantity = pheromoneParam;
         }
         //si les reines sont déjà existente.
         else {
-            for(Ant ant : listeFourmis){
-                if(ant instanceof Queen){
-                    ((Queen) ant).setCollectCapacity(foodParam);
-                    ((Queen) ant).setPheromoneQuantity(pheromoneQuantity);
+            for(Ant ant : antList){
+                if(ant instanceof AntHill){
+                    ((AntHill) ant).setCollectCapacity(foodParam);
+                    ((AntHill) ant).setPheromoneQuantity(pheromoneQuantity);
                 }
             }
         }
@@ -81,10 +81,10 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createColony(int row, int column) {
-        Queen queen = new Queen(this.graph.getNoeud(row,column));
-        queen.setPheromoneQuantity(this.pheromoneQuantity);
-        queen.setCollectCapacity(this.collectCapacity);
-        listeFourmis.add(queen);
+        AntHill antHill = new AntHill(this.graph.getNoeud(row,column));
+        antHill.setPheromoneQuantity(this.pheromoneQuantity);
+        antHill.setCollectCapacity(this.collectCapacity);
+        antList.add(antHill);
     }
 
     /**
@@ -95,16 +95,16 @@ public class ControlAnt implements AntFacadeController {
     //à reverifier
     public void createSoldiers(int amount) {
         ArrayList<Ant> temp_soldat = new ArrayList<>();
-        for(Ant ant : this.listeFourmis){
+        for(Ant ant : this.antList){
             //Si la fourmis est une reine (donc colonie)
-            if(ant instanceof Queen){
+            if(ant instanceof AntHill){
                 for(int i = 0; i < amount; i++){
-                    Soldier s = new Soldier(ant.getPosition(), (Queen)ant);
+                    Soldier s = new Soldier(ant.getPosition(), (AntHill)ant);
                     temp_soldat.add(s);
                 }
             }
         }
-        listeFourmis.addAll(temp_soldat);
+        antList.addAll(temp_soldat);
     }
 
     /**
@@ -142,9 +142,16 @@ public class ControlAnt implements AntFacadeController {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
 
+
+        for(Node node : this.graph.getNoeudList()){
+            for(Pheromone pheromone : node.getPheromone()){
+
+            }
+        }
+
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-            for(Ant ant : this.listeFourmis){
+            for(Ant ant : this.antList){
                 if(ant instanceof Soldier){
                     ant.move();
                 }
@@ -165,7 +172,7 @@ public class ControlAnt implements AntFacadeController {
 
                 //Présence de soldat
                 int compteur_soldat = 0;
-                for(Ant ant : this.listeFourmis){
+                for(Ant ant : this.antList){
                     if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
                         compteur_soldat++;
                         if(compteur_soldat > 0){
