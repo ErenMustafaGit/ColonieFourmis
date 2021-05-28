@@ -184,7 +184,7 @@ public class ControlAnt implements AntFacadeController {
                 if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
-                    //Présence d'obstacle
+                //Présence d'obstacle
                 else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 

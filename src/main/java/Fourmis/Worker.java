@@ -32,28 +32,29 @@ public class Worker extends Ant{
             if(freeVoisins.size() != 0){
                 Random rnd = new Random();
 
-                ArrayList<Node> noneVistedNode = new ArrayList<>();
+                ArrayList<Node> noneVisitedNode = new ArrayList<>();
                 //Obtient la liste des noeuds non parcourus
                 for(Node node : freeVoisins){
                     if(!recordsPath.contains(node)){
-                        noneVistedNode.add(node);
+                        noneVisitedNode.add(node);
                     }
                 }
 
                 //Si nous avons parcourus tout les noeuds adjacents
-                if(noneVistedNode.size() == 0){
+                    if(noneVisitedNode.size() == 0){
 
-                    //Prend un noeud au hasard parmis ceux de libre
-                    Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
+                        //Prend un noeud au hasard parmis ceux de libre
+                        Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
-                    this.setPosition(direction);
-                }
+                        this.setPosition(direction);
+                        recordsPath.add(this.getPosition());
+                    }
 
                 else{
 
                     //Melange la liste
-                    Collections.shuffle(noneVistedNode);
-                    ArrayList<Node> orderedList = new ArrayList<>(noneVistedNode);
+                    Collections.shuffle(noneVisitedNode);
+                    ArrayList<Node> orderedList = new ArrayList<>(noneVisitedNode);
 
                     //Trie la liste des noeuds possèdant de la plus petite quantité de phéromone à la plus grande
                     //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
@@ -127,5 +128,8 @@ public class Worker extends Ant{
         this.getPosition().addPheromone(pheromone);
     }
 
+    public int getFoodCollected(){
+        return this.foodCollected;
+    }
 
 }
