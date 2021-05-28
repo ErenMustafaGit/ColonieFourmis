@@ -7,7 +7,7 @@ hide footbox
 'title Méthode jouer()
 participant ":Main" as main
 participant "controlAnt:ControlAnt" as controlAnt
-participant "fourmi:Fourmi" as ant
+participant "controlAnt.listeFourmis:Ant" as ant
 participant "position:Noeud" as position
 participant "voisin:Noeud" as voisin
 participant "freeVoisins:Noeud[*]" as freeVoisins
@@ -19,7 +19,7 @@ entity "rand:Random" as random
 'participant "bitPlay[i][j]:BitSet" as bitSet
 
 main -> controlAnt ++ : play(1, false)
-    loop ant : controlAnt.Ant
+    loop controlAnt.listeFourmis
     |||
         controlAnt -> ant ++ : move()
         ant -> ant  ++ : getPosition()
@@ -29,15 +29,20 @@ main -> controlAnt ++ : play(1, false)
             position -> position ++ : getVoisins()
             return voisins
             loop voisin : voisins
-                alt voisin.getNoeudState() != STATE.OBSTACLE
+
+            position -> voisin ++ : isObstacle()
+            return isObstacle
+
+                alt !isObstacle
                     position -> freeVoisins : add(voisin)
                 end
             end
         return freeVoisins
 
+        ant -> freeVoisins ++ : size()
+        return nbFreeVoisins
 
-
-        alt freeVoisins.size() != 0
+        alt nbFreeVoisins != 0
             'nextInt() en Java
             ant -> random ++ : getInt(freeVoisins.size)
             return randomInt

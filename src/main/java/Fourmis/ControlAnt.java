@@ -4,7 +4,19 @@ import java.util.*;
 
 public class ControlAnt implements AntFacadeController {
     private Graph graph;
-    private ArrayList<Ant> listeFourmis = new ArrayList<>();
+    private ArrayList<Ant> antList = new ArrayList<>();
+    private int collectCapacity = 0;
+    private int pheromoneQuantity = 0;
+    private int evaporationQuantity = 0;
+
+
+
+    public Graph getGraph(){
+        return this.graph;
+    }
+    public ArrayList<Ant> getAntList(){
+        return new ArrayList<>(this.antList);
+    }
 
 
     /**
@@ -31,7 +43,22 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void setParameters(int evaporationParam, int foodParam, int pheromoneParam) {
-        //V2
+        //s'il n'y a pas de reine.
+        if(antList.isEmpty()){
+            this.evaporationQuantity = evaporationParam;
+            this.collectCapacity = foodParam;
+            this.pheromoneQuantity = pheromoneParam;
+        }
+        //si les reines sont déjà existente.
+        else {
+            for(Ant ant : antList){
+                if(ant instanceof AntHill){
+                    ((AntHill) ant).setCollectCapacity(foodParam);
+                    ((AntHill) ant).setPheromoneQuantity(pheromoneQuantity);
+                }
+            }
+        }
+
     }
 
     /**
@@ -62,7 +89,8 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void putFood(int row, int column, int quantity) {
-        //V2
+        Node n = this.graph.getNoeud(row, column);
+        n.setFood(quantity);
     }
 
     /**
@@ -72,8 +100,10 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createColony(int row, int column) {
-        Queen queen = new Queen(this.graph.getNoeud(row,column));
-        listeFourmis.add(queen);
+        AntHill antHill = new AntHill(this.graph.getNoeud(row,column));
+        antHill.setPheromoneQuantity(this.pheromoneQuantity);
+        antHill.setCollectCapacity(this.collectCapacity);
+        antList.add(antHill);
     }
 
     /**
@@ -84,15 +114,16 @@ public class ControlAnt implements AntFacadeController {
     //à reverifier
     public void createSoldiers(int amount) {
         ArrayList<Ant> temp_soldat = new ArrayList<>();
-        for(Ant ant : this.listeFourmis){
-            if(ant instanceof Queen){
+        for(Ant ant : this.antList){
+            //Si la fourmis est une reine (donc colonie)
+            if(ant instanceof AntHill){
                 for(int i = 0; i < amount; i++){
-                    Soldier s = new Soldier(ant.getPosition());
+                    Soldier s = new Soldier(ant.getPosition(), (AntHill)ant);
                     temp_soldat.add(s);
                 }
             }
         }
-        listeFourmis.addAll(temp_soldat);
+        antList.addAll(temp_soldat);
     }
 
     /**
@@ -101,7 +132,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createWorkers(int amount) {
-        //V2
+
     }
 
     /**
@@ -130,12 +161,20 @@ public class ControlAnt implements AntFacadeController {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
 
+
+        //Récupération de tout les noeuds du graphe
+        for(Node node : this.graph.getNoeudList()){
+
+            //Récupération de tout les noeuds du graphe
+            for(Pheromone pheromone : node.getPheromone()){
+                pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
+            }
+        }
+
         //Déplacement des fourmis pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-            for(Ant ant : this.listeFourmis){
-                if(ant instanceof Soldier){
-                    ant.move();
-                }
+            for(Ant ant : this.antList){
+                ant.move();
             }
         }
 
@@ -153,7 +192,7 @@ public class ControlAnt implements AntFacadeController {
 
                 //Présence de soldat
                 int compteur_soldat = 0;
-                for(Ant ant : this.listeFourmis){
+                for(Ant ant : this.antList){
                     if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
                         compteur_soldat++;
                         if(compteur_soldat > 0){

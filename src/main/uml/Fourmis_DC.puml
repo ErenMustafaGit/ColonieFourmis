@@ -11,29 +11,41 @@ hide enum methods
 
 'Controleur
 interface AntFacadeController <<interface>> {
-    '+setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
+    +setParameters( evaporationParam:Integer, foodParam:Integer, pheromoneParam:Integer )
     +createColony(row:Integer,column:Integer)
     +createGrid(width:Integer, height:Integer)
     +putObstacle(row:Integer, column:Integer)
-    '+putFood( row:Integer, column:Integer, quantity:Integer);
-    '+createWorkers( amount:Integer )
+    +putFood( row:Integer, column:Integer, quantity:Integer);
+    +createWorkers( amount:Integer )
     +createSoldiers(amount:Integer)
-    '+setAntFile(antLogFile:String);
+    +setAntFile(antLogFile:String);
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
 class Node {
+    -food:Integer
     +Node()
     +getNoeudState():STATE
     +setNoeudState(State:STATE)
     +addNoeudVoisin(noeud:Noeud)
     +getVoisins():Node[*]
     +getFreeVoisins():Node[*]
+    +getPheromones():Pheromone[*]
+    +setFood(amount:Integer)
 }
 enum STATE <<enum>> {
     FREE
     OBSTACLE
     ANTHILL
+}
+
+'class Food{
+'    -amount:Integer
+'    +Food()
+'}
+class Pheromone{
+    +quantity:Integer
+    +getQuantity():Integer
 }
 
 
@@ -42,24 +54,29 @@ abstract Ant <<abstract>> {
     +setPosition(position:Noeud)
     {abstract} +move()
 }
-class Queen{
-    +Queen(:Noeud)
-    +move() <<override>>
+class AntHill{
+    -collectCapacity:Integer
+    +AntHill(position:Noeud, collectCapacity:Integer)
+    +getPosition():Node
     +createSoldiers(amount:Integer)
-
+    +setCollectCapacity(:Integer)
+    +getCollectCapacity():Integer
 }
 class Soldier{
-    +Soldier(:Noeud)
+    +Soldier(position:Node, colony:AntHill)
     +move() <<override>>
 }
 
 class Worker {
-    +Worder(:Noeud)
+    +Worker(position:Node , colony:AntHill)
     +move() <<override>>
+    +putPheromone()
+    +collect()
 }
 
 
 class ControlAnt implements AntFacadeController{
+    -collectCapacity:Integer
 }
 
 
@@ -77,18 +94,25 @@ class Graph{
 
 
 Soldier --|> Ant
-Queen -l-|> Ant
 Worker --|> Ant
 
 ControlAnt "-graphe\n1 " *-l-> Graph
-ControlAnt  *--> "-listeFourmis\n1..*" Ant
+ControlAnt  *-r-> "-antList\n1..*" Ant
+ControlAnt  *--> "-antHillList\n1..*" AntHill
 
-Graph *-r-> "-noeudList \n0..n" Node : composé de >
+Graph *-r-> "-nodeList \n0..n" Node : composé de >
+
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Ant *---> "-position\n1" Node  : est sur un >
+Ant *--> "-position\n1" Node  : est sur un >
+AntHill *---> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
 Node -l-> STATE : <<uses>>
+
+Ant *-> "-colony\n1" AntHill : provient de >
+Pheromone *-u-> "-colony\n1" AntHill : provient de >
+Node o-u-> "-pheromones\n..*" Pheromone : contient >
+
 
 @enduml

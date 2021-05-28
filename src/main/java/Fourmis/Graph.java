@@ -118,11 +118,12 @@ public class Graph {
      * @param column : la colonne
      */
 
+    /*
     public void createColony(Integer row,Integer column){
         Node n = getNoeud(row , column);
-        Queen r = new Queen(n);
+        Queen r = new Queen(n, );
     }
-
+     */
     /**
      * Permet de récuperer les noeuds contenue dans le graphe
      * @return retourne une Liste de Noeud

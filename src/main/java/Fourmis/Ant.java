@@ -2,14 +2,21 @@ package Fourmis;
 
 public abstract class Ant {
     private Node position;
+    protected AntHill colony;
 
     /**
      * Créé une fourmis à un noeud donné
      * @param node : emplacement de la fourmis
      */
+    public Ant(Node node, AntHill colony){
+        this.position = node;
+        this.colony = colony;
+    }
+
     public Ant(Node node){
         this.position = node;
     }
+
 
     /**
      * Permet de faire déplacer une fourmis
@@ -31,5 +38,4 @@ public abstract class Ant {
     public void setPosition(Node node){
         this.position = node;
     }
-
 }

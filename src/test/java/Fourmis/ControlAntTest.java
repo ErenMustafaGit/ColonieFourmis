@@ -61,54 +61,77 @@ class ControlAntTest {
 
     @Test
     void createColony() {
-        appli.createColony(0,0);
-        assertEquals(Node.STATE.ANTHILL, graph.getNoeud(0,0).getNodeState());
+        appli.createColony(1,2);
+        Node actual = graph.getNoeud(1,2);
+        assertEquals(Node.STATE.ANTHILL, actual.getNodeState());
+
+        assertThrows(IndexOutOfBoundsException.class, ()->{
+            appli.createColony(HEIGHT, WIDTH);
+        });
     }
 
     @Test
     void createSoldiers() {
-        //Aucune fourmis crée
-        assertEquals(0, appli.getListeFourmis().size());
+        //Création de soldat sans reine
         appli.createSoldiers(10);
-        assertEquals(0, appli.getListeFourmis().size());
+        assertEquals(0, appli.getAntList().size());
 
-        //22 = 2 Reine + 10 Soldat par Reine (20)
+        //Création de soldat avec 2 reines
         appli.createColony(0,0);
         appli.createColony(1,1);
         appli.createSoldiers(10);
-        assertEquals(22, appli.getListeFourmis().size());
+        //22 = 2 Reine + 20 Soldats
+        assertEquals(22, appli.getAntList().size());
+    }
+
+    @Test
+    void createWorkers() {
+        //Création d'ouvrier sans reine
+        appli.createWorkers(10);
+        assertEquals(0, appli.getAntList().size());
+
+        //Création d'ouvrer avec 2 reines
+        appli.createColony(0,0);
+        appli.createColony(1,1);
+        appli.createWorkers(10);
+        //22 = 2 Reine + 20 Soldats
+        assertEquals(22, appli.getAntList().size());
     }
 
 
     @Test
     void play() {
-        appli.createColony(0,0);
-        appli.putObstacle(1,0);
-        appli.putObstacle(2,0);
-        appli.putObstacle(3,0);
-        appli.putObstacle(4,0);
-        appli.createSoldiers(5);
-        BitSet[][] bitsets = appli.play(1, false);
-        //Si la fourmillière est bien reconnu
-        assertTrue(bitsets[0][0].get(0));
+        BitSet[][] bitset = appli.play(5, false);
+        BitSet actual;
+        for(int i = 0; i<bitset.length; i++){
+            for(int j = 0; j<bitset[0].length;j++){
+                actual = bitset[i][j];
+                for (int k = 0; k< actual.length(); k++){
+                    assertFalse(actual.get(k));
+                }
+            }
+        }
 
-        //Si les soldats se sont bien déplacé de 1 et sont bien reconnu
-        assertTrue(bitsets[0][1].get(2));
 
-        //Si les obstacles sont bien reconnus
-        assertTrue(bitsets[1][0].get(1));
-        assertTrue(bitsets[2][0].get(1));
-        assertTrue(bitsets[3][0].get(1));
-        assertTrue(bitsets[4][0].get(1));
 
-        //Verification si il ne les confonds pas
-        assertFalse(bitsets[0][0].get(2));
-        assertFalse(bitsets[0][0].get(1));
-        assertFalse(bitsets[1][0].get(0));
-        assertFalse(bitsets[2][0].get(0));
-        assertFalse(bitsets[3][0].get(0));
-        assertFalse(bitsets[4][0].get(0));
-        assertFalse(bitsets[0][1].get(1));
-        assertFalse(bitsets[0][1].get(0));
+        //Appli rempli de fourmillière
+        /*
+        for(int i = 0; i<WIDTH; i++){
+            for(int j = 0; j<HEIGHT;j++){
+                appli.createColony(i,j);
+            }
+        }
+        BitSet[][] bitset2 = appli.play(5, false);
+        BitSet actual2;
+        for(int i = 0; i<bitset2.length; i++){
+            for(int j = 0; j<bitset2[0].length;j++){
+                actual2 = bitset[i][j];
+                assertTrue(actual2.get(0));
+                for (int k = 1; k< actual2.length(); k++){
+                    assertFalse(actual2.get(k));
+                }
+            }
+        }
+         */
     }
 }
