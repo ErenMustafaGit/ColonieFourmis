@@ -176,6 +176,7 @@ class FourmiSoldierTest
     {
         appli.createWorkers(1);
         appli.putFood(0,WIDTH-1, 100);
+        appli.setParameters(0, 20, 20);
 
         //Trajet aller pour aller chercher la nourriture
         for(int i = 1; i<=WIDTH-1; i++){
@@ -186,10 +187,11 @@ class FourmiSoldierTest
             //Si la fourmi soldat a bien avancé
             //assertTrue(bitset.get(2));
 
+            System.out.print(i +" : ");
             //Si il y a bien une ouvrière sans nourriture
-            System.out.println(i);
             if(i != WIDTH - 1)
                 assertTrue(bitset.get(3));
+                assertFalse(bitset.get(6));
             if(i == WIDTH - 1){
                 assertTrue(bitset.get(4));
                 System.out.println("nourriture sur fourmis");
@@ -203,10 +205,21 @@ class FourmiSoldierTest
             //TOUR 1
             BitSet[][] bitSets = appli.play(1, false);
             BitSet bitset = bitSets[0][i];
-
+            System.out.print(i +" : ");
             //Si il y a bien une ouvrière avec nourriture
-            System.out.println( " at : "+i);
             assertTrue(bitset.get(4));
+            if(i == WIDTH - 1)
+                //Case de départ (sensé contenir de la nourriture) donc ne contient pas de phéromone
+                assertFalse(bitset.get(6));
+            else if(i != 0)
+                //Case contenant de la phéromone
+                assertTrue(bitset.get(6));
+            else if (i == 0){
+                //Retour dans la colonnie
+                assertTrue(bitset.get(0));
+                //Vérification qu'il n'y ai pas de phéromone dans la colonnie
+                assertFalse(bitset.get(6));
+            }
         }
 
 

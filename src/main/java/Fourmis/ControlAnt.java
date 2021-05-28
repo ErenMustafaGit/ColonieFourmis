@@ -192,18 +192,6 @@ public class ControlAnt implements AntFacadeController {
             for(int column = 0; column < this.graph.getWidth(); column++){
                 bit_play[row][column]=new BitSet(7);
 
-                //Présence de colonnie
-                if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
-                    bit_play[row][column].set(0, true);
-
-                //Présence d'obstacle
-                else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
-                    bit_play[row][column].set(1, true);
-
-                //Présence de nourriture
-                else if (this.graph.getNoeud(row, column).getFood() > 0)
-                    bit_play[row][column].set(5, true);
-
                 //Compteur du nombre de soldat et d'ouvrier
                 int compteurSoldier = 0;
                 int compteurWorker = 0;
@@ -236,6 +224,23 @@ public class ControlAnt implements AntFacadeController {
                         }
                     }
                 }
+
+                //Présence de colonnie
+                if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
+                    bit_play[row][column].set(0, true);
+
+                    //Présence d'obstacle
+                else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
+                    bit_play[row][column].set(1, true);
+
+                    //Présence de nourriture
+                else if (this.graph.getNoeud(row, column).getFood() > 0)
+                    bit_play[row][column].set(5, true);
+
+                //Présence de phéromone
+                else if (this.graph.getNoeud(row, column).getPheromone().size() != 0)
+                    bit_play[row][column].set(6, true);
+
             }
         }
 

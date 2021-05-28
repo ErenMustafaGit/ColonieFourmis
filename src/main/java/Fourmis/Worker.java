@@ -18,15 +18,12 @@ public class Worker extends Ant{
     public Worker(Node node, AntHill colony) {
         super(node, colony);
         this.foodCollected = 0;
-        this.colony.setCollectCapacity(20);
-        System.out.println("capacity of collect = " + this.colony.getCollectCapicty());
         this.recordsPath = new ArrayList<>();
         recordsPath.add(this.getPosition());
     }
 
     @Override
     public void move() {
-
         Node position = this.getPosition();
         if(this.foodCollected == 0){
             ArrayList<Node> freeVoisins = new ArrayList<>(position.getFreeVoisins());
@@ -35,7 +32,6 @@ public class Worker extends Ant{
             //alors elle peu bouger, sinon elle ne fait rien.
             if(freeVoisins.size() != 0){
                 Random rnd = new Random();
-
                 ArrayList<Node> noneVisitedNode = new ArrayList<>();
                 //Obtient la liste des noeuds non parcourus
                 for(Node node : freeVoisins){
@@ -44,21 +40,17 @@ public class Worker extends Ant{
                     }
                 }
 
-
-
                 //Si nous avons parcourus tout les noeuds adjacents
-                    if(noneVisitedNode.size() == 0){
+                if(noneVisitedNode.size() == 0){
+                    //Prend un noeud au hasard parmis ceux de libre
+                    Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
-                        //Prend un noeud au hasard parmis ceux de libre
-                        Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
+                    this.setPosition(direction);
+                    this.collect();
+                    recordsPath.add(this.getPosition());
+                }
 
-                        this.setPosition(direction);
-                        this.collect();
-                        recordsPath.add(this.getPosition());
-                    }
-
-                else{
-
+                else {
                     //Melange la liste
                     Collections.shuffle(noneVisitedNode);
                     ArrayList<Node> orderedList = new ArrayList<>(noneVisitedNode);
@@ -76,19 +68,19 @@ public class Worker extends Ant{
                             break;
                         }
                     }
-
                     Node newDirection = orderedList.get(index);
                     this.setPosition(newDirection);
-                    this.collect();
+                    if(newDirection.getFood() > 0)
+                        this.collect();
                     this.recordsPath.add(newDirection);
                 }
-
             }
         }
 
         else {
             this.setPosition(recordsPath.get(recordsPath.size() - 1));
-            this.putPheromone();
+            if(this.getPosition().getFood() == 0)
+                this.putPheromone();
             recordsPath.remove(recordsPath.size() - 1);
         }
 
@@ -101,7 +93,8 @@ public class Worker extends Ant{
                 this.foodCollected = foodQuantity;
                 this.getPosition().setFood(0);
             }
-            else{
+
+            else {
                 this.foodCollected = this.colony.getCollectCapicty();
                 this.getPosition().setFood(foodQuantity - this.foodCollected);
             }
@@ -117,7 +110,4 @@ public class Worker extends Ant{
     public int getFoodCollected(){
         return this.foodCollected;
     }
-
-
-
 }

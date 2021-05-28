@@ -1,5 +1,7 @@
 package Fourmis;
 
+import com.sun.nio.sctp.PeerAddressChangeNotification;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.concurrent.Semaphore;
@@ -100,7 +102,8 @@ public class Node implements Comparable<Node> {
     }
 
     public void addPheromone(Pheromone pheromone){
-        this.pheromoneList.add(pheromone);
+        if(this.getNodeState() != STATE.ANTHILL)
+            this.pheromoneList.add(pheromone);
     }
 
     public ArrayList<Pheromone> getPheromone(){
