@@ -208,15 +208,20 @@ class FourmiSoldierTest
             System.out.print(i +" : ");
             //Si il y a bien une ouvrière avec nourriture
             assertTrue(bitset.get(4));
-            if(i == WIDTH - 1)
+            if(i == WIDTH - 1){
                 //Case de départ (sensé contenir de la nourriture) donc ne contient pas de phéromone
                 assertFalse(bitset.get(6));
-            else if(i != 0)
+                System.out.println("pas de phéromone");
+            }
+            else if(i != 0){
                 //Case contenant de la phéromone
                 assertTrue(bitset.get(6));
+                System.out.println("phéromone présente ");
+            }
             else if (i == 0){
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
+                System.out.println("colonnie");
                 //Vérification qu'il n'y ai pas de phéromone dans la colonnie
                 assertFalse(bitset.get(6));
             }
