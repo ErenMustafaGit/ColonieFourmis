@@ -88,8 +88,8 @@ public class Graph {
 
     /**
      * Permet d'obtenir un noeud à partir d'une coordonné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      * @return retourne un Noeud
      */
     public Node getNoeud(Integer row, Integer column){
@@ -98,17 +98,15 @@ public class Graph {
 
     /**
      * Permet de placer un obstacle à une coordonnée donné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      */
     public void putObstacle(Integer row, Integer column){
         Node n = nodeList.get(column+ row * width);
         if(n.getNodeState() != Node.STATE.ANTHILL){
             n.setNodeState(Node.STATE.OBSTACLE);
-        }
 
-        //Pour passer le test n°1, mais illogique ?
-        if(row == 0 && column == 0){
+        } else{
             throw new IllegalArgumentException("Impossible de placer un obstacle sur une fourmillière");
         }
 
@@ -116,8 +114,8 @@ public class Graph {
 
     /**
      * Place la reine à une coordonnée donné (x=row;y=column)
-     * @param row : la ligne (x)
-     * @param column : la colonne (y)
+     * @param row : la ligne
+     * @param column : la colonne
      */
 
     /*

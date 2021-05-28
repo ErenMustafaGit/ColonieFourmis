@@ -8,24 +8,55 @@ import java.util.BitSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControlAntTest {
-    Graph graph;
-    public int WIDTH = 13;
-    public int HEIGHT = 19;
     ControlAnt appli;
+    static final int WIDTH = 13;
+    static final int HEIGHT = 19;
+    Graph graph;
 
     @BeforeEach
     void setUp() {
         appli = new ControlAnt();
-        appli.createGrid(WIDTH,HEIGHT);
+        appli.createGrid(WIDTH, HEIGHT);
         graph = appli.getGraph();
     }
 
     @Test
     void createGrid() {
+        appli.createGrid(WIDTH, HEIGHT);
+        assertTrue(appli.getGraph() != null);
+    }
+    @Test
+    void getGraph(){
+        graph = appli.getGraph();
+        assertTrue(graph instanceof Graph);
+    }
+
+    @Test
+    void getListeFourmis(){
+        assertTrue(appli.getListeFourmis().isEmpty());
+        appli.createSoldiers(4);
+        assertTrue(appli.getListeFourmis().isEmpty());
+
+        appli.createColony(0,0);
+        assertEquals(1,appli.getListeFourmis().size());
+
+        appli.createSoldiers(0);
+        assertEquals(1,appli.getListeFourmis().size());
+        appli.createSoldiers(10);
+        assertEquals(11,appli.getListeFourmis().size());
     }
 
     @Test
     void putObstacle() {
+        /*DEBUG POUR VOIR LE STATUT DE TOUT LES NOEUDS
+        for(int i = 0; i<WIDTH; i++){
+            for(int j = 0; j<HEIGHT; j++){
+                System.out.println("Graph : " + i + "  " + j  + " = " + graph.getNoeud(i,j).getNodeState());
+            }
+        }*/
+        appli.putObstacle(0,0);
+        assertEquals(Node.STATE.OBSTACLE, graph.getNoeud(0,0).getNodeState());
+
     }
 
     @Test
@@ -66,6 +97,7 @@ class ControlAntTest {
         //22 = 2 Reine + 20 Soldats
         assertEquals(22, appli.getAntList().size());
     }
+
 
     @Test
     void play() {
