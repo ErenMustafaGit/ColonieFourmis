@@ -52,7 +52,7 @@ public class Worker extends Ant{
                     Random rndNode = new Random();
                     int index = rndNode.nextInt(orderedList.size()) ;
                     //l'index à i(index) fois plude chance d'être choisi que le premier élement
-                    index = (1/orderedList.size()) * index;
+                    index = ((1/orderedList.size()) * index) - 1;
                     Node newDirection = orderedList.get(index);
                     this.setPosition(newDirection);
                 }
