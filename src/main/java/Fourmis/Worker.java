@@ -18,6 +18,8 @@ public class Worker extends Ant{
     public Worker(Node node, AntHill colony) {
         super(node, colony);
         this.foodCollected = 0;
+        this.colony.setCollectCapacity(20);
+        System.out.println("capacity of collect = " + this.colony.getCollectCapicty());
         this.recordsPath = new ArrayList<>();
         recordsPath.add(this.getPosition());
     }
