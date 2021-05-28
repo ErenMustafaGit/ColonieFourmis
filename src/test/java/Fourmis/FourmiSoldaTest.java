@@ -188,17 +188,24 @@ class FourmiSoldierTest
 
             //Si il y a bien une ouvrière sans nourriture
             System.out.println(i);
-            assertTrue(bitset.get(3));
+            if(i != WIDTH - 1)
+                assertTrue(bitset.get(3));
+            if(i == WIDTH - 1){
+                assertTrue(bitset.get(4));
+                System.out.println("nourriture sur fourmis");
+            }
+
+
         }
 
         //Trajet retour
-        for(int i = WIDTH-2; i>=0; i--){
+        for(int i = WIDTH-1; i>=0; i--){
             //TOUR 1
             BitSet[][] bitSets = appli.play(1, false);
             BitSet bitset = bitSets[0][i];
 
             //Si il y a bien une ouvrière avec nourriture
-            System.out.println(i);
+            System.out.println( " at : "+i);
             assertTrue(bitset.get(4));
         }
 

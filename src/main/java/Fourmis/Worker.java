@@ -26,7 +26,7 @@ public class Worker extends Ant{
 
     @Override
     public void move() {
-        System.out.println("My food = " + this.foodCollected);
+
         Node position = this.getPosition();
         if(this.foodCollected == 0){
             ArrayList<Node> freeVoisins = new ArrayList<>(position.getFreeVoisins());
@@ -85,22 +85,11 @@ public class Worker extends Ant{
 
             }
         }
+
         else {
-
-            for(int i = 0; i<recordsPath.size(); i++){
-                System.out.println(recordsPath.get(i));
-            }
-            ArrayList<Node> recordsPathReverse = new ArrayList<>(recordsPath);
-            Collections.reverse(recordsPathReverse);
-
-            for(int i = 0; i<recordsPathReverse.size(); i++){
-                System.out.println(recordsPathReverse.get(i));
-            }
-
-            for(Node node : recordsPathReverse){
-                this.setPosition(node);
-                this.putPheromone();
-            }
+            this.setPosition(recordsPath.get(recordsPath.size() - 1));
+            this.putPheromone();
+            recordsPath.remove(recordsPath.size() - 1);
         }
 
     }
