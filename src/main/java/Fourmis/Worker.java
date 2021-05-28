@@ -43,6 +43,7 @@ public class Worker extends Ant{
                 if(noneVistedNode.size() == 0){
                     //Prend un noeud au hasard parmis ceux de libre
                     Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
+                    this.setPosition(direction);
                 }
 
                 else{
