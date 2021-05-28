@@ -189,16 +189,31 @@ public class ControlAnt implements AntFacadeController {
                     bit_play[row][column].set(1, true);
 
                 //Présence de soldat
-                int compteur_soldat = 0;
+                int compteurSoldier = 0;
+                int compteurWorker = 0;
                 for(Ant ant : this.antList){
                     if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
-                        compteur_soldat++;
-                        if(compteur_soldat > 0){
+                        compteurSoldier++;
+                        if(compteurSoldier > 0){
                             bit_play[row][column].set(2, true);
                         }
                     }
+                    if(ant instanceof Worker && ant.getPosition() == this.graph.getNoeud(row, column)){
+                        compteurWorker++;
+                        if(compteurWorker > 0){
+                            Worker worker = (Worker)ant;
+
+                            //Si l'ouvrière a de la nourriture collecté
+                            if(worker.getFoodCollected() > 0){
+                                bit_play[row][column].set(4, true);
+                            }
+                            //Si l'ouvrière n'a PAS de nourriture collecté
+                            else{
+                                bit_play[row][column].set(3, true);
+                            }
+                        }
+                    }
                 }
-                // la suite dans le v2
             }
         }
 

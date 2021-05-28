@@ -181,6 +181,7 @@ class FourmiSoldierTest
         for(int i = 1; i<=WIDTH-1; i++){
             //TOUR 1
             BitSet[][] bitSets = appli.play(1, false);
+
             BitSet bitset = bitSets[0][i];
             //Si la fourmi soldat a bien avancé
             assertTrue(bitset.get(2));
