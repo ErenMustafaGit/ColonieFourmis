@@ -50,10 +50,20 @@ public class Worker extends Ant{
                     //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
                     Collections.sort(orderedList);
                     Random rndNode = new Random();
-                    int index = rndNode.nextInt(orderedList.size()) ;
+
                     //l'index à i(index) fois plude chance d'être choisi que le premier élement
-                    index = ((1/orderedList.size()) * index) - 1;
-                    Node newDirection = orderedList.get(index);
+                    ArrayList<Node> indexList = new ArrayList<>();
+                    for(int i = 0; i < orderedList.size(); i++){
+                        if(i == 0)
+                            indexList.add(orderedList.get(i));
+                        else
+                            for(int j = 0; j < i; j++){
+                                indexList.add(orderedList.get(i));
+                            }
+                    }
+                    int index = rndNode.nextInt(indexList.size());
+
+                    Node newDirection = indexList.get(index);
                     this.setPosition(newDirection);
                 }
 
