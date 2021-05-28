@@ -184,14 +184,15 @@ class FourmiSoldierTest
 
             BitSet bitset = bitSets[0][i];
             //Si la fourmi soldat a bien avancé
-            assertTrue(bitset.get(2));
+            //assertTrue(bitset.get(2));
 
             //Si il y a bien une ouvrière sans nourriture
             System.out.println(i);
             assertTrue(bitset.get(3));
         }
 
-        for(int i = WIDTH-1; i<=0; i++){
+        //Trajet retour
+        for(int i = WIDTH-2; i>=0; i--){
             //TOUR 1
             BitSet[][] bitSets = appli.play(1, false);
             BitSet bitset = bitSets[0][i];
@@ -204,10 +205,13 @@ class FourmiSoldierTest
 
     }
     @Test
-    @DisplayName("Fourmi bloquée")
+    @DisplayName("Si la nouriture est bien placé")
     void test7()
     {
-
+        appli.putFood(0,8, 7);
+        BitSet[][] bitSets = appli.play(1, false);
+        BitSet bitset = bitSets[0][8];
+        assertTrue(bitset.get(5));
     }
     @Test
     @DisplayName("Fourmi bloquée")

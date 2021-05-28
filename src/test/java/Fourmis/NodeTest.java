@@ -97,4 +97,6 @@ class NodeTest {
         assertTrue(voisins.contains(n2));
     }
 
+
+
 }

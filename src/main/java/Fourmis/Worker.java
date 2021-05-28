@@ -19,10 +19,12 @@ public class Worker extends Ant{
         super(node, colony);
         this.foodCollected = 0;
         this.recordsPath = new ArrayList<>();
+        recordsPath.add(this.getPosition());
     }
 
     @Override
     public void move() {
+        System.out.println("My food = " + this.foodCollected);
         Node position = this.getPosition();
         if(this.foodCollected == 0){
             ArrayList<Node> freeVoisins = new ArrayList<>(position.getFreeVoisins());
@@ -40,6 +42,8 @@ public class Worker extends Ant{
                     }
                 }
 
+
+
                 //Si nous avons parcourus tout les noeuds adjacents
                     if(noneVisitedNode.size() == 0){
 
@@ -47,6 +51,7 @@ public class Worker extends Ant{
                         Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
                         this.setPosition(direction);
+                        this.collect();
                         recordsPath.add(this.getPosition());
                     }
 
@@ -72,21 +77,23 @@ public class Worker extends Ant{
 
                     Node newDirection = orderedList.get(index);
                     this.setPosition(newDirection);
+                    this.collect();
+                    this.recordsPath.add(newDirection);
                 }
 
-
-                //Prend un noeud au hasard parmis ceux de libre
-                Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
-
-                //Va en direction de ce noeud là
-                this.setPosition(direction);
-                //Ajout des noeuds parcourues
-                recordsPath.add(this.getPosition());
             }
         }
         else {
+
+            for(int i = 0; i<recordsPath.size(); i++){
+                System.out.println(recordsPath.get(i));
+            }
             ArrayList<Node> recordsPathReverse = new ArrayList<>(recordsPath);
             Collections.reverse(recordsPathReverse);
+
+            for(int i = 0; i<recordsPathReverse.size(); i++){
+                System.out.println(recordsPathReverse.get(i));
+            }
 
             for(Node node : recordsPathReverse){
                 this.setPosition(node);
@@ -119,5 +126,7 @@ public class Worker extends Ant{
     public int getFoodCollected(){
         return this.foodCollected;
     }
+
+
 
 }

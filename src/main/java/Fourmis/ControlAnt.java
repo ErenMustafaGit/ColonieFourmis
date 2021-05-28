@@ -111,17 +111,17 @@ public class ControlAnt implements AntFacadeController {
     @Override
     //à reverifier
     public void createSoldiers(int amount) {
-        ArrayList<Ant> temp_soldat = new ArrayList<>();
+        ArrayList<Ant> tempSoldier = new ArrayList<>();
         for(Ant ant : this.antList){
             //Si la fourmis est une reine (donc colonie)
             if(ant instanceof AntHill){
                 for(int i = 0; i < amount; i++){
                     Soldier s = new Soldier(ant.getPosition(), (AntHill)ant);
-                    temp_soldat.add(s);
+                    tempSoldier.add(s);
                 }
             }
         }
-        antList.addAll(temp_soldat);
+        antList.addAll(tempSoldier);
     }
 
     /**
@@ -130,7 +130,18 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createWorkers(int amount) {
+        ArrayList<Ant> tempWorker = new ArrayList<>();
+        for(Ant ant : this.antList){
 
+            //Si la fourmis est une reine (donc colonie)
+            if(ant instanceof AntHill){
+                for(int i = 0; i < amount; i++){
+                    Worker worker = new Worker(ant.getPosition(), (AntHill)ant);
+                    tempWorker.add(worker);
+                }
+            }
+        }
+        antList.addAll(tempWorker);
     }
 
     /**
@@ -180,6 +191,7 @@ public class ControlAnt implements AntFacadeController {
         for(int row = 0; row < this.graph.getHeight(); row++){
             for(int column = 0; column < this.graph.getWidth(); column++){
                 bit_play[row][column]=new BitSet(7);
+
                 //Présence de colonnie
                 if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
@@ -188,16 +200,26 @@ public class ControlAnt implements AntFacadeController {
                 else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
-                //Présence de soldat
+                //Présence de nourriture
+                else if (this.graph.getNoeud(row, column).getFood() > 0)
+                    bit_play[row][column].set(5, true);
+
+                //Compteur du nombre de soldat et d'ouvrier
                 int compteurSoldier = 0;
                 int compteurWorker = 0;
+
+                //Parcours de toutes les fourmis
                 for(Ant ant : this.antList){
+
+                    //Si c'est un soldat dans la position actuel
                     if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
                         compteurSoldier++;
                         if(compteurSoldier > 0){
                             bit_play[row][column].set(2, true);
                         }
                     }
+
+                    //Si c'est un ouvrier dans la position actuel
                     if(ant instanceof Worker && ant.getPosition() == this.graph.getNoeud(row, column)){
                         compteurWorker++;
                         if(compteurWorker > 0){
