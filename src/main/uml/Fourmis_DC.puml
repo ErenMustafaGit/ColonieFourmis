@@ -99,8 +99,9 @@ class Graph{
 }
 
 
-Soldier --|> Ant
-Worker --|> Ant
+Soldier ---|> Ant
+Worker ---|> Ant
+AntHill --|> Ant
 
 ControlAnt "-graphe\n1 " *-l-> Graph
 ControlAnt  *-r-> "-antList\n1..*" Ant
@@ -116,7 +117,7 @@ Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
 Node -l-> STATE : <<uses>>
 
-Ant *-> "-colony\n1" AntHill : provient de >
+'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
 Node o-u-> "-pheromones\n..*" Pheromone : contient >
 
