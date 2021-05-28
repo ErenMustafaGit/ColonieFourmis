@@ -22,7 +22,7 @@ interface AntFacadeController <<interface>> {
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
-class Node {
+class Node implements Comparable{
     -food:Integer
     +Node()
     +getNoeudState():STATE
@@ -32,7 +32,13 @@ class Node {
     +getFreeVoisins():Node[*]
     +getPheromones():Pheromone[*]
     +setFood(amount:Integer)
+    +compareTo(node:Node)<<override>>
 }
+
+interface Comparable <<interface>>{
+
+}
+
 enum STATE <<enum>> {
     FREE
     OBSTACLE
