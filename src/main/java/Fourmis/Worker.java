@@ -33,27 +33,31 @@ public class Worker extends Ant{
                 Random rnd = new Random();
 
                 ArrayList<Node> noneVistedNode = new ArrayList<>();
-                //Ajoute les noeuds parcourue à l'historique
+                //Obtient la liste des noeuds non parcourus
                 for(Node node : freeVoisins){
                     if(!recordsPath.contains(node)){
                         noneVistedNode.add(node);
                     }
                 }
 
+                //Si nous avons parcourus tout les noeuds adjacents
                 if(noneVistedNode.size() == 0){
+
                     //Prend un noeud au hasard parmis ceux de libre
                     Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
+
                     this.setPosition(direction);
                 }
 
                 else{
+
                     //Melange la liste
                     Collections.shuffle(noneVistedNode);
                     ArrayList<Node> orderedList = new ArrayList<>(noneVistedNode);
+
                     //Trie la liste des noeuds possèdant de la plus petite quantité de phéromone à la plus grande
                     //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
                     Collections.sort(orderedList);
-                    Random rndNode = new Random();
 
                     //l'index à i(index) fois plude chance d'être choisi que le premier élement
                     /*
@@ -68,7 +72,7 @@ public class Worker extends Ant{
                     }
                     int index = rnd.nextInt(indexList.size());
                     */
-                    int k = 1 + rndNode.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
+                    int k = 1 + rnd.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
                     int index = 0;
                     for(int i = 1; i <= orderedList.size(); i++){
                         if(k <= i*(i+1)/2){

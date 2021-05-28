@@ -11,9 +11,7 @@ public class ControlAnt implements AntFacadeController {
 
 
 
-    public Graph getGraph(){
-        return this.graph;
-    }
+
     public ArrayList<Ant> getAntList(){
         return new ArrayList<>(this.antList);
     }
@@ -32,7 +30,7 @@ public class ControlAnt implements AntFacadeController {
      * @return this.graphe : la liste de fourmis de l'application
      */
     public ArrayList<Ant> getListeFourmis (){
-        return new ArrayList<>(listeFourmis);
+        return new ArrayList<>(antList);
     }
 
     /**

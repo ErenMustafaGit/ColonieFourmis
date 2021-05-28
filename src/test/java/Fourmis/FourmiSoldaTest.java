@@ -94,6 +94,7 @@ class FourmiSoldierTest
     @DisplayName("Déplacement élémentaire")
     void test2()
     {
+        //Déplacement élémentaire dans un couloir
         BitSet[][] bitsets = appli.play(1, false);
         BitSet actual = bitsets[0][1];
         boolean soldatPresent = actual.get(2);
@@ -105,6 +106,7 @@ class FourmiSoldierTest
     @DisplayName("Fourmi bloquée")
     void test3()
     {
+        //Déplacement élémentaire bloqué (d)
         appli.putObstacle(0, 1);
         BitSet[][] bitsets = appli.play(1, false);
         BitSet actual = bitsets[0][0];
@@ -146,5 +148,76 @@ class FourmiSoldierTest
             else
                 i++;
         }
+    }
+
+    @Test
+    @DisplayName("Nourriture impossible à placé sur fourmillière/obstacle")
+    void test5()
+    {
+        //Nourriture sur une fourmillière
+        assertThrows(IllegalArgumentException.class, ()->{
+            appli.putFood(0,0,1);
+        });
+
+        //Nourriture sur un obstacle
+        assertThrows(IllegalArgumentException.class, ()->{
+            appli.putFood(1,0,1);
+        });
+
+        //Obstacle sur de la nourriture
+        appli.putFood(0,3,1);
+        assertThrows(IllegalArgumentException.class, ()->{
+            appli.putObstacle(0,3);
+        });
+    }
+    @Test
+    @DisplayName("Trajet aller-retour")
+    void test6()
+    {
+        appli.createWorkers(1);
+        appli.putFood(0,WIDTH-1, 100);
+
+        //Trajet aller pour aller chercher la nourriture
+        for(int i = 1; i<=WIDTH-1; i++){
+            //TOUR 1
+            BitSet[][] bitSets = appli.play(1, false);
+            BitSet bitset = bitSets[0][i];
+            //Si la fourmi soldat a bien avancé
+            assertTrue(bitset.get(2));
+
+            //Si il y a bien une ouvrière sans nourriture
+            System.out.println(i);
+            assertTrue(bitset.get(3));
+        }
+
+        for(int i = WIDTH-1; i<=0; i++){
+            //TOUR 1
+            BitSet[][] bitSets = appli.play(1, false);
+            BitSet bitset = bitSets[0][i];
+
+            //Si il y a bien une ouvrière avec nourriture
+            System.out.println(i);
+            assertTrue(bitset.get(4));
+        }
+
+
+    }
+    @Test
+    @DisplayName("Fourmi bloquée")
+    void test7()
+    {
+
+    }
+    @Test
+    @DisplayName("Fourmi bloquée")
+    void test8()
+    {
+
+    }
+    @Test
+    @DisplayName("Fourmi bloquée")
+    void test9()
+    {
+
     }
 }
