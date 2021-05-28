@@ -61,18 +61,6 @@ public class Worker extends Ant{
                     Collections.sort(orderedList);
 
                     //l'index à i(index) fois plude chance d'être choisi que le premier élement
-                    /*
-                    ArrayList<Node> indexList = new ArrayList<>();
-                    for(int i = 0; i < orderedList.size(); i++){
-                        if(i == 0)
-                            indexList.add(orderedList.get(i));
-                        else
-                            for(int j = 0; j < i; j++){
-                                indexList.add(orderedList.get(i));
-                            }
-                    }
-                    int index = rnd.nextInt(indexList.size());
-                    */
                     int k = 1 + rnd.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
                     int index = 0;
                     for(int i = 1; i <= orderedList.size(); i++){
