@@ -55,6 +55,7 @@ public class Worker extends Ant{
                     Random rndNode = new Random();
 
                     //l'index à i(index) fois plude chance d'être choisi que le premier élement
+                    /*
                     ArrayList<Node> indexList = new ArrayList<>();
                     for(int i = 0; i < orderedList.size(); i++){
                         if(i == 0)
@@ -64,9 +65,18 @@ public class Worker extends Ant{
                                 indexList.add(orderedList.get(i));
                             }
                     }
-                    int index = rndNode.nextInt(indexList.size());
+                    int index = rnd.nextInt(indexList.size());
+                    */
+                    int k = 1 + rndNode.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
+                    int index = 0;
+                    for(int i = 1; i <= orderedList.size(); i++){
+                        if(k <= i*(i+1)/2){
+                            index = i - 1;
+                            break;
+                        }
+                    }
 
-                    Node newDirection = indexList.get(index);
+                    Node newDirection = orderedList.get(index);
                     this.setPosition(newDirection);
                 }
 
