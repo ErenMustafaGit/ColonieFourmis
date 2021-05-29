@@ -180,7 +180,7 @@ class FourmiSoldierTest
 
         //Trajet aller pour aller chercher la nourriture
         for(int i = 1; i<=WIDTH-1; i++){
-            //TOUR 1
+
             BitSet[][] bitSets = appli.play(1, false);
 
             BitSet bitset = bitSets[0][i];
@@ -188,11 +188,21 @@ class FourmiSoldierTest
             //assertTrue(bitset.get(2));
 
             System.out.print(i +" : ");
-            //Si il y a bien une ouvrière sans nourriture
-            if(i != WIDTH - 1)
+
+
+            //Les noeuds entre la colonie et la nourriture
+            if(i != WIDTH - 1) {
+                //Verification si il y a bien une ouvrière sans nourriture
                 assertTrue(bitset.get(3));
+
+                //Vérification si il n'y a pas de phéromone laché
                 assertFalse(bitset.get(6));
-            if(i == WIDTH - 1){
+            }
+
+            //Noeud contenant la nourriture
+            else if(i == WIDTH - 1){
+
+                //Verification si il y a bien une ouvrière avec de la nourriture
                 assertTrue(bitset.get(4));
                 System.out.println("nourriture sur fourmis");
             }
@@ -202,26 +212,37 @@ class FourmiSoldierTest
 
         //Trajet retour
         for(int i = WIDTH-1; i>=0; i--){
-            //TOUR 1
+
             BitSet[][] bitSets = appli.play(1, false);
+
+            //Noeud où l'ouvrière est censé se trouver si elle poursuit correctement son chemin dans le couloir
             BitSet bitset = bitSets[0][i];
             System.out.print(i +" : ");
+
             //Si il y a bien une ouvrière avec nourriture
             assertTrue(bitset.get(4));
+
+            //Noeud de fin (censé contenir la nourriture) donc ne contient pas de phéromone
             if(i == WIDTH - 1){
-                //Case de départ (sensé contenir de la nourriture) donc ne contient pas de phéromone
+                //Verification si le noeud ne contient pas de phéromone
                 assertFalse(bitset.get(6));
                 System.out.println("pas de phéromone");
             }
+
+            //Les noeuds entre la colonie et la nourriture
             else if(i != 0){
                 //Case contenant de la phéromone
                 assertTrue(bitset.get(6));
                 System.out.println("phéromone présente ");
             }
-            else if (i == 0){
+
+            //Si nous sommes sur la case de départ (colonie)
+            else{
+
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
                 System.out.println("colonnie");
+
                 //Vérification qu'il n'y ai pas de phéromone dans la colonnie
                 assertFalse(bitset.get(6));
             }
