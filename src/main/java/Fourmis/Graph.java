@@ -103,9 +103,12 @@ public class Graph {
      */
     public void putObstacle(Integer row, Integer column){
         Node n = nodeList.get(column+ row * width);
-        if(n.getNodeState() != Node.STATE.ANTHILL){
+
+        //Si le noeud ne possède pas de fourmillière ou de nourriture
+        if(n.getNodeState() != Node.STATE.ANTHILL && n.getFood() <= 0){
             n.setNodeState(Node.STATE.OBSTACLE);
 
+            //SINON
         } else{
             throw new IllegalArgumentException("Impossible de placer un obstacle sur une fourmillière");
         }

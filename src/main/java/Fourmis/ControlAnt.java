@@ -88,7 +88,11 @@ public class ControlAnt implements AntFacadeController {
     @Override
     public void putFood(int row, int column, int quantity) {
         Node n = this.graph.getNoeud(row, column);
-        n.setFood(quantity);
+        if(n.getNodeState() == Node.STATE.FREE){
+            n.setFood(quantity);
+        }else{
+            throw new IllegalArgumentException("Placement de la nourriture impossible sur ce noeud");
+        }
     }
 
     /**
