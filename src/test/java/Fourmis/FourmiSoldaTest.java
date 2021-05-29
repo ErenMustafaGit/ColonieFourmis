@@ -12,6 +12,9 @@ class FourmiSoldierTest
 {
     static final int WIDTH = 13;
     static final int HEIGHT = 19;
+    static final int FOODPARAM = 20;
+    static final int EVAPORATIONPARAM = 1;
+    static final int PHEROMONEPARAM = 20;
 
     AntFacadeController appli;
 
@@ -32,6 +35,9 @@ class FourmiSoldierTest
             }
         }
         appli.createSoldiers(1);
+        appli.createWorkers(1);
+
+        appli.setParameters(EVAPORATIONPARAM, FOODPARAM, PHEROMONEPARAM);
     }
 
     @Test
@@ -63,9 +69,12 @@ class FourmiSoldierTest
         assertTrue(actual.get(0), "Fourmilière absente : bitsets[0][0] = " + actual);
         assertFalse(actual.get(1), "Obstacle sur la fourmilière : bitsets[0][0] = " + actual);
         assertTrue(actual.get(2), "Soldat absent bitsets[0][0] = " + actual);
+        assertTrue(actual.get(3), "Ouvrière absent bitsets[0][0] = " + actual);
         BitSet expected = new BitSet();
         expected.set(0);
         expected.set(2);
+        expected.set(3);
+
         assertEquals(expected, actual,
                 "Foumilière : bitsets[0][0] = " + actual);
 
@@ -91,7 +100,7 @@ class FourmiSoldierTest
     }
 
     @Test
-    @DisplayName("Déplacement élémentaire")
+    @DisplayName("Déplacement élémentaire (soldat+ouvrière)")
     void test2()
     {
         //Déplacement élémentaire dans un couloir
@@ -99,6 +108,10 @@ class FourmiSoldierTest
         BitSet actual = bitsets[0][1];
         boolean soldatPresent = actual.get(2);
         assertTrue(soldatPresent,
+                "Soldat absent : bitsets[0][1] = " + actual);
+
+        boolean ouvrierPresent = actual.get(3);
+        assertTrue(ouvrierPresent,
                 "Soldat absent : bitsets[0][1] = " + actual);
     }
 
@@ -110,8 +123,13 @@ class FourmiSoldierTest
         appli.putObstacle(0, 1);
         BitSet[][] bitsets = appli.play(1, false);
         BitSet actual = bitsets[0][0];
+
         boolean soldatPresent = actual.get(2);
         assertTrue(soldatPresent,
+                "Soldat absent : bitsets[0][0] = " + actual);
+
+        boolean ouvrierPresent = actual.get(3);
+        assertTrue(ouvrierPresent,
                 "Soldat absent : bitsets[0][0] = " + actual);
     }
 
@@ -174,9 +192,7 @@ class FourmiSoldierTest
     @DisplayName("Trajet aller-retour")
     void test6()
     {
-        appli.createWorkers(1);
         appli.putFood(0,WIDTH-1, 100);
-        appli.setParameters(0, 20, 20);
 
         //Trajet aller pour aller chercher la nourriture
         for(int i = 1; i<=WIDTH-1; i++){
@@ -219,11 +235,13 @@ class FourmiSoldierTest
             BitSet bitset = bitSets[0][i];
             System.out.print(i +" : ");
 
-            //Si il y a bien une ouvrière avec nourriture
-            assertTrue(bitset.get(4));
+
 
             //Noeud de fin (censé contenir la nourriture) donc ne contient pas de phéromone
             if(i == WIDTH - 1){
+                //Si il y a bien une ouvrière avec nourriture
+                assertTrue(bitset.get(4));
+
                 //Verification si le noeud ne contient pas de phéromone
                 assertFalse(bitset.get(6));
                 System.out.println("pas de phéromone");
@@ -231,6 +249,9 @@ class FourmiSoldierTest
 
             //Les noeuds entre la colonie et la nourriture
             else if(i != 0){
+                //Si il y a bien une ouvrière avec nourriture
+                assertTrue(bitset.get(4));
+
                 //Case contenant de la phéromone
                 assertTrue(bitset.get(6));
                 System.out.println("phéromone présente ");
@@ -238,6 +259,8 @@ class FourmiSoldierTest
 
             //Si nous sommes sur la case de départ (colonie)
             else{
+                //Si il y a bien une ouvrière SANS nourriture (déposer)
+                assertTrue(bitset.get(3));
 
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
@@ -248,7 +271,8 @@ class FourmiSoldierTest
             }
         }
 
-
+        //DEBUG pour déposer food sur Anthill
+        appli.play(1,false);
     }
     @Test
     @DisplayName("Si la nouriture est bien placé")
@@ -260,10 +284,22 @@ class FourmiSoldierTest
         assertTrue(bitset.get(5));
     }
     @Test
-    @DisplayName("Fourmi bloquée")
+    @DisplayName("Trajet aller-retour jusqu'à finir la nourriture sur le noeud ligne 0 colonne 2. (g)")
     void test8()
     {
+        appli.putFood(0,2,100);
 
+        BitSet[][] bitSets = appli.play(0,false);
+        BitSet nodeFood = bitSets[0][2];
+
+        int compteur = 0;
+        //Boucle tant qu'il y a encore de la nourriture
+        while (nodeFood.get(5)){
+            compteur++;
+            System.out.println(compteur);
+            bitSets = appli.play(1,false);
+            nodeFood = bitSets[0][2];
+        }
     }
     @Test
     @DisplayName("Fourmi bloquée")

@@ -50,6 +50,7 @@ public class Worker extends Ant{
                     recordsPath.add(this.getPosition());
                 }
 
+                //Si il y a au moins un noeud non parcourus
                 else {
                     //Melange la liste
                     Collections.shuffle(noneVisitedNode);
@@ -69,7 +70,12 @@ public class Worker extends Ant{
                         }
                     }
                     Node newDirection = orderedList.get(index);
+                    if(this.getPosition().getNodeState() == Node.STATE.ANTHILL)
+                        System.out.print("ANTHILL : " + this.getPosition());
+
+                    System.out.print("     up : " + this.getPosition());
                     this.setPosition(newDirection);
+                    System.out.println("    to : " + this.getPosition());
                     if(newDirection.getFood() > 0)
                         this.collect();
                     this.recordsPath.add(newDirection);
@@ -77,11 +83,27 @@ public class Worker extends Ant{
             }
         }
 
+        //Lorsque l'ouvrière a de la nourriture
         else {
+
+            //Chemin arrière
             this.setPosition(recordsPath.get(recordsPath.size() - 1));
-            if(this.getPosition().getFood() == 0)
+
+            //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
+            if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
                 this.putPheromone();
+
             recordsPath.remove(recordsPath.size() - 1);
+
+            //Vide la nourriture lorsqu'il est sur une Fourmillière
+            if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
+                this.foodCollected = 0;
+
+                //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture
+                //Sinon il s'arretera devant la fourmillière à la prochaine itération sans savoir quoi faire
+                recordsPath.add(this.getPosition());
+            }
+
         }
 
     }
