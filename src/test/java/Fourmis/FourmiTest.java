@@ -430,9 +430,11 @@ class FourmiTest
                 System.out.println("colonnie");
                 //Vérification qu'il n'y ai pas de phéromone dans la colonnie
                 assertFalse(bitset.get(6));
+                appli.putObstacle(0, 1);
                 System.out.println("");
                 for(int t = 0; t < WIDTH - 1; t++){
-                    BitSet[][] bitPheromone = appli.play(0, false);
+                    assertTrue(bitset.get(3));
+                    BitSet[][] bitPheromone = appli.play(1, false);
                     for(int j = WIDTH - 1; j>=0; j--){
                         BitSet bitsetPh = bitPheromone[0][j];
                         System.out.print(j);
