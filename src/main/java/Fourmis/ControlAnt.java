@@ -53,6 +53,7 @@ public class ControlAnt implements AntFacadeController {
                 if(ant instanceof AntHill){
                     ((AntHill) ant).setCollectCapacity(foodParam);
                     ((AntHill) ant).setPheromoneQuantity(pheromoneQuantity);
+                    this.evaporationQuantity = evaporationParam;
                 }
             }
         }
@@ -233,17 +234,28 @@ public class ControlAnt implements AntFacadeController {
                 if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
-                    //Présence d'obstacle
+                //Présence d'obstacle
                 else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
-                    //Présence de nourriture
+                //Présence de nourriture
                 else if (this.graph.getNoeud(row, column).getFood() > 0)
                     bit_play[row][column].set(5, true);
 
                 //Présence de phéromone
-                else if (this.graph.getNoeud(row, column).getPheromone().size() != 0)
+                else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
+                    ArrayList<Pheromone> listeNodePheromone = new ArrayList<>(this.graph.getNoeud(row, column).getPheromone());
+                    ArrayList<Pheromone> listeNodePheromoneUpdated = new ArrayList<>();
+                    for(Pheromone pheromone : listeNodePheromone){
+                        if((pheromone.getQuantity() - this.evaporationQuantity) != 0)
+                            pheromone.setQuantity(pheromone.getQuantity() - this.evaporationQuantity);
+                            listeNodePheromoneUpdated.add(pheromone);
+                    }
+                    this.graph.getNoeud(row, column).updatePheromone(listeNodePheromoneUpdated);
+                }
+
+
 
             }
         }

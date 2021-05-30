@@ -107,6 +107,9 @@ public class Node implements Comparable<Node> {
         return new ArrayList<>(pheromoneList);
     }
 
+    public void updatePheromone(ArrayList<Pheromone> listePheromoneUpdated){
+        this.pheromoneList = new ArrayList<>(listePheromoneUpdated);
+    }
 }
 
 
