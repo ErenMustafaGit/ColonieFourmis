@@ -8,7 +8,7 @@ import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FourmiSoldierTest
+class FourmiTest
 {
     static final int WIDTH = 13;
     static final int HEIGHT = 19;
