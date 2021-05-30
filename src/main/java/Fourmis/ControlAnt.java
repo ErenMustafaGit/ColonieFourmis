@@ -175,14 +175,16 @@ public class ControlAnt implements AntFacadeController {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
 
-
         //Récupération de tout les noeuds du graphe
         for(Node node : this.graph.getNoeudList()){
-
+            ArrayList<Pheromone> listePheromoneUpdate = new ArrayList<>();
             //Récupération de tout les noeuds du graphe
             for(Pheromone pheromone : node.getPheromone()){
                 pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
+                if(pheromone.getQuantity() != 0)
+                    listePheromoneUpdate.add(pheromone);
             }
+            node.updatePheromone(listePheromoneUpdate);
         }
 
         //Déplacement des fourmis pour chaque itération
@@ -246,9 +248,6 @@ public class ControlAnt implements AntFacadeController {
                 else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
                 }
-
-
-
             }
         }
 
