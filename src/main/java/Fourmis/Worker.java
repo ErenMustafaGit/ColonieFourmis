@@ -9,6 +9,9 @@ public class Worker extends Ant{
     private int foodCollected;
     private ArrayList<Node> recordsPath;
 
+    //Mis à true lors de la collect() de nourriture
+    private boolean isBacktracking;
+
     /**
      * Créé une fourmis à un noeud donné
      *
@@ -17,6 +20,7 @@ public class Worker extends Ant{
 
     public Worker(Node node, AntHill colony) {
         super(node, colony);
+        this.isBacktracking = false;
         this.foodCollected = 0;
         this.recordsPath = new ArrayList<>();
         recordsPath.add(this.getPosition());
@@ -46,7 +50,9 @@ public class Worker extends Ant{
                     Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
 
                     this.setPosition(direction);
-                    this.collect();
+                    if(direction.getFood() > 0){
+                        this.collect();
+                    }
                     recordsPath.add(this.getPosition());
                 }
 
@@ -69,16 +75,12 @@ public class Worker extends Ant{
                             break;
                         }
                     }
-                    Node newDirection = orderedList.get(index);
-                    if(this.getPosition().getNodeState() == Node.STATE.ANTHILL)
-                        System.out.print("ANTHILL : " + this.getPosition());
+                    Node direction = orderedList.get(index);
 
-                    System.out.print("     up : " + this.getPosition());
-                    this.setPosition(newDirection);
-                    System.out.println("    to : " + this.getPosition());
-                    if(newDirection.getFood() > 0)
+                    this.setPosition(direction);
+                    if(direction.getFood() > 0)
                         this.collect();
-                    this.recordsPath.add(newDirection);
+                    this.recordsPath.add(direction);
                 }
             }
         }
@@ -87,22 +89,87 @@ public class Worker extends Ant{
         else {
 
             //Chemin arrière
-            this.setPosition(recordsPath.get(recordsPath.size() - 1));
+            Node backNode = recordsPath.get(recordsPath.size()-1);
 
-            //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
-            if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
-                this.putPheromone();
-
-            recordsPath.remove(recordsPath.size() - 1);
-
-            //Vide la nourriture lorsqu'il est sur une Fourmillière
-            if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
-                this.foodCollected = 0;
-
-                //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture
-                //Sinon il s'arretera devant la fourmillière à la prochaine itération sans savoir quoi faire
-                recordsPath.add(this.getPosition());
+            //Si le noeud est un obstacle
+            if(backNode.getNodeState() == Node.STATE.OBSTACLE){
+                this.isBacktracking = false;
             }
+
+            //Si il est dans un état de "retour sur ces pas" (qu'il n'a pas encore vu d'obstacle dans son retour)
+            if(isBacktracking){
+                this.setPosition(backNode);
+
+                //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
+                if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
+                    this.putPheromone();
+
+                recordsPath.remove(recordsPath.size() - 1);
+
+                //Vide la nourriture lorsqu'il est sur une Fourmillière
+                if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
+                    this.foodCollected = 0;
+
+                    //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture
+                    //Sinon il s'arretera devant la fourmillière à la prochaine itération sans savoir quoi faire
+                    recordsPath.add(this.getPosition());
+                }
+            }
+            //Si il n'est PAS dans un état de "retour sur ces pas"
+            //Il devra donc se déplacer de manière aléatoire
+            else{
+
+                //On vide notre historique de chemin
+                recordsPath.clear();
+
+                ArrayList<Node> freeVoisins = new ArrayList<>(position.getFreeVoisins());
+
+                //Si la fourmis ce trouve sur un noeud qui possède une liste de NoeudVoisin différent de 0,
+                //alors elle peu bouger, sinon elle ne fait rien.
+                if(freeVoisins.size() != 0) {
+
+                    Random rnd = new Random();
+                    ArrayList<Node> noneVisitedNode = new ArrayList<>();
+
+                    //Obtient la liste des noeuds non parcourus
+                    for (Node node : freeVoisins) {
+                        if (!recordsPath.contains(node)) {
+                            noneVisitedNode.add(node);
+                        }
+                    }
+
+                    //Si nous avons parcourus tout les noeuds adjacents
+                    if (noneVisitedNode.size() == 0) {
+
+                        //Prend un noeud au hasard parmis ceux de libre
+                        Node direction = freeVoisins.get(rnd.nextInt(freeVoisins.size()));
+                        this.setPosition(direction);
+                        recordsPath.add(this.getPosition());
+
+                    }else{
+
+                        //Prend un noeud au hasard parmis ceux non parcours et libre
+                        Node direction = noneVisitedNode.get(rnd.nextInt(noneVisitedNode.size()));
+                        this.setPosition(direction);
+                        recordsPath.add(this.getPosition());
+                    }
+
+                    //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
+                    if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
+                        this.putPheromone();
+
+                    //Vide la nourriture lorsqu'il est sur une Fourmillière
+                    if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
+                        this.foodCollected = 0;
+
+                        //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture
+                        //Sinon il s'arretera devant la fourmillière à la prochaine itération sans savoir quoi faire
+                        recordsPath.add(this.getPosition());
+                    }
+
+                }
+            }
+
 
         }
 
@@ -121,6 +188,7 @@ public class Worker extends Ant{
                 this.getPosition().setFood(foodQuantity - this.foodCollected);
             }
         }
+        this.isBacktracking = true;
 
     }
 

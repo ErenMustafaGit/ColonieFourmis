@@ -302,9 +302,60 @@ class FourmiSoldierTest
         }
     }
     @Test
-    @DisplayName("Fourmi bloquée")
+    @DisplayName("Trajet retour perturbé par un obstacle (h)")
     void test9()
     {
+        appli.putFood(0,WIDTH-1, 100);
+
+        //Trajet aller pour aller chercher la nourriture
+        for(int i = 1; i<=WIDTH-1; i++) {
+            BitSet[][] bitSets = appli.play(1, false);
+            BitSet bitset = bitSets[0][i];
+
+            //Les noeuds entre la colonie et la nourriture
+            if (i != WIDTH - 1) {
+                //Verification si il y a bien une ouvrière sans nourriture
+                assertTrue(bitset.get(3));
+            }
+
+            //Noeud contenant la nourriture
+            else if (i == WIDTH - 1) {
+                //Verification si il y a bien une ouvrière avec de la nourriture
+                assertTrue(bitset.get(4));
+            }
+        } //Fin du trajet aller
+
+        //Placement de l'obstacle 2 noeud avant la nourriture
+        appli.putObstacle(0,WIDTH-3);
+
+        BitSet[][] bitSets = appli.play(2, false);
+        BitSet bitset = bitSets[0][WIDTH-2];
+        assertTrue(bitset.get(4));
+
+
+        bitSets = appli.play(1, false);
+        //Il ne va PAS sur le noeud avec l'obstacle
+        bitset = bitSets[0][WIDTH-3];
+        assertFalse(bitset.get(4));
+
+        //Il fait bien demi-tour
+        bitset = bitSets[0][WIDTH-1];
+        assertTrue(bitset.get(4));
+
+
+
+        for(int i = WIDTH-1 ; i<=0; i--){
+            //Et il continue bien son chemin pour retrouver la fourmillière
+            bitSets = appli.play(1, false);
+            bitset = bitSets[1][i];
+            assertTrue(bitset.get(4));
+        }
+    }
+
+
+    @Test
+    @DisplayName("Evaporation des phéromones")
+    void test10(){
 
     }
 }
