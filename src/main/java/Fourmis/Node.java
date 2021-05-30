@@ -116,8 +116,7 @@ public class Node implements Comparable<Node> {
                 tempList.add(pheromone);
         }
 
-        this.pheromoneList = tempList;
-
+        this.pheromoneList = new ArrayList<>(tempList);
     }
 }
 
