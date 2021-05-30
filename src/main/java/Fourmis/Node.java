@@ -9,18 +9,6 @@ import java.util.concurrent.Semaphore;
 
 public class Node implements Comparable<Node> {
 
-    @Override
-    public int compareTo(Node node) {
-        ArrayList<Pheromone> pheromoneList = new ArrayList<>(node.getPheromone());
-        int quantityPheromone = 0;
-        //Ne prend pas en compte les différentes colony, cad que lorsque la fourmis
-        // appel les noeuds voisins, les pheromones ne sont pas distinct
-        for(Pheromone pheromone : pheromoneList){
-            quantityPheromone += pheromone.getQuantity();
-        }
-        return quantityPheromone;
-    }
-
     /**
      * Différent état d'un noeud
      */
@@ -111,12 +99,25 @@ public class Node implements Comparable<Node> {
     public void updatePheromone() {
         //Liste temporaire qui contiendra que les phéromones encore existant (+ de 0 de quantité)
         ArrayList<Pheromone> tempList = new ArrayList<>();
-        for (Pheromone pheromone : this.pheromoneList) {
-            if (pheromone.getQuantity() != 0)
+        for (Pheromone pheromone : getPheromone()) {
+            if (pheromone.getQuantity() != 0){
                 tempList.add(pheromone);
-        }
+            }
 
+        }
         this.pheromoneList = new ArrayList<>(tempList);
+    }
+
+    @Override
+    public int compareTo(Node node) {
+        ArrayList<Pheromone> pheromoneList = new ArrayList<>(node.getPheromone());
+        int quantityPheromone = 0;
+        //Ne prend pas en compte les différentes colony, cad que lorsque la fourmis
+        // appel les noeuds voisins, les pheromones ne sont pas distinct
+        for(Pheromone pheromone : pheromoneList){
+            quantityPheromone += pheromone.getQuantity();
+        }
+        return quantityPheromone;
     }
 }
 

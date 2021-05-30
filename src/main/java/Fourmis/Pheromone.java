@@ -17,7 +17,9 @@ public class Pheromone {
         if(quantity > 0){
             this.quantity = quantity;
         }
-        this.quantity = 0;
+        else{
+            this.quantity = 0;
+        }
     }
 
 }

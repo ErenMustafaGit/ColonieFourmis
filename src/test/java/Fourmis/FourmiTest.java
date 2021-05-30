@@ -3,6 +3,8 @@ package Fourmis;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
 
 import java.util.BitSet;
 
@@ -14,7 +16,7 @@ class FourmiTest
     static final int HEIGHT = 19;
     static final int FOODPARAM = 20;
     static final int EVAPORATIONPARAM = 1;
-    static final int PHEROMONEPARAM = 20;
+    static final int PHEROMONEPARAM = 1;
 
     AntFacadeController appli;
 
@@ -261,7 +263,6 @@ class FourmiTest
             else{
                 //Si il y a bien une ouvrière SANS nourriture (déposer)
                 assertTrue(bitset.get(3));
-
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
                 System.out.println("colonnie");
@@ -270,7 +271,6 @@ class FourmiTest
                 assertFalse(bitset.get(6));
             }
         }
-
         //DEBUG pour déposer food sur Anthill
         appli.play(1,false);
     }
@@ -356,6 +356,90 @@ class FourmiTest
     @Test
     @DisplayName("Evaporation des phéromones")
     void test10(){
+        appli.putFood(0,WIDTH-1, 100);
 
+        //Trajet aller pour aller chercher la nourriture
+        for(int i = 1; i<=WIDTH-1; i++){
+
+            BitSet[][] bitSets = appli.play(1, false);
+
+            BitSet bitset = bitSets[0][i];
+            //Si la fourmi soldat a bien avancé
+            //assertTrue(bitset.get(2));
+
+            System.out.print(i +" : ");
+
+
+            //Les noeuds entre la colonie et la nourriture
+            if(i != WIDTH - 1) {
+                //Verification si il y a bien une ouvrière sans nourriture
+                assertTrue(bitset.get(3));
+
+                //Vérification si il n'y a pas de phéromone laché
+                assertFalse(bitset.get(6));
+            }
+
+            //Noeud contenant la nourriture
+            else if(i == WIDTH - 1){
+
+                //Verification si il y a bien une ouvrière avec de la nourriture
+                assertTrue(bitset.get(4));
+                System.out.println("nourriture sur fourmis");
+            }
+
+
+        }
+
+        //Trajet retour
+        for(int i = WIDTH-1; i>=0; i--){
+
+            BitSet[][] bitSets = appli.play(1, false);
+
+            //Noeud où l'ouvrière est censé se trouver si elle poursuit correctement son chemin dans le couloir
+            BitSet bitset = bitSets[0][i];
+            System.out.print(i +" : ");
+
+
+
+            //Noeud de fin (censé contenir la nourriture) donc ne contient pas de phéromone
+            if(i == WIDTH - 1){
+                //Si il y a bien une ouvrière avec nourriture
+                assertTrue(bitset.get(4));
+
+                //Verification si le noeud ne contient pas de phéromone
+                assertFalse(bitset.get(6));
+                System.out.println("pas de phéromone");
+            }
+
+            //Les noeuds entre la colonie et la nourriture
+            else if(i != 0){
+                //Si il y a bien une ouvrière avec nourriture
+                assertTrue(bitset.get(4));
+
+                //Case contenant de la phéromone
+                assertTrue(bitset.get(6));
+                System.out.println("phéromone présente ");
+                BitSet bitsetPheromone = bitSets[0][i+1];
+                System.out.print("\t phéromone plus présent à " );
+                System.out.println(i+1);
+                assertFalse(bitsetPheromone.get(6));
+            }
+
+            //Si nous sommes sur la case de départ (colonie)
+            else{
+                //Si il y a bien une ouvrière SANS nourriture (déposer)
+                assertTrue(bitset.get(3));
+                //Retour dans la colonnie
+                assertTrue(bitset.get(0));
+                System.out.println("colonnie");
+
+                BitSet bitsetPheromone = bitSets[0][i+1];
+                System.out.print("\t phéromone plus présent à " );
+                System.out.println(i+1);
+                assertFalse(bitsetPheromone.get(6));
+                //Vérification qu'il n'y ai pas de phéromone dans la colonnie
+                assertFalse(bitset.get(6));
+            }
+        }
     }
 }

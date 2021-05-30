@@ -5,12 +5,9 @@ import java.util.*;
 public class ControlAnt implements AntFacadeController {
     private Graph graph;
     private ArrayList<Ant> antList = new ArrayList<>();
-    private int collectCapacity = 0;
-    private int pheromoneQuantity = 0;
-    private int evaporationQuantity = 0;
-
-
-
+    private int collectCapacity;
+    private int pheromoneQuantity;
+    private int evaporationQuantity;
 
     public ArrayList<Ant> getAntList(){
         return new ArrayList<>(this.antList);
@@ -52,7 +49,7 @@ public class ControlAnt implements AntFacadeController {
             for(Ant ant : antList){
                 if(ant instanceof AntHill){
                     ((AntHill) ant).setCollectCapacity(foodParam);
-                    ((AntHill) ant).setPheromoneQuantity(pheromoneQuantity);
+                    ((AntHill) ant).setPheromoneQuantity(pheromoneParam);
                     this.evaporationQuantity = evaporationParam;
                 }
             }
