@@ -245,14 +245,6 @@ public class ControlAnt implements AntFacadeController {
                 //Présence de phéromone
                 else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
-                    ArrayList<Pheromone> listeNodePheromone = new ArrayList<>(this.graph.getNoeud(row, column).getPheromone());
-                    ArrayList<Pheromone> listeNodePheromoneUpdated = new ArrayList<>();
-                    for(Pheromone pheromone : listeNodePheromone){
-                        if((pheromone.getQuantity() - this.evaporationQuantity) != 0)
-                            pheromone.setQuantity(pheromone.getQuantity() - this.evaporationQuantity);
-                            listeNodePheromoneUpdated.add(pheromone);
-                    }
-                    this.graph.getNoeud(row, column).updatePheromone(listeNodePheromoneUpdated);
                 }
 
 

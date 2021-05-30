@@ -101,7 +101,7 @@ public class Worker extends Ant{
                 this.setPosition(backNode);
 
                 //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
-                if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
+                if(this.getPosition().getFood() == 0)
                     this.putPheromone();
 
                 recordsPath.remove(recordsPath.size() - 1);
@@ -155,7 +155,7 @@ public class Worker extends Ant{
                     }
 
                     //Phéromone sur les noeuds où il n'y a pas de la nourriture/fourmillière
-                    if(this.getPosition().getFood() == 0 || this.getPosition().getNodeState() != Node.STATE.ANTHILL)
+                    if(this.getPosition().getFood() == 0)
                         this.putPheromone();
 
                     //Vide la nourriture lorsqu'il est sur une Fourmillière
