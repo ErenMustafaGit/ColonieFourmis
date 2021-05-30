@@ -4,6 +4,7 @@ import com.sun.nio.sctp.PeerAddressChangeNotification;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class Node implements Comparable<Node> {
@@ -107,11 +108,16 @@ public class Node implements Comparable<Node> {
         return new ArrayList<>(pheromoneList);
     }
 
-    public void updatePheromone(){
-        for(Pheromone pheromone : this.pheromoneList){
-            if(pheromone.getQuantity() == 0)
-                this.pheromoneList.remove(pheromone);
+    public void updatePheromone() {
+        //Liste temporaire qui contiendra que les phéromones encore existant (+ de 0 de quantité)
+        ArrayList<Pheromone> tempList = new ArrayList<>();
+        for (Pheromone pheromone : this.pheromoneList) {
+            if (pheromone.getQuantity() != 0)
+                tempList.add(pheromone);
         }
+
+        this.pheromoneList = tempList;
+
     }
 }
 
