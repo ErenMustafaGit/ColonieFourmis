@@ -44,8 +44,8 @@ public class ScenarioTest {
     }
 
     @Test
-    @DisplayName("Scenario de test 2")
-    void test1(){
+    @DisplayName("Scenario de test 2 : a et b")
+    void testa(){
 
         //Situation initiale
         BitSet[][] bitSets = appli.play(0,false);
@@ -93,4 +93,11 @@ public class ScenarioTest {
             goodMove = true;
         assertTrue(goodMove);
     }
+
+    @Test
+    @DisplayName("Scénario de test : Probabilité avec 6000 essai")
+    void testc(){
+
+    }
+
 }
