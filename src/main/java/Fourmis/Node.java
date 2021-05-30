@@ -117,7 +117,19 @@ public class Node implements Comparable<Node> {
         for(Pheromone pheromone : pheromoneList){
             quantityPheromone += pheromone.getQuantity();
         }
-        return quantityPheromone;
+
+        ArrayList<Pheromone> pheromoneListThis = new ArrayList<>(this.getPheromone());
+        int quantityPheromoneThis = 0;
+        for(Pheromone pheromone : pheromoneListThis){
+            quantityPheromoneThis += pheromone.getQuantity();
+        }
+
+        if(quantityPheromoneThis > quantityPheromone)
+            return 1;
+        else if (quantityPheromoneThis < quantityPheromone)
+            return -1;
+        else
+            return 0;
     }
 }
 
