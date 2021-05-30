@@ -15,6 +15,7 @@ public class ScenarioTest {
     static final int FOODPARAM = 1;
     static final int EVAPORATIONPARAM = 0;
     static final int PHEROMONEPARAM = 0;
+    static final int MARGE_ERROR = 100;
     AntFacadeController appli;
 
     @BeforeEach
@@ -124,7 +125,20 @@ public class ScenarioTest {
         }
 
         System.out.println("Top : " + topCount + "\nBottom : " + bottomCount + "\nRight : " + rightCount);
+        boolean topCheck = false;
+        boolean bottomCheck = false;
+        boolean rightCheck = false;
 
+        if((topCount <= (6000/2) + MARGE_ERROR) && (topCount >= (6000/2) - MARGE_ERROR))
+            topCheck = true;
+        if((bottomCount <= (6000/6) + MARGE_ERROR) && (bottomCount >= (6000/6) - MARGE_ERROR))
+            bottomCheck = true;
+        if((rightCount <= (6000/3) + MARGE_ERROR) && (rightCount >= (6000/3) - MARGE_ERROR))
+            rightCheck = true;
+
+        assertTrue(topCheck);
+        assertTrue(bottomCheck);
+        assertTrue(rightCheck);
 
 
     }
