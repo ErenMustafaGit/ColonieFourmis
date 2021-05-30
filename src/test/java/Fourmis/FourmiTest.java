@@ -425,20 +425,26 @@ class FourmiTest
             else{
                 //Si il y a bien une ouvrière SANS nourriture (déposer)
                 assertTrue(bitset.get(3));
+
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
                 System.out.println("colonnie");
-                //Vérification qu'il n'y ai pas de phéromone dans la colonnie
+
+                //Vérification qu'il n'y ai pas de phéromone dans la colonie
                 assertFalse(bitset.get(6));
                 System.out.println("");
-                for(int t = 0; t < WIDTH - 1; t++){
-                    BitSet[][] bitPheromone = appli.play(0, false);
-                    for(int j = WIDTH - 1; j>=0; j--){
-                        BitSet bitsetPh = bitPheromone[0][j];
-                        System.out.print(j);
-                        System.out.println(" | "+bitsetPh.get(6));
-                    }
-                    System.out.println("");
+
+                for(int t = WIDTH-1; t > 1; t--){
+                    bitSets = appli.play(1, false);
+
+                    //Noeud dont les phéromones doivent disparaître
+                    //(tour 1) = noeud adjacent à la nourriture
+                    bitset = bitSets[0][t];
+                    assertFalse(bitset.get(6));
+
+                    //Noeud qui est adjacent à celui dont les phéromones ont disparu
+                    bitset = bitSets[0][t-1];
+                    assertTrue(bitset.get(6));
                 }
             }
         }
