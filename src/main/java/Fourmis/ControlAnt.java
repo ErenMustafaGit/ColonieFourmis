@@ -181,7 +181,8 @@ public class ControlAnt implements AntFacadeController {
             //Récupération de tout les noeuds du graphe
             for(Pheromone pheromone : node.getPheromone()){
                 pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
-                listePheromoneUpdate.add(pheromone);
+                if(pheromone.getQuantity() != 0)
+                    listePheromoneUpdate.add(pheromone);
             }
             node.updatePheromone(listePheromoneUpdate);
         }
