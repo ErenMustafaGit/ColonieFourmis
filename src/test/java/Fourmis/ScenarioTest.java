@@ -35,13 +35,13 @@ public class ScenarioTest {
         appli.putFood(2,2,FOODQUANTITY);
 
 
-        appli.createWorkers(1);
         appli.setParameters(EVAPORATIONPARAM, FOODPARAM, PHEROMONEPARAM);
     }
 
     @Test
     @DisplayName("Scenario de test 2 : a et b")
     void testa(){
+        appli.createWorkers(1);
 
         //Situation initiale
         BitSet[][] bitSets = appli.play(0,false);
@@ -93,6 +93,39 @@ public class ScenarioTest {
     @Test
     @DisplayName("Scénario de test : Probabilité avec 6000 essai")
     void testc(){
+
+        //On place un ouvrier au centre (colonie inutile ici)
+        Graph graph = ((ControlAnt)this.appli).getGraph();
+        Node centerNode = graph.getNoeud(1,1);
+        Node topNode = graph.getNoeud(0,1);
+        Node bottomNode = graph.getNoeud(2,1);
+        Node rightNode = graph.getNoeud(1,2);
+
+        Node antHillNode = graph.getNoeud(1,0);
+
+        //Print la quantité de phéro en haut, pour voir si il y en a bien 2
+        System.out.println(topNode.getPheromone().get(0).getQuantity());
+
+        int topCount = 0;
+        int bottomCount = 0;
+        int rightCount = 0;
+
+        for(int i = 0; i<6000; i++){
+            Worker worker = new Worker(centerNode, null);
+            worker.addToRecordsPath(antHillNode);
+            worker.move();
+
+            if(worker.getPosition() == topNode)
+                topCount++;
+            else if(worker.getPosition() == bottomNode)
+                bottomCount++;
+            else if(worker.getPosition() == rightNode)
+                rightCount++;
+        }
+
+        System.out.println("Top : " + topCount + "\nBottom : " + bottomCount + "\nRight : " + rightCount);
+
+
 
     }
 

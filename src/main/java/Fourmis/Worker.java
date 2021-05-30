@@ -200,4 +200,8 @@ public class Worker extends Ant{
     public int getFoodCollected(){
         return this.foodCollected;
     }
+
+    public void addToRecordsPath(Node addedNode){
+        this.recordsPath.add(addedNode);
+    }
 }
