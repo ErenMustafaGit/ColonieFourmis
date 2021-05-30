@@ -28,12 +28,8 @@ public class ScenarioTest {
         appli.createColony(1,0);
         appli.putObstacle(2,0);
 
-        Pheromone pheromone2 = new Pheromone(2, null);
-        Graph graph = ((ControlAnt)appli).getGraph();
-        graph.getNoeud(0,1).addPheromone(pheromone2);
-
-        Pheromone pheromone1 = new Pheromone(1, null);
-        graph.getNoeud(1,2).addPheromone(pheromone1);
+        ((ControlAnt)appli).putPheromone(0,1,2);
+        ((ControlAnt)appli).putPheromone(1,2,1);
 
         appli.putFood(0,2, FOODQUANTITY);
         appli.putFood(2,2,FOODQUANTITY);

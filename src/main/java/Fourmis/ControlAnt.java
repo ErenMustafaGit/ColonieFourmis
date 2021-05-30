@@ -14,6 +14,12 @@ public class ControlAnt implements AntFacadeController {
     }
 
 
+
+    public void putPheromone(int row, int column, int quantity) {
+        Pheromone pheromone = new Pheromone(quantity, null);
+        this.graph.getNoeud(row, column).addPheromone(pheromone);
+    }
+
     /**
      * Retourne le graphe de l'instance de contrôle
      * @return this.graphe : le graphe de l'application
