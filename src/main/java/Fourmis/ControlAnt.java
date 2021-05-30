@@ -181,6 +181,7 @@ public class ControlAnt implements AntFacadeController {
             for(Pheromone pheromone : node.getPheromone()){
                 pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
             }
+            node.updatePheromone();
         }
 
         //Déplacement des fourmis pour chaque itération
