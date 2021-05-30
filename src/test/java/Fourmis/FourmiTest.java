@@ -16,7 +16,7 @@ class FourmiTest
     static final int HEIGHT = 19;
     static final int FOODPARAM = 20;
     static final int EVAPORATIONPARAM = 1;
-    static final int PHEROMONEPARAM = 1;
+    static final int PHEROMONEPARAM = WIDTH*EVAPORATIONPARAM;
 
     AntFacadeController appli;
 
