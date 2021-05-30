@@ -419,10 +419,6 @@ class FourmiTest
                 //Case contenant de la phéromone
                 assertTrue(bitset.get(6));
                 System.out.println("phéromone présente ");
-                BitSet bitsetPheromone = bitSets[0][i+1];
-                System.out.print("\t phéromone plus présent à " );
-                System.out.println(i+1);
-                assertFalse(bitsetPheromone.get(6));
             }
 
             //Si nous sommes sur la case de départ (colonie)
@@ -432,13 +428,18 @@ class FourmiTest
                 //Retour dans la colonnie
                 assertTrue(bitset.get(0));
                 System.out.println("colonnie");
-
-                BitSet bitsetPheromone = bitSets[0][i+1];
-                System.out.print("\t phéromone plus présent à " );
-                System.out.println(i+1);
-                assertFalse(bitsetPheromone.get(6));
                 //Vérification qu'il n'y ai pas de phéromone dans la colonnie
                 assertFalse(bitset.get(6));
+                System.out.println("");
+                for(int t = 0; t < WIDTH - 1; t++){
+                    BitSet[][] bitPheromone = appli.play(0, false);
+                    for(int j = WIDTH - 1; j>=0; j--){
+                        BitSet bitsetPh = bitPheromone[0][j];
+                        System.out.print(j);
+                        System.out.println(" | "+bitsetPh.get(6));
+                    }
+                    System.out.println("");
+                }
             }
         }
     }
