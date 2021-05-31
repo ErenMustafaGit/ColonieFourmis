@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.BitSet;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,7 +42,7 @@ public class ScenarioTest {
 
     @Test
     @DisplayName("Scenario de test 2 : a et b")
-    void testa(){
+    void testa() throws IOException {
         appli.createWorkers(1);
 
         //Situation initiale

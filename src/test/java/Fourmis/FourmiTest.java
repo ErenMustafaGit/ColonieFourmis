@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
 
+import java.io.IOException;
 import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,8 +65,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Fourmilière correctement initialisée")
-    void test0()
-    {
+    void test0() throws IOException {
         BitSet[][] bitsets = appli.play(0, false);
         BitSet actual = bitsets[0][0];
         assertTrue(actual.get(0), "Fourmilière absente : bitsets[0][0] = " + actual);
@@ -84,8 +84,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Obstacles correctement placés")
-    void test1()
-    {
+    void test1() throws IOException {
         BitSet[][] bitsets = appli.play(0, false);
 
         for (int i = 0; i < HEIGHT; i++)
@@ -103,8 +102,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Déplacement élémentaire (soldat+ouvrière)")
-    void test2()
-    {
+    void test2() throws IOException {
         //Déplacement élémentaire dans un couloir
         BitSet[][] bitsets = appli.play(1, false);
         BitSet actual = bitsets[0][1];
@@ -119,8 +117,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Fourmi bloquée")
-    void test3()
-    {
+    void test3() throws IOException {
         //Déplacement élémentaire bloqué (d)
         appli.putObstacle(0, 1);
         BitSet[][] bitsets = appli.play(1, false);
@@ -137,8 +134,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Fourmi dans le couloir")
-    void test4()
-    {
+    void test4() throws IOException {
         BitSet[][] bitsets;
 
         boolean surFourmiliere;
@@ -192,14 +188,13 @@ class FourmiTest
     }
     @Test
     @DisplayName("Trajet aller-retour")
-    void test6()
-    {
+    void test6() throws IOException {
         appli.putFood(0,WIDTH-1, 100);
 
         //Trajet aller pour aller chercher la nourriture
         for(int i = 1; i<=WIDTH-1; i++){
 
-            BitSet[][] bitSets = appli.play(1, false);
+            BitSet[][] bitSets = appli.play(1, true);
 
             BitSet bitset = bitSets[0][i];
             //Si la fourmi soldat a bien avancé
@@ -276,8 +271,7 @@ class FourmiTest
     }
     @Test
     @DisplayName("Si la nouriture est bien placé")
-    void test7()
-    {
+    void test7() throws IOException {
         appli.putFood(0,8, 7);
         BitSet[][] bitSets = appli.play(1, false);
         BitSet bitset = bitSets[0][8];
@@ -285,8 +279,7 @@ class FourmiTest
     }
     @Test
     @DisplayName("Trajet aller-retour jusqu'à finir la nourriture sur le noeud ligne 0 colonne 2. (g)")
-    void test8()
-    {
+    void test8() throws IOException {
         appli.putFood(0,2,100);
 
         BitSet[][] bitSets = appli.play(0,false);
@@ -303,8 +296,7 @@ class FourmiTest
     }
     @Test
     @DisplayName("Trajet retour perturbé par un obstacle (h)")
-    void test9()
-    {
+    void test9() throws IOException {
         appli.putFood(0,WIDTH-1, 100);
 
         //Trajet aller pour aller chercher la nourriture
@@ -355,7 +347,7 @@ class FourmiTest
 
     @Test
     @DisplayName("Evaporation des phéromones")
-    void test10(){
+    void test10() throws IOException {
         appli.putFood(0,WIDTH-1, 100);
 
         //Trajet aller pour aller chercher la nourriture

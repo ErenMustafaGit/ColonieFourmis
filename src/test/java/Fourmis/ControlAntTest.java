@@ -3,6 +3,7 @@ package Fourmis;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -100,8 +101,8 @@ class ControlAntTest {
 
 
     @Test
-    void play() {
-        BitSet[][] bitset = appli.play(5, false);
+    void play() throws IOException {
+        BitSet[][] bitset = appli.play(5, true);
         BitSet actual;
         for(int i = 0; i<bitset.length; i++){
             for(int j = 0; j<bitset[0].length;j++){

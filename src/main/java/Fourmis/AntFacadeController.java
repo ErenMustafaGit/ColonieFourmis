@@ -73,7 +73,7 @@ public interface AntFacadeController {
      *  - le bit n° 5 vaut true s'il y a de la nourriture sur le noeud ;
      *  - le bit n° 6 vaut true s'il y a des phéromones sur le noeud.
      */
-    BitSet[][] play( int duration, boolean record );
+    BitSet[][] play( int duration, boolean record ) throws IOException;
 
 
 

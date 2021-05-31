@@ -1,5 +1,7 @@
 package Fourmis;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class ControlAnt implements AntFacadeController {
@@ -174,9 +176,10 @@ public class ControlAnt implements AntFacadeController {
      *  - le bit n° 6 vaut true s'il y a des phéromones sur le noeud.
      */
     @Override
-    public BitSet[][] play(int duration, boolean record) {
+    public BitSet[][] play(int duration, boolean record) throws IOException {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
+        List<List<String>> dataFourmis = new ArrayList<>();
 
 
         //Déplacement des fourmis + evaporation des phéromones pour chaque itération
@@ -251,9 +254,39 @@ public class ControlAnt implements AntFacadeController {
                 else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
                 }
+
+                //enregistrement du play (fichier .csv)
+                if(record){
+                    dataFourmis.add(Arrays.asList( "No : " + this.graph.getNoeud(row, column).toString(), "St : " +  this.graph.getNoeud(row,column).getNodeState().toString(),
+                                    String.valueOf("Qph : " + this.graph.getNoeud(row, column).getPheromone().size()),
+                                    String.valueOf("Nf : " + this.graph.getNoeud(row, column).getFood()),  String.valueOf("Ns : " + compteurSoldier),
+                                    String.valueOf("Nw: " + compteurWorker)));
+                }
             }
+            dataFourmis.add(Arrays.asList("\n"));
         }
 
+        if(record){
+            FileWriter csvWriter = new FileWriter("new.csv");
+            csvWriter.append("Node (No)");
+            csvWriter.append(" | ");
+            csvWriter.append("State (St");
+            csvWriter.append(" | ");
+            csvWriter.append("Quantity of pheromone (Qph)");
+            csvWriter.append(" | ");
+            csvWriter.append("Number of food (Nf)");
+            csvWriter.append(" | ");
+            csvWriter.append("Number of soldier (Ns)");
+            csvWriter.append(" | ");
+            csvWriter.append("Number of worker (Nw)");
+            csvWriter.append("\n");
+            for (List<String> rowData : dataFourmis) {
+                csvWriter.append(String.join("\t", rowData));
+                csvWriter.append("\n");
+            }
+            csvWriter.close();
+
+        }
         return bit_play;
     }
 }

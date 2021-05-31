@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.BitSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ class AntHillTest {
     }
 
     @Test
-    void createSoldiers() {
+    void createSoldiers() throws IOException {
 
 
         appli.createColony(1,2);
@@ -42,7 +43,7 @@ class AntHillTest {
 
     @Test
     @DisplayName("Les soldats qu'une colonie crée, bouge bien")
-    void createSoldiersMove() {
+    void createSoldiersMove() throws IOException {
 
         appli.createColony(0,0);
         appli.putObstacle(1,0);
