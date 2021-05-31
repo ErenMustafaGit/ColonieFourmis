@@ -96,27 +96,34 @@ public class ScenarioTest {
     @DisplayName("Scénario de test : Probabilité avec 6000 essai")
     void testc(){
 
-        //On place un ouvrier au centre (colonie inutile ici)
+        //Récupération du graphe de l'appli
         Graph graph = ((ControlAnt)this.appli).getGraph();
+
+        //Récupération des 5 noeuds nécessaires
         Node centerNode = graph.getNoeud(1,1);
         Node topNode = graph.getNoeud(0,1);
         Node bottomNode = graph.getNoeud(2,1);
         Node rightNode = graph.getNoeud(1,2);
-
         Node antHillNode = graph.getNoeud(1,0);
 
-        //Print la quantité de phéro en haut, pour voir si il y en a bien 2
-        System.out.println(topNode.getPheromone().get(0).getQuantity());
 
         int topCount = 0;
         int bottomCount = 0;
         int rightCount = 0;
 
+        //Boucle effectué 6000 fois pour la probabilité
         for(int i = 0; i<6000; i++){
+
+            //Instanciation d'un ouvrier dans le noeud central
             Worker worker = new Worker(centerNode, null);
+
+            //Ajout du noeud de gauche à son historique de noeud, afin qu'il n'y aille pas car il est censé venir de la bas
             worker.addToRecordsPath(antHillNode);
+
+            //Déplacement de l'ouvrier
             worker.move();
 
+            //Enregistrement de sa position dans un des 3 compteurs
             if(worker.getPosition() == topNode)
                 topCount++;
             else if(worker.getPosition() == bottomNode)
@@ -125,11 +132,14 @@ public class ScenarioTest {
                 rightCount++;
         }
 
+        //Print de debug
         System.out.println("Top : " + topCount + "\nBottom : " + bottomCount + "\nRight : " + rightCount);
         boolean topCheck = false;
         boolean bottomCheck = false;
         boolean rightCheck = false;
 
+        //Verification si les probabilités sont juste (1/2, 1/3, 1/6)
+        //En utilisant une intervalle avec marge d'erreur
         if((topCount <= (6000/2) + MARGE_ERROR) && (topCount >= (6000/2) - MARGE_ERROR))
             topCheck = true;
         if((bottomCount <= (6000/6) + MARGE_ERROR) && (bottomCount >= (6000/6) - MARGE_ERROR))

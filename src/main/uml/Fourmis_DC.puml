@@ -104,14 +104,14 @@ Worker ---|> Ant
 AntHill --|> Ant
 
 ControlAnt "-graphe\n1 " *-l-> Graph
-ControlAnt  *-r-> "-antList\n1..*" Ant
-ControlAnt  *--> "-antHillList\n1..*" AntHill
+ControlAnt  *-r-> "-antList\n0..*" Ant
+ControlAnt  *--> "-antHillList\n0..*" AntHill
 
-Graph *-r-> "-nodeList \n0..n" Node : composé de >
+Graph *-r-> "-nodeList \n0..*" Node : composé de >
 
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Ant *--> "-position\n1" Node  : est sur un >
+Ant o--> "-position\n1" Node  : est sur un >
 AntHill *---> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
