@@ -268,7 +268,7 @@ public class ControlAnt implements AntFacadeController {
 
         if(record){
             FileWriter csvWriter = new FileWriter("new.csv");
-            csvWriter.append("Positio in the Graph");
+            csvWriter.append("Pos (x,y)");
             csvWriter.append(" | ");
             csvWriter.append("Node (No)");
             csvWriter.append(" | ");
