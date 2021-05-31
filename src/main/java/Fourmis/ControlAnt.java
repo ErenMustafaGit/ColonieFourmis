@@ -257,7 +257,7 @@ public class ControlAnt implements AntFacadeController {
 
                 //enregistrement du play (fichier .csv)
                 if(record){
-                    dataFourmis.add(Arrays.asList( "No : " + this.graph.getNoeud(row, column).toString(), "St : " +  this.graph.getNoeud(row,column).getNodeState().toString(),
+                    dataFourmis.add(Arrays.asList("(" + row+", "+column+")" ,"No : " + this.graph.getNoeud(row, column).toString(), "St : " +  this.graph.getNoeud(row,column).getNodeState().toString(),
                                     String.valueOf("Qph : " + this.graph.getNoeud(row, column).getPheromone().size()),
                                     String.valueOf("Nf : " + this.graph.getNoeud(row, column).getFood()),  String.valueOf("Ns : " + compteurSoldier),
                                     String.valueOf("Nw: " + compteurWorker)));
@@ -268,6 +268,8 @@ public class ControlAnt implements AntFacadeController {
 
         if(record){
             FileWriter csvWriter = new FileWriter("new.csv");
+            csvWriter.append("Positio in the Graph");
+            csvWriter.append(" | ");
             csvWriter.append("Node (No)");
             csvWriter.append(" | ");
             csvWriter.append("State (St");
