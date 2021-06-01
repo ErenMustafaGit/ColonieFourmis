@@ -30,8 +30,10 @@ class Node{
     +addNoeudVoisin(noeud:Noeud)
     +getVoisins():Node[*]
     +getFreeVoisins():Node[*]
-    +getPheromones():Pheromone[*]
     +setFood(amount:Integer)
+    +getFood():Integer
+    +getPheromones():Pheromone[*]
+    +updatePheromone()
     +compareTo(node:Node)<<override>>
 }
 
@@ -48,30 +50,40 @@ enum STATE <<enum>> {
 '    +Food()
 '}
 class Pheromone{
+    +Pheromone(quantity:Integer, colony:AntHill)
     +quantity:Integer
     +getQuantity():Integer
+    +setQuantity(quantity:Amount)
 }
 
 
 abstract Ant <<abstract>> {
+    +Ant(node:Node)
+    +Ant(node:Node, colony:AntHill)
     +getPosition():Node
     +setPosition(position:Noeud)
     {abstract} +move()
 }
 class AntHill{
+    -pheromoneQuantity:Integer
     -collectCapacity:Integer
-    +AntHill(position:Noeud, collectCapacity:Integer)
+    +AntHill(position:Node)
+    +setCollectCapacity(capacity:Integer)
+    +setPheromoneQuantity(pheromoneQuantity:Integer)
+    +getCollectCapacity():Integer
+    +getPheromoneQuantity():Integer
     +getPosition():Node
     +createSoldiers(amount:Integer)
-    +setCollectCapacity(:Integer)
-    +getCollectCapacity():Integer
+    +createWorkers((amount:Integer)
 }
 class Soldier{
-    +Soldier(position:Node, colony:AntHill)
+    +Soldier(position:Node, colony:Hill)
     +move() <<override>>
 }
 
 class Worker {
+    +foodCollected:Integer
+    +isBacktracking:Boolean
     +Worker(position:Node , colony:AntHill)
     +move() <<override>>
     +putPheromone()
@@ -80,7 +92,11 @@ class Worker {
 
 
 class ControlAnt implements AntFacadeController{
+    -graph:Graph
     -collectCapacity:Integer
+    -pheromoneQuantity:Integer
+    -evaporationParam:Integer
+    -antLogFile:String
 }
 
 
@@ -101,9 +117,11 @@ Soldier ---|> Ant
 Worker ---|> Ant
 AntHill --|> Ant
 
+Worker --> Node
+
 ControlAnt "-graphe\n1 " *-l-> Graph
 ControlAnt  *-r-> "-antList\n0..*" Ant
-ControlAnt  *--> "-antHillList\n0..*" AntHill
+
 
 Graph *-r-> "-nodeList \n0..*" Node : composé de >
 
