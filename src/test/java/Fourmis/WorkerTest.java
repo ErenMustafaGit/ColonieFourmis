@@ -104,11 +104,11 @@ class WorkerTest {
         Worker worker = new Worker(position, colony);
         assertEquals(0, worker.getFoodCollected());
         worker.collect();
-        assertEquals(colony.getCollectCapicity(), worker.getFoodCollected());
+        assertEquals(colony.getCollectCapacity(), worker.getFoodCollected());
 
         //Il ne ramasse de la nourriture que si il en a pas
         worker.collect();
-        assertEquals(colony.getCollectCapicity(),worker.getFoodCollected());
+        assertEquals(colony.getCollectCapacity(),worker.getFoodCollected());
     }
 
     @Test
