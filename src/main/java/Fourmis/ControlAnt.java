@@ -191,14 +191,11 @@ public class ControlAnt implements AntFacadeController {
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
         List<List<String>> dataFourmis = new ArrayList<>();
+        List<List<String>> dataNeighbour = new ArrayList<>();
 
 
         //Déplacement des fourmis + evaporation des phéromones pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-
-            //Fichier csv
-            dataFourmis.add(Arrays.asList("Tour : " + iteration + "\n----------------------------------------------------"));
-
             //Evaporation des phéromones
             //Récupération de tout les noeuds du graphe
             for(Node node : this.graph.getNoeudList()){
@@ -228,28 +225,26 @@ public class ControlAnt implements AntFacadeController {
                         quantityOfPheromone += pheromone.getQuantity();
                     }
 
-                    dataFourmis.add(Arrays.asList(ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
+                    //List de list string => information concernant le noeud
+                    dataFourmis.add(Arrays.asList(String.valueOf(iteration) ,ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
                             ant.getPosition().getNodeState().toString(), "QF[" + ant.getPosition().getFood()+ "]",
                             "QP["+ quantityOfPheromone+"]"));
 
-                    String nodeNeighBourInfo ="///////////////////////////////////////////////////////////////////////////////////////\nNeighboor of " + ant.getPosition().toString() + "\n";
+                    //Information concernant les noeuds voisin du noeud courant
+                    dataNeighbour = new ArrayList<>();
                     if(ant.getPosition().getVoisins().size() != 0){
                         for(Node node : ant.getPosition().getVoisins()){
-
-                            //Addresse et statue du noeud voisin en question
-                            nodeNeighBourInfo += node.toString() + ", " + node.getNodeState().toString() + ", ";
-                            nodeNeighBourInfo += "QF[" + node.getFood() + "], ";
-
                             //quantité de phéromone sur le noeud voisin en question
                             int quantityOfPheromoneNodeNeighBour = 0;
                             for(Pheromone pheromone : ant.getPosition().getPheromone()){
                                 quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
                             }
 
-                            nodeNeighBourInfo += "QP[" +quantityOfPheromoneNodeNeighBour + "]\n";
+                            dataNeighbour.add(Arrays.asList(node.toString(), node.getNodeState().toString(), "QF[" + node.getFood() + "]",
+                                    "QP[" +quantityOfPheromoneNodeNeighBour + "]"));
+
                         }
                     }
-                    dataFourmis.add(Arrays.asList(nodeNeighBourInfo + "\n"));
                 }//Fin de l'enregistrement pour le fichier csv
 
             }
@@ -313,12 +308,15 @@ public class ControlAnt implements AntFacadeController {
             }
         }
 
+        //Création du fichier
         if(record){
             String file = "new.csv";
             if(antLogFile != ""){
                 file = antLogFile;
             }
             FileWriter csvWriter = new FileWriter(file);
+            csvWriter.append("Iteration");
+            csvWriter.append(" | ");
             csvWriter.append("Ant");
             csvWriter.append(" | ");
             csvWriter.append("Node");
@@ -332,7 +330,13 @@ public class ControlAnt implements AntFacadeController {
             csvWriter.append("Pheromone (QP)");
             csvWriter.append("\n");
             for (List<String> rowData : dataFourmis) {
-                csvWriter.append(String.join(", \t", rowData));
+                csvWriter.append(String.join(" | ", rowData));
+                csvWriter.append("\n");
+                csvWriter.append("Neighboors\n");
+                for(List<String> rowNeighboor : dataNeighbour){
+                    csvWriter.append(String.join(" | ", rowNeighboor));
+                    csvWriter.append("\n");
+                }
                 csvWriter.append("\n");
             }
             csvWriter.close();
