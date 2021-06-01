@@ -2,7 +2,6 @@ package Fourmis;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Worker extends Ant{
@@ -201,13 +200,13 @@ public class Worker extends Ant{
     public void collect(){
         int foodQuantity = this.getPosition().getFood();
         if(foodQuantity != 0){
-            if(foodQuantity < this.colony.getCollectCapicty()){
+            if(foodQuantity < this.colony.getCollectCapicity()){
                 this.foodCollected = foodQuantity;
                 this.getPosition().setFood(0);
             }
 
             else {
-                this.foodCollected = this.colony.getCollectCapicty();
+                this.foodCollected = this.colony.getCollectCapicity();
                 this.getPosition().setFood(foodQuantity - this.foodCollected);
             }
         }

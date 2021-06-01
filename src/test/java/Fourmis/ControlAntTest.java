@@ -34,17 +34,17 @@ class ControlAntTest {
 
     @Test
     void getListeFourmis(){
-        assertTrue(appli.getListeFourmis().isEmpty());
+        assertTrue(appli.getAntList().isEmpty());
         appli.createSoldiers(4);
-        assertTrue(appli.getListeFourmis().isEmpty());
+        assertTrue(appli.getAntList().isEmpty());
 
         appli.createColony(0,0);
-        assertEquals(1,appli.getListeFourmis().size());
+        assertEquals(1,appli.getAntList().size());
 
         appli.createSoldiers(0);
-        assertEquals(1,appli.getListeFourmis().size());
+        assertEquals(1,appli.getAntList().size());
         appli.createSoldiers(10);
-        assertEquals(11,appli.getListeFourmis().size());
+        assertEquals(11,appli.getAntList().size());
     }
 
     @Test

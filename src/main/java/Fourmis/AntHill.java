@@ -2,7 +2,7 @@ package Fourmis;
 
 public class AntHill extends Ant {
     private int pheromoneQuantity = 0;
-    private int collectCapicty = 0;
+    private int collectCapicity = 0;
 
     /**
      * Créé une reine à partir d'un noeud donné
@@ -24,7 +24,7 @@ public class AntHill extends Ant {
 
 
     public void setCollectCapacity(int capacity){
-        this.collectCapicty = capacity;
+        this.collectCapicity = capacity;
     }
 
     public void setPheromoneQuantity(int pheromoneQuantity){
@@ -35,8 +35,8 @@ public class AntHill extends Ant {
         return this.pheromoneQuantity;
     }
 
-    public int getCollectCapicty(){
-        return this.collectCapicty;
+    public int getCollectCapicity(){
+        return this.collectCapicity;
     }
 
     /**

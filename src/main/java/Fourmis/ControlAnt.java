@@ -42,14 +42,6 @@ public class ControlAnt implements AntFacadeController {
     }
 
     /**
-     * Retourne la liste de fourmis de l'instance
-     * @return this.graphe : la liste de fourmis de l'application
-     */
-    public ArrayList<Ant> getListeFourmis (){
-        return new ArrayList<>(antList);
-    }
-
-    /**
      * Fixe les paramètres de l'application.
      * @param evaporationParam rythme d'évaporation des phéromones. La valeur par défaut est 1 par itération.
      * @param foodParam quantité maximale de nourriture que peut transporter une fourmi ouvrière.
