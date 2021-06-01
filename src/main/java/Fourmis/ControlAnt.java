@@ -213,19 +213,19 @@ public class ControlAnt implements AntFacadeController {
                 ant.move();
 
                 //enregistrement du play (fichier .csv)
-                Worker worker = null;
                 if(record){
+
+                    //quantité de nourriture collecté si c'est une fourmis
                     int foodCollected = 0;
                     if(ant instanceof Worker){
-                        worker = (Worker)ant;
+                        Worker worker = (Worker)ant;
                         foodCollected = worker.getFoodCollected();
                     }
 
+                    //quantité de phéromone sur le noeud où se situe la fourmis
                     int quantityOfPheromone = 0;
-                    if(ant.getPosition().getPheromone().size() != 0){
-                        for(Pheromone pheromone : ant.getPosition().getPheromone()){
-                            quantityOfPheromone += pheromone.getQuantity();
-                        }
+                    for(Pheromone pheromone : ant.getPosition().getPheromone()){
+                        quantityOfPheromone += pheromone.getQuantity();
                     }
 
                     dataFourmis.add(Arrays.asList(ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
@@ -235,17 +235,18 @@ public class ControlAnt implements AntFacadeController {
                     String nodeNeighBourInfo ="///////////////////////////////////////////////////////////////////////////////////////\nNeighboor of " + ant.getPosition().toString() + "\n";
                     if(ant.getPosition().getVoisins().size() != 0){
                         for(Node node : ant.getPosition().getVoisins()){
-                            nodeNeighBourInfo += node.toString() + ", ";
-                            nodeNeighBourInfo += node.getNodeState().toString() + ", ";
-                            nodeNeighBourInfo += String.valueOf("QF[" + node.getFood()) + "], ";
+
+                            //Addresse et statue du noeud voisin en question
+                            nodeNeighBourInfo += node.toString() + ", " + node.getNodeState().toString() + ", ";
+                            nodeNeighBourInfo += "QF[" + node.getFood() + "], ";
+
+                            //quantité de phéromone sur le noeud voisin en question
                             int quantityOfPheromoneNodeNeighBour = 0;
-                            if(node.getPheromone().size() != 0){
-                                for(Pheromone pheromone : node.getPheromone()){
-                                    quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
-                                }
+                            for(Pheromone pheromone : ant.getPosition().getPheromone()){
+                                quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
                             }
-                            nodeNeighBourInfo += String.valueOf("QP[" +quantityOfPheromoneNodeNeighBour) + "] ";
-                            nodeNeighBourInfo += "\n";
+
+                            nodeNeighBourInfo += "QP[" +quantityOfPheromoneNodeNeighBour + "]\n";
                         }
                     }
                     dataFourmis.add(Arrays.asList(nodeNeighBourInfo + "\n"));
