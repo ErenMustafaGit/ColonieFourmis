@@ -47,8 +47,9 @@ public class ScenarioTest {
         appli.putFood(1,2, 1);
         appli.createWorkers(1);
 
+
         //Fourmis au milieu
-        BitSet[][] bitSets = appli.play(1,false);
+        BitSet[][] bitSets = appli.play(1,true);
         assertTrue(bitSets[1][1].get(3));
 
         //Fourmis sur la nourriture
