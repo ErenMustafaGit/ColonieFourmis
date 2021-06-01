@@ -41,6 +41,22 @@ public class ScenarioTest {
     }
 
     @Test
+    @DisplayName("Test personnel : Fourmi se déplace obligatoirement vers le Noeud avec le plus de nourriture")
+    void testNourriture() throws IOException{
+        appli.putFood(2,1,10);
+        appli.putFood(1,2, 1);
+        appli.createWorkers(1);
+
+        //Fourmis au milieu
+        BitSet[][] bitSets = appli.play(1,false);
+        assertTrue(bitSets[1][1].get(3));
+
+        //Fourmis sur la nourriture
+        bitSets = appli.play(1,false);
+        assertTrue(bitSets[2][1].get(4));
+    }
+
+    @Test
     @DisplayName("Scenario de test 2 : a et b")
     void testa() throws IOException {
         appli.createWorkers(1);
@@ -150,8 +166,6 @@ public class ScenarioTest {
         assertTrue(topCheck);
         assertTrue(bottomCheck);
         assertTrue(rightCheck);
-
-
     }
 
 }
