@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -95,6 +96,44 @@ class NodeTest {
 
         assertTrue(voisins.contains(n1));
         assertTrue(voisins.contains(n2));
+    }
+
+    @Test
+    @DisplayName("CompareTo/sort : Trie croissant des noeuds par rapport aux phéromones dessus ")
+    void testCompareTo(){
+        appli.putPheromone(1,2,40);
+        appli.putPheromone(2,1, 10);
+        appli.putPheromone(3,2, 20);
+
+        Node position = appli.getGraph().getNoeud(2,2);
+        List<Node> nodeVoisins = position.getFreeVoisins();
+
+        for(Node node : nodeVoisins){
+            int pheromoneQuantity = 0;
+            for(Pheromone pheromone : node.getPheromone()){
+                pheromoneQuantity += pheromone.getQuantity();
+            }
+            System.out.println(node + "| ph : " + pheromoneQuantity);
+        }
+
+        Collections.shuffle(nodeVoisins);
+        Collections.sort(nodeVoisins);
+
+        System.out.println("\n\nTRIE !");
+        for(Node node : nodeVoisins){
+            int pheromoneQuantity = 0;
+            for(Pheromone pheromone : node.getPheromone()){
+                pheromoneQuantity += pheromone.getQuantity();
+            }
+            System.out.println(node + "| ph : " + pheromoneQuantity);
+        }
+
+        //Ordre attendue :
+        assertEquals(appli.getGraph().getNoeud(2,3),nodeVoisins.get(0) ); //0 de pheromone
+        assertEquals(appli.getGraph().getNoeud(2,1),nodeVoisins.get(1) ); //10 de pheromone
+        assertEquals(appli.getGraph().getNoeud(3,2),nodeVoisins.get(2) ); //20 de pheromone
+        assertEquals(appli.getGraph().getNoeud(1,2),nodeVoisins.get(3) ); //40 de pheromone
+
     }
 
 

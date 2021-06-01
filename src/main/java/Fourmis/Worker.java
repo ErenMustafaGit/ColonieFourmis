@@ -62,25 +62,48 @@ public class Worker extends Ant{
                     Collections.shuffle(noneVisitedNode);
                     ArrayList<Node> orderedList = new ArrayList<>(noneVisitedNode);
 
-                    //Trie la liste des noeuds possèdant de la plus petite quantité de phéromone à la plus grande
-                    //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
-                    Collections.sort(orderedList);
-
-                    //l'index à i(index) fois plude chance d'être choisi que le premier élement
-                    int k = 1 + rnd.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
-                    int index = 0;
-                    for(int i = 1; i <= orderedList.size(); i++){
-                        if(k <= i*(i+1)/2){
-                            index = i - 1;
-                            break;
+                    int foodQuantity = 0;
+                    Node mostFood = null;
+                    for(Node node : orderedList){
+                        if(node.getFood() > foodQuantity){
+                            foodQuantity = node.getFood();
+                            mostFood = node;
                         }
                     }
-                    Node direction = orderedList.get(index);
 
-                    this.setPosition(direction);
-                    if(direction.getFood() > 0)
+                    //Si il y a au moins un noeud qui a de la nourriture
+                    if(foodQuantity != 0){
+                        this.setPosition(mostFood);
                         this.collect();
-                    this.recordsPath.add(direction);
+                        this.recordsPath.add(mostFood);
+                    }
+
+                    //Si aucun voisin non visité n'ont pas de nourriture, algorithme de phéromone
+                    else{
+
+
+                        //Trie la liste des noeuds possèdant de la plus petite quantité de phéromone à la plus grande
+                        //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
+                        Collections.sort(orderedList);
+
+                        //l'index à i(index) fois plude chance d'être choisi que le premier élement
+                        int k = 1 + rnd.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
+                        int index = 0;
+                        for(int i = 1; i <= orderedList.size(); i++){
+                            if(k <= i*(i+1)/2){
+                                index = i - 1;
+                                break;
+                            }
+                        }
+                        Node direction = orderedList.get(index);
+
+                        this.setPosition(direction);
+                        if(direction.getFood() > 0)
+                            this.collect();
+                        this.recordsPath.add(direction);
+                    }
+
+
                 }
             }
         }
