@@ -10,7 +10,7 @@ public class ControlAnt implements AntFacadeController {
     private int collectCapacity;
     private int pheromoneQuantity;
     private int evaporationQuantity;
-
+    private String antLogFile = "";
     public ArrayList<Ant> getAntList(){
         return new ArrayList<>(this.antList);
     }
@@ -160,7 +160,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void setAntFile(String antLogFile) {
-        //V2
+        this.antLogFile = antLogFile;
     }
 
     /**
@@ -184,7 +184,7 @@ public class ControlAnt implements AntFacadeController {
 
         //Déplacement des fourmis + evaporation des phéromones pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
-
+            dataFourmis.add(Arrays.asList("Tour : " + iteration + "\n----------------------------------------------------"));
             //Evaporation des phéromones
             //Récupération de tout les noeuds du graphe
             for(Node node : this.graph.getNoeudList()){
@@ -197,6 +197,45 @@ public class ControlAnt implements AntFacadeController {
             //Déplacer toutes les fourmis
             for(Ant ant : this.antList){
                 ant.move();
+
+                //enregistrement du play (fichier .csv)
+                Worker worker = null;
+                if(record){
+                    int foodCollected = 0;
+                    if(ant instanceof Worker){
+                        worker = (Worker)ant;
+                        foodCollected = worker.getFoodCollected();
+                    }
+
+                    int quantityOfPheromone = 0;
+                    if(ant.getPosition().getPheromone().size() != 0){
+                        for(Pheromone pheromone : ant.getPosition().getPheromone()){
+                            quantityOfPheromone += pheromone.getQuantity();
+                        }
+                    }
+
+                    dataFourmis.add(Arrays.asList(ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
+                            ant.getPosition().getNodeState().toString(), "QF[" + ant.getPosition().getFood()+ "]",
+                            "QP["+ quantityOfPheromone+"]"));
+
+                    String nodeNeighBourInfo ="///////////////////////////////////////////////////////////////////////////////////////\nNeighboor of " + ant.getPosition().toString() + "\n";
+                    if(ant.getPosition().getVoisins().size() != 0){
+                        for(Node node : ant.getPosition().getVoisins()){
+                            nodeNeighBourInfo += node.toString() + ", ";
+                            nodeNeighBourInfo += node.getNodeState().toString() + ", ";
+                            nodeNeighBourInfo += String.valueOf("QF[" + node.getFood()) + "], ";
+                            int quantityOfPheromoneNodeNeighBour = 0;
+                            if(node.getPheromone().size() != 0){
+                                for(Pheromone pheromone : node.getPheromone()){
+                                    quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
+                                }
+                            }
+                            nodeNeighBourInfo += String.valueOf("QP[" +quantityOfPheromoneNodeNeighBour) + "] ";
+                            nodeNeighBourInfo += "\n";
+                        }
+                    }
+                    dataFourmis.add(Arrays.asList(nodeNeighBourInfo + "\n"));
+                }
             }
         }
 
@@ -255,35 +294,29 @@ public class ControlAnt implements AntFacadeController {
                     bit_play[row][column].set(6, true);
                 }
 
-                //enregistrement du play (fichier .csv)
-                if(record){
-                    dataFourmis.add(Arrays.asList("(" + row+", "+column+")" ,"No : " + this.graph.getNoeud(row, column).toString(), "St : " +  this.graph.getNoeud(row,column).getNodeState().toString(),
-                                    String.valueOf("Qph : " + this.graph.getNoeud(row, column).getPheromone().size()),
-                                    String.valueOf("Nf : " + this.graph.getNoeud(row, column).getFood()),  String.valueOf("Ns : " + compteurSoldier),
-                                    String.valueOf("Nw: " + compteurWorker)));
-                }
             }
-            dataFourmis.add(Arrays.asList("\n"));
         }
 
         if(record){
-            FileWriter csvWriter = new FileWriter("new.csv");
-            csvWriter.append("Pos (x,y)");
+            String file = "new.csv";
+            if(antLogFile != ""){
+                file = antLogFile;
+            }
+            FileWriter csvWriter = new FileWriter(file);
+            csvWriter.append("Ant");
             csvWriter.append(" | ");
-            csvWriter.append("Node (No)");
+            csvWriter.append("Node");
             csvWriter.append(" | ");
-            csvWriter.append("State (St");
+            csvWriter.append("Food collected (FC)");
             csvWriter.append(" | ");
-            csvWriter.append("Quantity of pheromone (Qph)");
+            csvWriter.append("State of node");
             csvWriter.append(" | ");
-            csvWriter.append("Number of food (Nf)");
+            csvWriter.append("Food on the node (QF)");
             csvWriter.append(" | ");
-            csvWriter.append("Number of soldier (Ns)");
-            csvWriter.append(" | ");
-            csvWriter.append("Number of worker (Nw)");
+            csvWriter.append("Pheromone (QP)");
             csvWriter.append("\n");
             for (List<String> rowData : dataFourmis) {
-                csvWriter.append(String.join("\t", rowData));
+                csvWriter.append(String.join(", \t", rowData));
                 csvWriter.append("\n");
             }
             csvWriter.close();

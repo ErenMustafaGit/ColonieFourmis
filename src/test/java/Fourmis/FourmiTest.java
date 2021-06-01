@@ -273,7 +273,8 @@ class FourmiTest
     @DisplayName("Si la nouriture est bien placé")
     void test7() throws IOException {
         appli.putFood(0,8, 7);
-        BitSet[][] bitSets = appli.play(1, false);
+        appli.setAntFile("testUNITAIRE.csv");
+        BitSet[][] bitSets = appli.play(5, true);
         BitSet bitset = bitSets[0][8];
         assertTrue(bitset.get(5));
     }
