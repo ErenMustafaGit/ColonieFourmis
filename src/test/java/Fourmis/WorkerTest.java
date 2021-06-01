@@ -48,13 +48,16 @@ class WorkerTest {
 
     @Test
     void move() {
-        appli.putObstacle(6,5);
-        appli.putObstacle(5,6);
-        appli.putObstacle(5,4);
+        AntHill colony = new AntHill(appli.getGraph().getNoeud(5,0));
+        appli.putFood(4,5, 100);
+        appli.putFood(5,4, 10);
+        appli.putFood(6,5, 10);
+
         Node position = appli.getGraph().getNoeud(5,5);
-        Worker worker = new Worker(position, null);
+        Worker worker = new Worker(position, colony);
         worker.move();
 
+        //Il va vers le noeud avec le plus de nourriture dans ses voisins
         Node newPosition = appli.getGraph().getNoeud(4,5);
         assertEquals(newPosition, worker.getPosition());
     }
