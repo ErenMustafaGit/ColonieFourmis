@@ -11,12 +11,23 @@ public class ControlAnt implements AntFacadeController {
     private int pheromoneQuantity;
     private int evaporationQuantity;
     private String antLogFile = "";
+
+
+    /**
+     * Retourne la liste de fourmis de l'instance
+     * @return this.antList : la liste de fourmis de l'application, avec encapsulation.
+     */
     public ArrayList<Ant> getAntList(){
         return new ArrayList<>(this.antList);
     }
 
 
-
+    /**
+     * Créé le fichier d'historique des fourmis.
+     * @param row numero de ligne
+     * @param column numero de la colonne
+     * @param quantity quantité de phéromone à déposer sur le noeud
+     */
     public void putPheromone(int row, int column, int quantity) {
         Pheromone pheromone = new Pheromone(quantity, null);
         this.graph.getNoeud(row, column).addPheromone(pheromone);
@@ -184,7 +195,10 @@ public class ControlAnt implements AntFacadeController {
 
         //Déplacement des fourmis + evaporation des phéromones pour chaque itération
         for(int iteration = 0 ; iteration < duration; iteration++){
+
+            //Fichier csv
             dataFourmis.add(Arrays.asList("Tour : " + iteration + "\n----------------------------------------------------"));
+
             //Evaporation des phéromones
             //Récupération de tout les noeuds du graphe
             for(Node node : this.graph.getNoeudList()){
@@ -235,7 +249,8 @@ public class ControlAnt implements AntFacadeController {
                         }
                     }
                     dataFourmis.add(Arrays.asList(nodeNeighBourInfo + "\n"));
-                }
+                }//Fin de l'enregistrement pour le fichier csv
+
             }
         }
 
