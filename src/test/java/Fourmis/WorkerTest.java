@@ -93,9 +93,42 @@ class WorkerTest {
 
     @Test
     void getFoodCollected() {
+        Node position = appli.getGraph().getNoeud(4,4);
+        AntHill colony = new AntHill(appli.getGraph().getNoeud(0,0));
+        colony.setCollectCapacity(10);
+        appli.putFood(4,4, 100);
+
+        Worker worker = new Worker(position, colony);
+        assertEquals(0, worker.getFoodCollected());
+        worker.collect();
+        assertEquals(colony.getCollectCapicity(), worker.getFoodCollected());
+
+        //Il ne ramasse de la nourriture que si il en a pas
+        worker.collect();
+        assertEquals(colony.getCollectCapicity(),worker.getFoodCollected());
     }
 
     @Test
     void addToRecordsPath() {
+        Node position = appli.getGraph().getNoeud(4,4);
+        AntHill colony = new AntHill(appli.getGraph().getNoeud(0,0));
+        colony.setCollectCapacity(10);
+        appli.putFood(4,4, 100);
+
+        //Ouvriere avec de la nourriture
+        Worker worker = new Worker(position, colony);
+        worker.collect();
+
+        //Ajout de 2 chemin dans son historique qu'il va devoir re-parcourir
+        Node n1 = appli.getGraph().getNoeud(4,3);
+        Node n2 = appli.getGraph().getNoeud(4,3);
+        worker.addToRecordsPath(n1);
+        worker.addToRecordsPath(n2);
+
+        worker.move();
+        assertEquals(n1, worker.getPosition());
+        worker.move();
+        assertEquals(n2, worker.getPosition());
+
     }
 }

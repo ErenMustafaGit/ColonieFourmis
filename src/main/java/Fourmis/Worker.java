@@ -198,20 +198,26 @@ public class Worker extends Ant{
     }
 
     public void collect(){
-        int foodQuantity = this.getPosition().getFood();
-        if(foodQuantity != 0){
-            if(foodQuantity < this.colony.getCollectCapicity()){
-                this.foodCollected = foodQuantity;
-                this.getPosition().setFood(0);
-            }
 
-            else {
-                this.foodCollected = this.colony.getCollectCapicity();
-                this.getPosition().setFood(foodQuantity - this.foodCollected);
+        //Collecte seulement si il n'a rien collecté
+        if(this.foodCollected == 0){
+
+            int foodQuantity = this.getPosition().getFood();
+
+            //Si le noeud contient de la nourriture
+            if(foodQuantity != 0){
+                if(foodQuantity < this.colony.getCollectCapicity()){
+                    this.foodCollected = foodQuantity;
+                    this.getPosition().setFood(0);
+                }
+
+                else {
+                    this.foodCollected = this.colony.getCollectCapicity();
+                    this.getPosition().setFood(foodQuantity - this.foodCollected);
+                }
             }
+            this.isBacktracking = true;
         }
-        this.isBacktracking = true;
-
     }
 
     public void putPheromone(){
