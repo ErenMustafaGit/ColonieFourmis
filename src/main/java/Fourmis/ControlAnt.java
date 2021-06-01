@@ -181,11 +181,15 @@ public class ControlAnt implements AntFacadeController {
     @Override
     public BitSet[][] play(int duration, boolean record) throws IOException {
 
-        //csv
+        //variables csv
         List<List<String>> dataFourmis = new ArrayList<>();
         List<List<String>> dataNeighbour = new ArrayList<>();
+
+
         //enregistrement du play (fichier .csv)
         if(record){
+
+            //Prend toutes les fourmis
             for(Ant ant : this.getAntList()){
                 //quantité de nourriture collecté si c'est une fourmis
                 int foodCollected = 0;
