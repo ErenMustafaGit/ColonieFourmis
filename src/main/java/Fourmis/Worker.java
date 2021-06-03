@@ -25,7 +25,7 @@ public class Worker extends Ant{
         recordsPath.add(this.getPosition());
     }
 
-    private ArrayList<Node> getNonVisitedNode(ArrayList<Node> freeVoisins){
+    public ArrayList<Node> getNonVisitedNode(ArrayList<Node> freeVoisins){
         ArrayList<Node> noneVisitedNode = new ArrayList<>();
 
         //Obtient la liste des noeuds non parcourus

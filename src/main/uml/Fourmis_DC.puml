@@ -82,12 +82,16 @@ class Soldier{
 }
 
 class Worker {
-    +foodCollected:Integer
-    +isBacktracking:Boolean
+    -foodCollected:Integer
+    -isBacktracking:Boolean
     +Worker(position:Node , colony:AntHill)
+    +getNonVistedNode(freeeVoisins:Node[*]):Node[*]
     +move() <<override>>
-    +putPheromone()
     +collect()
+    +putPheromone()
+    +getFoodCollected():Integer
+    +addRecordsPath(addNode:Node)
+    +setFoodCollected(foodCollected:Integer)
 }
 
 
