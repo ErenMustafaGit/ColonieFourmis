@@ -9,15 +9,16 @@ import java.util.List;
 public class SaveIteration {
     private String antLogFile = "";
     private List<List<String>> dataAnt;
-    private  List<List<String>> dataNeighbour;
     private ArrayList<Ant> antList;
 
-    public SaveIteration(List<List<String>> dataAnt, List<List<String>> dataNeighbour, ArrayList<Ant> antList){
+    public SaveIteration(List<List<String>> dataAnt, ArrayList<Ant> antList){
         this.dataAnt = dataAnt;
-        this.dataNeighbour = dataNeighbour;
         this.antList = antList;
     }
 
+    public void updateAntList(ArrayList<Ant> antList){
+        this.antList= antList;
+    }
 
     /**
      * Permet de faire l'étape d'enregistrement sur les fourmis lorsque record == true dans la fonction play
@@ -25,8 +26,6 @@ public class SaveIteration {
      */
     public void recordProcess(int iteration) {
         for (Ant ant : this.antList) {
-            //Liste temporaire contenant les informations des noeuds voisin de la fourmis
-            List<List<String>> tempNeighbor = new ArrayList<>();
 
             //quantité de nourriture collecté si c'est une ouvrière
             int foodCollected = 0;
@@ -48,21 +47,24 @@ public class SaveIteration {
 
 
             //Information concernant les noeuds voisin du noeud courant
-            if (ant.getPosition().getVoisins().size() != 0) {
-                for (Node node : ant.getPosition().getVoisins()) {
+            ArrayList<Node> nodeVoisin = new ArrayList<>(ant.getPosition().getVoisins());
+            String nodeNeighboor = "Neighbor of " + ant.getPosition().toString();
+            if (nodeVoisin.size() != 0) {
+                for (Node node : nodeVoisin) {
                     //quantité de phéromone sur le noeud voisin en question
                     int quantityOfPheromoneNodeNeighBour = 0;
                     for (Pheromone pheromone : ant.getPosition().getPheromone()) {
                         quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
                     }
                     //Contient les informations des noeuds voisins de la fourmis
-                    tempNeighbor.add(Arrays.asList(node.toString(), node.getNodeState().toString(), "QF[" + node.getFood() + "]",
-                            "QP[" + quantityOfPheromoneNodeNeighBour + "]"));
-
+                    nodeNeighboor += "\n"+node.toString() + " | ";
+                    nodeNeighboor += node.getNodeState().toString() + " | ";
+                    nodeNeighboor += "QF"+ "[" + node.getFood() + "]"+ " | ";
+                    nodeNeighboor += "QP[" + quantityOfPheromoneNodeNeighBour + "]" + " | ";
                 }
+                dataAnt.add(Arrays.asList(nodeNeighboor+"\n"));
             }
             //Donne les informations à la varaiable dataNeighbour
-            dataNeighbour = tempNeighbor;
         }
     }
 
@@ -96,13 +98,6 @@ public class SaveIteration {
         //Récolte des informations des fourmis
         for (List<String> rowData : dataAnt) {
             csvWriter.append(String.join(" | ", rowData));
-            csvWriter.append("\n");
-            csvWriter.append("Neighboors\n");
-            //Récolte des informations des noeuds voisins de la fourmis
-            for(List<String> rowNeighboor : dataNeighbour){
-                csvWriter.append(String.join(" | ", rowNeighboor));
-                csvWriter.append("\n");
-            }
             csvWriter.append("\n");
         }
         //Fin d'écriture du fichier

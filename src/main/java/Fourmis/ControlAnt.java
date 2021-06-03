@@ -183,11 +183,10 @@ public class ControlAnt implements AntFacadeController {
     public BitSet[][] play(int duration, boolean record) throws IOException {
         //variables csv
         List<List<String>> dataFourmis = new ArrayList<>();
-        List<List<String>> dataNeighbour = new ArrayList<>();
         SaveIteration saveIteration = null;
 
         if(record){
-            saveIteration = new SaveIteration(dataFourmis, dataNeighbour, antList);
+            saveIteration = new SaveIteration(dataFourmis, antList);
             saveIteration.recordProcess(0);
         }
 
@@ -212,6 +211,7 @@ public class ControlAnt implements AntFacadeController {
                 ant.move();
             }
             if(record){
+                saveIteration.updateAntList(this.antList);
                 saveIteration.recordProcess(iteration + 1);
             }
         }
