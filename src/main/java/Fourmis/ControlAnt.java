@@ -10,6 +10,9 @@ public class ControlAnt implements AntFacadeController {
     private int collectCapacity;
     private int pheromoneQuantity;
     private int evaporationQuantity;
+    //variables csv
+    private List<List<String>> dataFourmis = new ArrayList<>();
+    private List<List<String>> dataNeighbour = new ArrayList<>();
     private String antLogFile = "";
 
 
@@ -181,52 +184,9 @@ public class ControlAnt implements AntFacadeController {
     @Override
     public BitSet[][] play(int duration, boolean record) throws IOException {
 
-        //variables csv
-        List<List<String>> dataFourmis = new ArrayList<>();
-        List<List<String>> dataNeighbour = new ArrayList<>();
-
-
-        //enregistrement du play (fichier .csv)
         if(record){
-
-            //Prend toutes les fourmis
-            for(Ant ant : this.getAntList()){
-
-                //quantité de nourriture collecté si c'est une ouvrière
-                int foodCollected = 0;
-                if(ant instanceof Worker){
-                    Worker worker = (Worker)ant;
-                    foodCollected = worker.getFoodCollected();
-                }
-
-                //quantité de phéromone sur le noeud où se situe la fourmis
-                int quantityOfPheromone = 0;
-                for(Pheromone pheromone : ant.getPosition().getPheromone()){
-                    quantityOfPheromone += pheromone.getQuantity();
-                }
-
-                //List de list string => information concernant le noeud
-                dataFourmis.add(Arrays.asList(String.valueOf(0) ,ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
-                        ant.getPosition().getNodeState().toString(), "QF[" + ant.getPosition().getFood()+ "]",
-                        "QP["+ quantityOfPheromone+"]"));
-
-                //Information concernant les noeuds voisin du noeud courant
-                dataNeighbour = new ArrayList<>();
-                if(ant.getPosition().getVoisins().size() != 0){
-                    for(Node node : ant.getPosition().getVoisins()){
-                        //quantité de phéromone sur le noeud voisin en question
-                        int quantityOfPheromoneNodeNeighBour = 0;
-                        for(Pheromone pheromone : ant.getPosition().getPheromone()){
-                            quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
-                        }
-
-                        dataNeighbour.add(Arrays.asList(node.toString(), node.getNodeState().toString(), "QF[" + node.getFood() + "]",
-                                "QP[" +quantityOfPheromoneNodeNeighBour + "]"));
-
-                    }
-                }
-            }
-        }//Fin de l'enregistrement pour le fichier csv
+            recordProcess(0);
+        }
 
         //BitSet[][] bit_play = new BitSet[this.graphe.getWidth()][this.graphe.getHeight()];
         BitSet[][] bit_play = new BitSet[this.graph.getHeight()][this.graph.getWidth()];
@@ -247,45 +207,9 @@ public class ControlAnt implements AntFacadeController {
             //Déplacer toutes les fourmis
             for(Ant ant : this.antList){
                 ant.move();
-
-                //enregistrement du play (fichier .csv)
-                if(record){
-
-                    //quantité de nourriture collecté si c'est une fourmis
-                    int foodCollected = 0;
-                    if(ant instanceof Worker){
-                        Worker worker = (Worker)ant;
-                        foodCollected = worker.getFoodCollected();
-                    }
-
-                    //quantité de phéromone sur le noeud où se situe la fourmis
-                    int quantityOfPheromone = 0;
-                    for(Pheromone pheromone : ant.getPosition().getPheromone()){
-                        quantityOfPheromone += pheromone.getQuantity();
-                    }
-
-                    //List de list string => information concernant le noeud
-                    dataFourmis.add(Arrays.asList(String.valueOf(iteration+1) ,ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
-                            ant.getPosition().getNodeState().toString(), "QF[" + ant.getPosition().getFood()+ "]",
-                            "QP["+ quantityOfPheromone+"]"));
-
-                    //Information concernant les noeuds voisin du noeud courant
-                    dataNeighbour = new ArrayList<>();
-                    if(ant.getPosition().getVoisins().size() != 0){
-                        for(Node node : ant.getPosition().getVoisins()){
-                            //quantité de phéromone sur le noeud voisin en question
-                            int quantityOfPheromoneNodeNeighBour = 0;
-                            for(Pheromone pheromone : ant.getPosition().getPheromone()){
-                                quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
-                            }
-
-                            dataNeighbour.add(Arrays.asList(node.toString(), node.getNodeState().toString(), "QF[" + node.getFood() + "]",
-                                    "QP[" +quantityOfPheromoneNodeNeighBour + "]"));
-
-                        }
-                    }
-                }//Fin de l'enregistrement pour le fichier csv
-
+            }
+            if(record){
+                recordProcess(iteration + 1);
             }
         }
 
@@ -331,15 +255,15 @@ public class ControlAnt implements AntFacadeController {
                 if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
-                //Présence d'obstacle
+                    //Présence d'obstacle
                 else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
-                //Présence de nourriture
+                    //Présence de nourriture
                 else if (this.graph.getNoeud(row, column).getFood() > 0)
                     bit_play[row][column].set(5, true);
 
-                //Présence de phéromone
+                    //Présence de phéromone
                 else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
                 }
@@ -349,25 +273,88 @@ public class ControlAnt implements AntFacadeController {
 
         //Création du fichier
         if(record){
-            String file = "new.csv";
-            if(antLogFile != ""){
-                file = antLogFile;
-            }
-            FileWriter csvWriter = new FileWriter(file);
-            csvWriter.append("Iteration | Ant | Node | Food collected (FC) | State of node | Food on the node (QF) | Pheromone (QP)\n");
-            for (List<String> rowData : dataFourmis) {
-                csvWriter.append(String.join(" | ", rowData));
-                csvWriter.append("\n");
-                csvWriter.append("Neighboors\n");
-                for(List<String> rowNeighboor : dataNeighbour){
-                    csvWriter.append(String.join(" | ", rowNeighboor));
-                    csvWriter.append("\n");
-                }
-                csvWriter.append("\n");
-            }
-            csvWriter.close();
-
+            writeProcess();
         }
         return bit_play;
+    }
+
+    /**
+     * Permet de faire l'étape d'enregistrement sur les fourmis lorsque record == true dans la fonction play
+     * @param iteration répresente à quel itération les données concorde
+     */
+    void recordProcess(int iteration) {
+        for (Ant ant : this.antList) {
+            //Liste temporaire contenant les informations des noeuds voisin de la fourmis
+            List<List<String>> tempNeighbor = new ArrayList<>();
+
+            //quantité de nourriture collecté si c'est une ouvrière
+            int foodCollected = 0;
+            if (ant instanceof Worker) {
+                Worker worker = (Worker) ant;
+                foodCollected = worker.getFoodCollected();
+            }
+
+            //quantité de phéromone sur le noeud où se situe la fourmis
+            int quantityOfPheromone = 0;
+            for (Pheromone pheromone : ant.getPosition().getPheromone()) {
+                quantityOfPheromone += pheromone.getQuantity();
+            }
+
+            //Contient les informations de la fourmis
+            dataFourmis.add(Arrays.asList(String.valueOf(iteration), ant.toString(), ant.getPosition().toString(), "FC[" + foodCollected + "]",
+                    ant.getPosition().getNodeState().toString(), "QF[" + ant.getPosition().getFood() + "]",
+                    "QP[" + quantityOfPheromone + "]"));
+
+
+            //Information concernant les noeuds voisin du noeud courant
+            if (ant.getPosition().getVoisins().size() != 0) {
+                for (Node node : ant.getPosition().getVoisins()) {
+                    //quantité de phéromone sur le noeud voisin en question
+                    int quantityOfPheromoneNodeNeighBour = 0;
+                    for (Pheromone pheromone : ant.getPosition().getPheromone()) {
+                        quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
+                    }
+                    //Contient les informations des noeuds voisins de la fourmis
+                    tempNeighbor.add(Arrays.asList(node.toString(), node.getNodeState().toString(), "QF[" + node.getFood() + "]",
+                            "QP[" + quantityOfPheromoneNodeNeighBour + "]"));
+
+                }
+            }
+            //Donne les informations à la varaiable dataNeighbour
+            dataNeighbour = tempNeighbor;
+        }
+    }
+
+    /**
+     * Permet de faire l'étape d'écriture du fichier .csv lorsque record == true dans la fonction play
+     * @throws IOException
+     */
+    void writeProcess() throws IOException {
+        //Si antLogFile n'a pas étais défini
+        //le fichier .csv prend comme nom "a22.csv"
+        String file = "a22.csv";
+        if(antLogFile != ""){
+            file = antLogFile;
+        }
+
+        //Initialisation de la création du fichier
+        FileWriter csvWriter = new FileWriter(file);
+        //En tête
+        csvWriter.append("Iteration | Ant | Node | Food collected (FC) | State of node | Food on the node (QF) | Pheromone (QP)\n");
+        //Récolte des informations des fourmis
+        for (List<String> rowData : dataFourmis) {
+            csvWriter.append(String.join(" | ", rowData));
+            csvWriter.append("\n");
+            csvWriter.append("Neighboors\n");
+            //Récolte des informations des noeuds voisins de la fourmis
+            for(List<String> rowNeighboor : dataNeighbour){
+                csvWriter.append(String.join(" | ", rowNeighboor));
+                csvWriter.append("\n");
+            }
+            csvWriter.append("\n");
+        }
+        //Fin d'écriture du fichier
+        csvWriter.close();
+        //Création du fichier fini
     }
 }
