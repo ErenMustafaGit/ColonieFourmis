@@ -282,7 +282,7 @@ public class ControlAnt implements AntFacadeController {
      * Permet de faire l'étape d'enregistrement sur les fourmis lorsque record == true dans la fonction play
      * @param iteration répresente à quel itération les données concorde
      */
-    void recordProcess(int iteration) {
+    private void recordProcess(int iteration) {
         for (Ant ant : this.antList) {
             //Liste temporaire contenant les informations des noeuds voisin de la fourmis
             List<List<String>> tempNeighbor = new ArrayList<>();
@@ -329,7 +329,7 @@ public class ControlAnt implements AntFacadeController {
      * Permet de faire l'étape d'écriture du fichier .csv lorsque record == true dans la fonction play
      * @throws IOException
      */
-    void writeProcess() throws IOException {
+    private void writeProcess() throws IOException {
         //Si antLogFile n'a pas étais défini
         //le fichier .csv prend comme nom "a22.csv"
         String file = "a22.csv";

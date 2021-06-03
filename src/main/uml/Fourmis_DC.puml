@@ -34,7 +34,7 @@ class Node{
     +getFood():Integer
     +getPheromones():Pheromone[*]
     +updatePheromone()
-    +compareTo(node:Node)<<override>>
+    '+compareTo(node:Node)<<override>>
 }
 
 
@@ -101,6 +101,9 @@ class ControlAnt implements AntFacadeController{
     -pheromoneQuantity:Integer
     -evaporationParam:Integer
     -antLogFile:String
+    -recordProcess(iteration:Integer)
+    -writeProcess()
+
 }
 
 
