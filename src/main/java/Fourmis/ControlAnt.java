@@ -211,7 +211,6 @@ public class ControlAnt implements AntFacadeController {
                 ant.move();
             }
             if(record){
-                saveIteration.updateAntList(this.antList);
                 saveIteration.recordProcess(iteration + 1);
             }
         }

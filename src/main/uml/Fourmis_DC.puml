@@ -100,8 +100,10 @@ class ControlAnt implements AntFacadeController{
     -graph:Graph
     -collectCapacity:Integer
     -pheromoneQuantity:Integer
-    -evaporationParam:Integer
+    -evaporationQuantity:Integer
     -antLogFile:String
+    +getAntList():Ant[*]
+    +getGraph():Graph
 }
 
 class SaveIteration {

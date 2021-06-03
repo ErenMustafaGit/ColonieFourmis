@@ -16,9 +16,6 @@ public class SaveIteration {
         this.antList = antList;
     }
 
-    public void updateAntList(ArrayList<Ant> antList){
-        this.antList= antList;
-    }
 
     /**
      * Permet de faire l'étape d'enregistrement sur les fourmis lorsque record == true dans la fonction play
