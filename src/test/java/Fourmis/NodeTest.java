@@ -35,20 +35,20 @@ class NodeTest {
     @Test
     @DisplayName(("Etat du noeud"))
     void testStateNoeud(){
-        Node.STATE etat_colonnie = g.getNode(2,2).getNodeState();
-        Node.STATE etat_obstacle = g.getNode(0,1).getNodeState();
-        Node.STATE etat_free = g.getNode(0,10).getNodeState();
-        assertEquals(Node.STATE.ANTHILL, etat_colonnie);
-        assertEquals(Node.STATE.OBSTACLE, etat_obstacle);
-        assertEquals(Node.STATE.FREE, etat_free);
+        State etat_colonnie = g.getNode(2,2).getNodeState();
+        State etat_obstacle = g.getNode(0,1).getNodeState();
+        State etat_free = g.getNode(0,10).getNodeState();
+        assertEquals(State.ANTHILL, etat_colonnie);
+        assertEquals(State.OBSTACLE, etat_obstacle);
+        assertEquals(State.FREE, etat_free);
     }
 
     @Test
     @DisplayName(("Changement d'état d'un du noeud"))
     void testSetStateNoeud(){
-        g.getNode(4,4).setNodeState(Node.STATE.ANTHILL);
-        Node.STATE etat = Node.STATE.ANTHILL;
-        assertEquals(Node.STATE.ANTHILL, etat);
+        g.getNode(4,4).setNodeState(State.ANTHILL);
+        State etat = State.ANTHILL;
+        assertEquals(State.ANTHILL, etat);
     }
 
     @Test

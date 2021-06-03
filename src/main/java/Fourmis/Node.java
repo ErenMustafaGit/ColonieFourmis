@@ -9,17 +9,8 @@ import java.util.concurrent.Semaphore;
 
 public class Node implements Comparable<Node> {
 
-    /**
-     * Différent état d'un noeud
-     */
-    public enum STATE {
-        FREE,
-        OBSTACLE,
-        ANTHILL //Fourmilliere
-    }
-
     private ArrayList<Node> voisins;
-    private STATE nodeState;
+    private State nodeState;
     private int food;
     private ArrayList<Pheromone> pheromoneList;
 
@@ -27,7 +18,7 @@ public class Node implements Comparable<Node> {
      * Créé un noeud
      */
     public Node(){
-        nodeState = STATE.FREE;
+        nodeState = State.FREE;
         voisins = new ArrayList<>();
         this.food = 0;
         this.pheromoneList = new ArrayList<>();
@@ -37,7 +28,7 @@ public class Node implements Comparable<Node> {
      * permet d'obtenir l'état du noeud
      * @return retourne le STATE du noeud
      */
-    public STATE getNodeState(){
+    public State getNodeState(){
         return this.nodeState;
     }
 
@@ -45,7 +36,7 @@ public class Node implements Comparable<Node> {
      * Permet d'établir l'état du noeud
      * @param state nouveau état du noeud
      */
-    public void setNodeState(STATE state){
+    public void setNodeState(State state){
         this.nodeState = state;
     }
 
@@ -72,7 +63,7 @@ public class Node implements Comparable<Node> {
     public ArrayList<Node> getFreeVoisins(){
         ArrayList<Node> temp = new ArrayList<>();
         for(Node n : this.voisins){
-            if(n.getNodeState() != STATE.OBSTACLE){
+            if(n.getNodeState() != State.OBSTACLE){
                 temp.add(n);
             }
         }
@@ -102,7 +93,7 @@ public class Node implements Comparable<Node> {
      * @param pheromone : phéromone à ajouter
      */
     public void addPheromone(Pheromone pheromone){
-        if(this.getNodeState() != STATE.ANTHILL)
+        if(this.getNodeState() != State.ANTHILL)
             this.pheromoneList.add(pheromone);
     }
 

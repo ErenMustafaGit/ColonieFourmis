@@ -37,7 +37,7 @@ class GraphTest {
     void putObstacle() {
         graph.putObstacle(2,1);
         Node actual = graph.getNode(2,1);
-        assertEquals(Node.STATE.OBSTACLE, actual.getNodeState());
+        assertEquals(State.OBSTACLE, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
             graph.putObstacle(HEIGHT, WIDTH);

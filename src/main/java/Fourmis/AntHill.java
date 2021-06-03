@@ -11,7 +11,7 @@ public class AntHill extends Ant {
     public AntHill(Node node) {
         super(node);
         super.colony = this;
-        node.setNodeState(Node.STATE.ANTHILL);
+        node.setNodeState(State.ANTHILL);
     }
 
 

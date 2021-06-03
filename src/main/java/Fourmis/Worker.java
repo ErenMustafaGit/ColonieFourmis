@@ -113,7 +113,7 @@ public class Worker extends Ant{
             Node backNode = recordsPath.get(recordsPath.size()-1);
 
             //Si le noeud est un obstacle
-            if(backNode.getNodeState() == Node.STATE.OBSTACLE){
+            if(backNode.getNodeState() == State.OBSTACLE){
                 this.isBacktracking = false;
             }
 
@@ -128,7 +128,7 @@ public class Worker extends Ant{
                 recordsPath.remove(recordsPath.size() - 1);
 
                 //Vide la nourriture lorsqu'il est sur une Fourmillière
-                if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
+                if(this.getPosition().getNodeState() == State.ANTHILL){
                     this.foodCollected = 0;
 
                     //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture
@@ -174,7 +174,7 @@ public class Worker extends Ant{
                         this.putPheromone();
 
                     //Vide la nourriture lorsqu'il est sur une Fourmillière
-                    if(this.getPosition().getNodeState() == Node.STATE.ANTHILL){
+                    if(this.getPosition().getNodeState() == State.ANTHILL){
                         this.foodCollected = 0;
 
                         //Ajoute la fourmillière à son historique de noeud parcourus lorsqu'elle depose sa nourriture

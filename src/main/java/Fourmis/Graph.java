@@ -105,8 +105,8 @@ public class Graph {
         Node n = nodeList.get(column+ row * width);
 
         //Si le noeud ne possède pas de fourmillière ou de nourriture
-        if(n.getNodeState() != Node.STATE.ANTHILL && n.getFood() <= 0){
-            n.setNodeState(Node.STATE.OBSTACLE);
+        if(n.getNodeState() != State.ANTHILL && n.getFood() <= 0){
+            n.setNodeState(State.OBSTACLE);
 
             //SINON
         } else{
@@ -115,18 +115,6 @@ public class Graph {
 
     }
 
-    /**
-     * Place la reine à une coordonnée donné (x=row;y=column)
-     * @param row : la ligne
-     * @param column : la colonne
-     */
-
-    /*
-    public void createColony(Integer row,Integer column){
-        Node n = getNoeud(row , column);
-        Queen r = new Queen(n, );
-    }
-     */
     /**
      * Permet de récuperer les noeuds contenue dans le graphe
      * @return retourne une Liste de Noeud

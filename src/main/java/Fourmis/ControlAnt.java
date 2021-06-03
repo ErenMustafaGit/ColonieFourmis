@@ -97,7 +97,7 @@ public class ControlAnt implements AntFacadeController {
     @Override
     public void putFood(int row, int column, int quantity) {
         Node n = this.graph.getNode(row, column);
-        if(n.getNodeState() == Node.STATE.FREE){
+        if(n.getNodeState() == State.FREE){
             n.setFood(quantity);
         }else{
             throw new IllegalArgumentException("Placement de la nourriture impossible sur ce noeud");
@@ -255,11 +255,11 @@ public class ControlAnt implements AntFacadeController {
                 }
 
                 //Présence de colonnie
-                if(this.graph.getNode(row, column).getNodeState() == Node.STATE.ANTHILL)
+                if(this.graph.getNode(row, column).getNodeState() == State.ANTHILL)
                     bit_play[row][column].set(0, true);
 
                     //Présence d'obstacle
-                else if (this.graph.getNode(row, column).getNodeState() == Node.STATE.OBSTACLE)
+                else if (this.graph.getNode(row, column).getNodeState() == State.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
                     //Présence de nourriture

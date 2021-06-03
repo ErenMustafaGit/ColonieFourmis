@@ -107,7 +107,6 @@ class ControlAnt implements AntFacadeController{
 class SaveIteration {
     -antLogFile:String
     -dataAnt:String[*]
-    -dataNeighbour:String[*]
     -antList:Ant[*]
     +SaveIteration(dataAnt:String[*], dataNeighbour:String[*], antList:Ant[*])
     +recordProcess(iteration:Integer)

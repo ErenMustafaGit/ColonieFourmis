@@ -56,7 +56,7 @@ class ControlAntTest {
             }
         }*/
         appli.putObstacle(0,0);
-        assertEquals(Node.STATE.OBSTACLE, graph.getNode(0,0).getNodeState());
+        assertEquals(State.OBSTACLE, graph.getNode(0,0).getNodeState());
 
     }
 
@@ -64,7 +64,7 @@ class ControlAntTest {
     void createColony() {
         appli.createColony(1,2);
         Node actual = graph.getNode(1,2);
-        assertEquals(Node.STATE.ANTHILL, actual.getNodeState());
+        assertEquals(State.ANTHILL, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
             appli.createColony(HEIGHT, WIDTH);
