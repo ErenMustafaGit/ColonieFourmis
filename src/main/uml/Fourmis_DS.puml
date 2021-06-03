@@ -8,9 +8,12 @@ hide footbox
 participant ":Main" as main
 participant "controlAnt:ControlAnt" as controlAnt
 participant "controlAnt.listeFourmis:Ant" as ant
-participant "position:Noeud" as position
-participant "voisin:Noeud" as voisin
-participant "freeVoisins:Noeud[*]" as freeVoisins
+participant "position:Node" as position
+participant "voisin:Node" as voisin
+participant "destination:Node" as destination
+participant "nonVisitedNode:Node[*]" as nonVisitedNode
+participant "colony:Queen" as colony
+participant "freeVoisins:Node[*]" as freeVoisins
 entity "rand:Random" as random
 
 'Pour le bitset.. prof a dit pas besoin
@@ -18,39 +21,131 @@ entity "rand:Random" as random
 'participant "bitPlay:BitSet[][]" as bitPlay
 'participant "bitPlay[i][j]:BitSet" as bitSet
 
-main -> controlAnt ++ : play(iteration, false)
-    loop iteration
+main -> controlAnt ++ : play(iteration, boolRecord)
+
+    'Si le boolean est a true : enregistrement !
+    alt boolRecord
+                controlAnt -> controlAnt : recordProcess()
+    end
+
+    loop 1,iteration
         loop controlAnt.listeFourmis
         |||
             controlAnt -> ant ++ : move()
-            ant -> ant  ++ : getPosition()
-            return position
+            alt Ant instance of Soldier
 
-            ant -> position ++ : getFreeVoisins()
-                position -> position ++ : getVoisins()
-                return voisins
-                loop voisin : voisins
+                ant -> ant  ++ : getPosition()
+                return position
 
-                position -> voisin ++ : isObstacle()
-                return isObstacle
+                ant -> position ++ : getFreeVoisins()
+                    position -> position ++ : getVoisins()
+                    return voisins
+                    loop voisin : voisins
 
-                    alt !isObstacle
-                        position -> freeVoisins : add(voisin)
+                    position -> voisin ++ : isObstacle()
+                    return isObstacle
+
+                        alt !isObstacle
+                            position -> freeVoisins : add(voisin)
+                        end
                     end
+                return freeVoisins
+
+                ant -> freeVoisins ++ : size()
+                return nbFreeVoisins
+
+                alt nbFreeVoisins != 0
+                    'nextInt() en Java
+                    ant -> random ++ : getInt(freeVoisins.size)
+                    return randomInt
+
+                    ant -> ant : setPosition(freeVoisin[randomInt])
                 end
-            return freeVoisins
-
-            ant -> freeVoisins ++ : size()
-            return nbFreeVoisins
-
-            alt nbFreeVoisins != 0
-                'nextInt() en Java
-                ant -> random ++ : getInt(freeVoisins.size)
-                return randomInt
-
-                ant -> ant : setPosition(freeVoisin[randomInt])
+                deactivate ant
             end
-            deactivate ant
+            |||
+            |||
+            alt Ant instance of Worker
+
+                            ant -> ant  ++ : getPosition()
+                            return position
+
+                            ant -> position ++ : getFreeVoisins()
+                                position -> position ++ : getVoisins()
+                                return voisins
+                                loop voisin : voisins
+
+                                position -> voisin ++ : isObstacle()
+                                return isObstacle
+
+                                    alt !isObstacle
+                                        position -> freeVoisins : add(voisin)
+                                    end
+                                end
+                            return freeVoisins
+
+                            ant -> freeVoisins ++ : size()
+                            return nbFreeVoisins
+
+
+
+
+
+
+                            alt nbFreeVoisins != 0
+
+                                ant -> ant ++ : getNonVisitedNode(freeVoisins)
+                                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                return nonVisitedNode
+
+                                ant -> nonVisitedNode ++ : size()
+                                return nbNonVisitedNode
+
+                                alt nbNonVisitedNode == 0
+                                    'nextInt() en Java
+                                    ant -> random ++ : getInt(freeVoisins.size)
+                                    return randomInt
+
+                                    ant -> freeVoisins ++ : get(randomInt)
+                                    return destination
+
+                                    ant -> ant : setPosition(destination)
+
+                                    ant -> destination ++ : getFood()
+                                    return nbFood
+
+                                    alt nbFood > 0
+                                        ant -> ant ++ : collect()
+                                            ant -> ant ++ : getFoodCollected()
+                                            return foodCollected
+
+                                            alt foodCollected != 0
+                                                ant -> ant ++ : getColony()
+                                                return colony
+                                                ant -> colony ++ : getCollectCapacity()
+                                                return collectCapacity
+
+                                                alt nbFood > collectCapacity
+
+                                                end
+                                            end
+                                        deactivate ant
+                                    end
+
+                                else
+
+                                end
+
+
+                            end
+
+
+                            deactivate ant
+                        end
+        end
+
+        alt boolRecord
+            controlAnt -> controlAnt : recordProcess()
         end
     end
 |||

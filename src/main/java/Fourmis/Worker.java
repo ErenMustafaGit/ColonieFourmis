@@ -25,6 +25,19 @@ public class Worker extends Ant{
         recordsPath.add(this.getPosition());
     }
 
+    private ArrayList<Node> getNonVisitedNode(ArrayList<Node> freeVoisins){
+        ArrayList<Node> noneVisitedNode = new ArrayList<>();
+
+        //Obtient la liste des noeuds non parcourus
+        for(Node node : freeVoisins){
+            if(!recordsPath.contains(node)){
+                noneVisitedNode.add(node);
+            }
+        }
+
+        return new ArrayList<>(noneVisitedNode);
+    }
+
     @Override
     public void move() {
         Node position = this.getPosition();
@@ -35,13 +48,8 @@ public class Worker extends Ant{
             //alors elle peu bouger, sinon elle ne fait rien.
             if(freeVoisins.size() != 0){
                 Random rnd = new Random();
-                ArrayList<Node> noneVisitedNode = new ArrayList<>();
-                //Obtient la liste des noeuds non parcourus
-                for(Node node : freeVoisins){
-                    if(!recordsPath.contains(node)){
-                        noneVisitedNode.add(node);
-                    }
-                }
+                ArrayList<Node> noneVisitedNode = getNonVisitedNode(freeVoisins);
+
 
                 //Si nous avons parcourus tout les noeuds adjacents
                 if(noneVisitedNode.size() == 0){
