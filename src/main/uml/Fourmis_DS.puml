@@ -127,7 +127,6 @@ main -> controlAnt ++ : play(iteration, boolRecord)
 
                                         alt nbFood > 0
                                             ref over ant : Execution de Fourmis_DS_Collect
-                                            ant -> ant : setIsBacktracking(true)
                                         'fin nbFood >0
                                         end
                                         ant -> ant : addToRecordsPath(direction)
@@ -154,8 +153,6 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                             ant -> nonVisitedNode ++ : get(index)
                                             return destination
                                             ant -> ant : setPosition(destination)
-                                            ant -> destination ++: getFood()
-                                            return nbFood
                                             ant -> ant : addToRecordsPath(destination)
                                         end
                                     end
@@ -191,13 +188,14 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                         ant -> ant : setFoodCollected(0)
                                         ant -> ant : addToRecordsPath(backNode)
                                     end
+                                |||
                                 else
                                     ant -> recordsPath : clear()
                                     ant -> ant ++: getFreeVoisins()
                                     return freeVoisins
                                     ant -> freeVoisins ++ : size()
                                     return nbFreeVoisins
-
+                                  alt nbFreeVoisins != 0
                                     ant -> ant ++ : getNonVisitedNode()
                                     return nonVisitedNode
 
@@ -236,6 +234,7 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                     alt backNodeState == State.Anthill
                                         ant -> ant : setFoodCollected(0)
                                         ant -> ant : addToRecordsPath(backNode)
+                                    end
                                     end
                                 end
                             end

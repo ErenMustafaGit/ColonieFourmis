@@ -24,13 +24,14 @@ alt foodCollected != 0
     ant -> colony ++ : getCollectCapacity()
     return collectCapacity
 
-    alt nbFood > collectCapacity
+    alt nbFood < collectCapacity
         ant -> ant : setFoodCollected(nbFood)
         ant -> destination : setFood(0)
     else
         ant -> ant : setFoodCollected(collectCapacity)
         ant -> destination : setFood(nbFood - collectCapacity)
     end
+    ant -> ant : setIsBacktracking(true)
 end
 deactivate ant
 
