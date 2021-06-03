@@ -17,6 +17,7 @@ participant "freeVoisins:Node[*]" as freeVoisins
 participant "recordsPath:Node[*]" as recordsPath
 participant "mostFoodNode:Node" as mostFoodNode
 participant "Pheromone:Pheromone" as pheromone
+participant "colony:Queen" as colony
 entity "rand:Random" as random
 entity "Collections" as collections
 
@@ -173,8 +174,10 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                     ant -> backNode ++ : getFood()
                                     return nbBackFood
                                     alt nbBackFood == 0
+                                        ant -> colony ++ : getPheromoneQuantity()
+                                        return pheromoneQuantity
                                         create pheromone
-                                        ant -->> pheromone : this()
+                                        ant -->> pheromone : this(pheromoneQuantity, colony)
                                         ant -> backNode : addPheromone(Pheromone)
                                     end
                                     ant -> recordsPath : remove(recordsSize-1)
@@ -204,9 +207,30 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                         ant -> random ++ : getInt(nbFreeVoisinsSize)
                                         return randomInt
                                         ant -> freeVoisins ++ : get(randomInt)
-                                        return randomNode
+                                        return direction
+                                        ant -> ant : setPosition(direction)
+                                        ant -> ant : addToRecordsPath(direction)
                                     else
+                                        ant -> random ++ : getInt(nbNonVisitedNode)
+                                        return randomInt
+                                        ant -> nonVisitedNode ++ : get(nbNonVisitedNode)
+                                        return direction
+                                        ant -> ant : setPosition(direction)
+                                        ant -> ant : addToRecordsPath(direction)
+                                    end
+                                    ant -> direction ++: getFood()
+                                    return nbFood
+                                    alt nbFood != 0
+                                        ant -> colony ++ : getPheromoneQuantity()
+                                        return pheromoneQuantity
+                                        create pheromone
+                                        ant -->> pheromone : this(pheromoneQuantity, colony)
+                                        ant -> backNode : addPheromone(Pheromone)
+                                    end
 
+                                    alt backNodeState == State.Anthill
+                                        ant -> ant : setFoodCollected(0)
+                                        ant -> ant : addToRecordsPath(backNode)
                                     end
                                 end
                             end

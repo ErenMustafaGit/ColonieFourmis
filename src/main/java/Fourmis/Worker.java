@@ -181,7 +181,6 @@ public class Worker extends Ant{
                         //Sinon il s'arretera devant la fourmillière à la prochaine itération sans savoir quoi faire
                         recordsPath.add(this.getPosition());
                     }
-
                 }
             }
 
