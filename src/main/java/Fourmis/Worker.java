@@ -215,12 +215,12 @@ public class Worker extends Ant{
             //Si le noeud contient de la nourriture
             if(foodQuantity != 0){
                 if(foodQuantity < this.colony.getCollectCapacity()){
-                    this.foodCollected = foodQuantity;
+                    this.setFoodCollected(foodQuantity);
                     this.getPosition().setFood(0);
                 }
 
                 else {
-                    this.foodCollected = this.colony.getCollectCapacity();
+                    this.setFoodCollected(this.colony.getCollectCapacity());
                     this.getPosition().setFood(foodQuantity - this.foodCollected);
                 }
             }
@@ -239,5 +239,9 @@ public class Worker extends Ant{
 
     public void addToRecordsPath(Node addedNode){
         this.recordsPath.add(addedNode);
+    }
+
+    public void setFoodCollected(int foodCollected) {
+        this.foodCollected = foodCollected;
     }
 }

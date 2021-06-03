@@ -14,6 +14,7 @@ participant "destination:Node" as destination
 participant "nonVisitedNode:Node[*]" as nonVisitedNode
 participant "colony:Queen" as colony
 participant "freeVoisins:Node[*]" as freeVoisins
+participant "recordsPath:Node[*]" as recordsPath
 entity "rand:Random" as random
 
 'Pour le bitset.. prof a dit pas besoin
@@ -126,10 +127,16 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                                 return collectCapacity
 
                                                 alt nbFood > collectCapacity
-
+                                                    ant -> ant : setFoodCollected(nbFood)
+                                                    ant -> destination : setFood(0)
+                                                else
+                                                    ant -> ant : setFoodCollected(collectCapacity)
+                                                    ant -> destination : setFood(nbFood - collectCapacity)
                                                 end
                                             end
                                         deactivate ant
+                                        ant -> ant : setIsBacktracking(true)
+                                    'fin nbFood >0
                                     end
 
                                 else
