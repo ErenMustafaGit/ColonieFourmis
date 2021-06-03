@@ -191,7 +191,8 @@ public class ControlAnt implements AntFacadeController {
 
             //Prend toutes les fourmis
             for(Ant ant : this.getAntList()){
-                //quantité de nourriture collecté si c'est une fourmis
+
+                //quantité de nourriture collecté si c'est une ouvrière
                 int foodCollected = 0;
                 if(ant instanceof Worker){
                     Worker worker = (Worker)ant;
@@ -288,7 +289,7 @@ public class ControlAnt implements AntFacadeController {
             }
         }
 
-
+        //Remplissage du BitSet[][]
         for(int row = 0; row < this.graph.getHeight(); row++){
             for(int column = 0; column < this.graph.getWidth(); column++){
                 bit_play[row][column]=new BitSet(7);

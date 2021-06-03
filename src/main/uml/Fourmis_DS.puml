@@ -18,38 +18,40 @@ entity "rand:Random" as random
 'participant "bitPlay:BitSet[][]" as bitPlay
 'participant "bitPlay[i][j]:BitSet" as bitSet
 
-main -> controlAnt ++ : play(1, false)
-    loop controlAnt.listeFourmis
-    |||
-        controlAnt -> ant ++ : move()
-        ant -> ant  ++ : getPosition()
-        return position
+main -> controlAnt ++ : play(iteration, false)
+    loop iteration
+        loop controlAnt.listeFourmis
+        |||
+            controlAnt -> ant ++ : move()
+            ant -> ant  ++ : getPosition()
+            return position
 
-        ant -> position ++ : getFreeVoisins()
-            position -> position ++ : getVoisins()
-            return voisins
-            loop voisin : voisins
+            ant -> position ++ : getFreeVoisins()
+                position -> position ++ : getVoisins()
+                return voisins
+                loop voisin : voisins
 
-            position -> voisin ++ : isObstacle()
-            return isObstacle
+                position -> voisin ++ : isObstacle()
+                return isObstacle
 
-                alt !isObstacle
-                    position -> freeVoisins : add(voisin)
+                    alt !isObstacle
+                        position -> freeVoisins : add(voisin)
+                    end
                 end
+            return freeVoisins
+
+            ant -> freeVoisins ++ : size()
+            return nbFreeVoisins
+
+            alt nbFreeVoisins != 0
+                'nextInt() en Java
+                ant -> random ++ : getInt(freeVoisins.size)
+                return randomInt
+
+                ant -> ant : setPosition(freeVoisin[randomInt])
             end
-        return freeVoisins
-
-        ant -> freeVoisins ++ : size()
-        return nbFreeVoisins
-
-        alt nbFreeVoisins != 0
-            'nextInt() en Java
-            ant -> random ++ : getInt(freeVoisins.size)
-            return randomInt
-
-            ant -> ant : setPosition(freeVoisin[randomInt])
+            deactivate ant
         end
-        deactivate ant
     end
 |||
     'controlFourmi -> graphe ++ : getHeight
