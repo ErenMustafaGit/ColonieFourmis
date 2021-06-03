@@ -61,13 +61,13 @@ main -> controlAnt ++ : play(iteration, boolRecord)
 
                 alt nbFreeVoisins != 0
                     'nextInt() en Java
-                    ant -> freeVoisins ++: size()
-                    return nbFreeVoisinsSize
                     ant -> random ++ : getInt(nbFreeVoisinsSize)
                     return randomInt
 
                     ant -> freeVoisins ++ : get(randomInt)
                     return randomNode
+
+                    ant -> ant : setPosition(randomNode)
                 end
 
             |||
