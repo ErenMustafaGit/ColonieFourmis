@@ -11,11 +11,14 @@ participant "controlAnt.listeFourmis:Ant" as ant
 participant "position:Node" as position
 participant "voisin:Node" as voisin
 participant "destination:Node" as destination
+participant "backNode:Node" as backNode
 participant "nonVisitedNode:Node[*]" as nonVisitedNode
-participant "colony:Queen" as colony
 participant "freeVoisins:Node[*]" as freeVoisins
 participant "recordsPath:Node[*]" as recordsPath
+participant "mostFoodNode:Node" as mostFoodNode
+participant "Pheromone:Pheromone" as pheromone
 entity "rand:Random" as random
+entity "Collections" as collections
 
 'Pour le bitset.. prof a dit pas besoin
 'participant ":Graphe" as graphe
@@ -57,17 +60,18 @@ main -> controlAnt ++ : play(iteration, boolRecord)
 
                 alt nbFreeVoisins != 0
                     'nextInt() en Java
-                    ant -> random ++ : getInt(freeVoisins.size)
+                    ant -> freeVoisins ++: size()
+                    return nbFreeVoisinsSize
+                    ant -> random ++ : getInt(nbFreeVoisinsSize)
                     return randomInt
 
-                    ant -> ant : setPosition(freeVoisin[randomInt])
+                    ant -> freeVoisins ++ : get(randomInt)
+                    return randomNode
                 end
-                deactivate ant
-            end
-            |||
-            |||
-            alt Ant instance of Worker
 
+            |||
+            else Ant instance of Worker
+            |||
                             ant -> ant  ++ : getPosition()
                             return position
 
@@ -104,7 +108,9 @@ main -> controlAnt ++ : play(iteration, boolRecord)
 
                                 alt nbNonVisitedNode == 0
                                     'nextInt() en Java
-                                    ant -> random ++ : getInt(freeVoisins.size)
+                                    ant -> freeVoisins ++: size()
+                                    return nbFreeVoisinsSize
+                                    ant -> random ++ : getInt(nbFreeVoisinsSize)
                                     return randomInt
 
                                     ant -> freeVoisins ++ : get(randomInt)
@@ -116,39 +122,98 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                     return nbFood
 
                                     alt nbFood > 0
-                                        ant -> ant ++ : collect()
-                                            ant -> ant ++ : getFoodCollected()
-                                            return foodCollected
-
-                                            alt foodCollected != 0
-                                                ant -> ant ++ : getColony()
-                                                return colony
-                                                ant -> colony ++ : getCollectCapacity()
-                                                return collectCapacity
-
-                                                alt nbFood > collectCapacity
-                                                    ant -> ant : setFoodCollected(nbFood)
-                                                    ant -> destination : setFood(0)
-                                                else
-                                                    ant -> ant : setFoodCollected(collectCapacity)
-                                                    ant -> destination : setFood(nbFood - collectCapacity)
-                                                end
-                                            end
-                                        deactivate ant
+                                        ref over ant : Execution de Fourmis_DS_Collect
                                         ant -> ant : setIsBacktracking(true)
                                     'fin nbFood >0
                                     end
+                                    ant -> ant : addToRecordsPath(direction)
 
+                                |||
                                 else
+                                    ant -> collections : shuffle(nonVisitedNode)
+                                    ant -> nonVisitedNode ++ : getMostFoodNode()
+                                    return mostFoodNode
+                                    ant -> mostFoodNode ++ : getFood()
+                                    return mostFood
 
+                                    alt mostFood != 0
+                                        ant -> ant : setPosition(mostFoodNode)
+                                        ref over ant : Execution de Fourmis_DS_Collect
+                                        ant -> ant : setIsBacktracking(true)
+                                        ant -> ant : addToRecordsPath(mostFoodNode)
+                                    else
+                                    'Fin mostFood != 0
+                                    'C'est a dire qu'il n'y a aucun noeud
+                                        ant -> collections : sort(nonVisitedNode)
+                                        ant -> ant ++ : getIndexAlgortihme(nonVisitedNode))
+                                        return index
+                                        ant -> nonVisitedNode ++ : get(index)
+                                        return destination
+                                        ant -> ant : setPosition(destination)
+                                        ant -> destination ++: getFood()
+                                        return nbFood
+                                        ant -> ant : addToRecordsPath(destination)
+                                    end
                                 end
 
+                            'Lorsque l'ouvrière a de la nourriture
+                            else
+                                ant -> recordsPath ++: size()
+                                return recordsSize
+                                ant -> recordsPath ++ : get(recordsSize-1)
+                                return backNode
+                                ant -> backNode ++ : getNodeStade()
+                                return backNodeState
+                                alt backNodeState == State.Obstacle
+                                    ant -> ant : setIsBacktracking(false)
+                                end
 
+                                alt isBacktracking
+                                    ant -> ant : setPosition(backNode)
+                                    ant -> backNode ++ : getFood()
+                                    return nbBackFood
+                                    alt nbBackFood == 0
+                                        create pheromone
+                                        ant -->> pheromone : this()
+                                        ant -> backNode : addPheromone(Pheromone)
+                                    end
+                                    ant -> recordsPath : remove(recordsSize-1)
+
+                                    alt backNodeState == State.Anthill
+                                        ant -> ant : setFoodCollected(0)
+                                        ant -> ant : addToRecordsPath(backNode)
+                                    end
+                                else
+                                    ant -> recordsPath : clear()
+                                    ant -> ant ++: getFreeVoisins()
+                                    return freeVoisins
+                                    ant -> freeVoisins ++ : size()
+                                    return nbFreeVoisins
+
+                                    ant -> ant ++ : getNonVisitedNode()
+                                    return nonVisitedNode
+
+                                    ant -> nonVisitedNode ++ : size()
+                                    return nbNonVisitedNode
+
+
+
+                                    alt nbNonVisitedNode == 0
+                                        ant -> freeVoisins ++: size()
+                                        return nbFreeVoisinsSize
+                                        ant -> random ++ : getInt(nbFreeVoisinsSize)
+                                        return randomInt
+                                        ant -> freeVoisins ++ : get(randomInt)
+                                        return randomNode
+                                    else
+
+                                    end
+                                end
                             end
 
 
-                            deactivate ant
-                        end
+            deactivate ant
+            end
         end
 
         alt boolRecord

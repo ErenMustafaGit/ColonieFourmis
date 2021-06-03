@@ -2,6 +2,7 @@ package Fourmis;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Worker extends Ant{
@@ -93,20 +94,10 @@ public class Worker extends Ant{
                         //à l'aide la méthode compareTo override dans Node (ne prend pas en compte les différentes phéromones provenant de différente colonnie)
                         Collections.sort(orderedList);
 
-                        //l'index à i(index) fois plude chance d'être choisi que le premier élement
-                        int k = 1 + rnd.nextInt(orderedList.size() * (orderedList.size() + 1) / 2);
-                        int index = 0;
-                        for(int i = 1; i <= orderedList.size(); i++){
-                            if(k <= i*(i+1)/2){
-                                index = i - 1;
-                                break;
-                            }
-                        }
+                        int index = this.getIndexAlgorithme(orderedList);
                         Node direction = orderedList.get(index);
 
                         this.setPosition(direction);
-                        if(direction.getFood() > 0)
-                            this.collect();
                         this.recordsPath.add(direction);
                     }
 
@@ -159,14 +150,8 @@ public class Worker extends Ant{
                 if(freeVoisins.size() != 0) {
 
                     Random rnd = new Random();
-                    ArrayList<Node> noneVisitedNode = new ArrayList<>();
+                    ArrayList<Node> noneVisitedNode = getNonVisitedNode(freeVoisins);
 
-                    //Obtient la liste des noeuds non parcourus
-                    for (Node node : freeVoisins) {
-                        if (!recordsPath.contains(node)) {
-                            noneVisitedNode.add(node);
-                        }
-                    }
 
                     //Si nous avons parcourus tout les noeuds adjacents
                     if (noneVisitedNode.size() == 0) {
@@ -235,6 +220,20 @@ public class Worker extends Ant{
 
     public int getFoodCollected(){
         return this.foodCollected;
+    }
+
+    public int getIndexAlgorithme(List<Node> nodesPheromone){
+        Random rnd = new Random();
+        //l'index à i(index) fois plude chance d'être choisi que le premier élement
+        int k = 1 + rnd.nextInt(nodesPheromone.size() * (nodesPheromone.size() + 1) / 2);
+        int index = 0;
+        for(int i = 1; i <= nodesPheromone.size(); i++){
+            if(k <= i*(i+1)/2){
+                index = i - 1;
+                break;
+            }
+        }
+        return index;
     }
 
     public void addToRecordsPath(Node addedNode){

@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+'autonumber
+hide footbox
+
+'title Méthode jouer()
+participant ":Ant" as ant
+participant "destination:Node" as destination
+participant "colony:Queen" as colony
+
+'Pour le bitset.. prof a dit pas besoin
+'participant ":Graphe" as graphe
+'participant "bitPlay:BitSet[][]" as bitPlay
+'participant "bitPlay[i][j]:BitSet" as bitSet
+
+ant -> ant ++ : collect()
+ant -> ant ++ : getFoodCollected()
+return foodCollected
+
+alt foodCollected != 0
+    ant -> ant ++ : getColony()
+    return colony
+    ant -> colony ++ : getCollectCapacity()
+    return collectCapacity
+
+    alt nbFood > collectCapacity
+        ant -> ant : setFoodCollected(nbFood)
+        ant -> destination : setFood(0)
+    else
+        ant -> ant : setFoodCollected(collectCapacity)
+        ant -> destination : setFood(nbFood - collectCapacity)
+    end
+end
+deactivate ant
+
+
+
+
+
+@enduml
