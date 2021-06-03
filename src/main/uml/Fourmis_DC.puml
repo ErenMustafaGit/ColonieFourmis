@@ -102,9 +102,17 @@ class ControlAnt implements AntFacadeController{
     -pheromoneQuantity:Integer
     -evaporationParam:Integer
     -antLogFile:String
-    -recordProcess(iteration:Integer)
-    -writeProcess()
+}
 
+class SaveIteration {
+    -antLogFile:String
+    -dataAnt:String[*]
+    -dataNeighbour:String[*]
+    -antList:Ant[*]
+    +SaveIteration(dataAnt:String[*], dataNeighbour:String[*], antList:Ant[*])
+    +recordProcess(iteration:Integer)
+    +setSaveLocation(location:String)
+    +writeProcess()
 }
 
 
@@ -119,10 +127,10 @@ class Graph{
  +getWidth():Integer
  +getHeight():Integer
 }
+SaveIteration <- "Save?" ControlAnt
 
-
-Soldier ---|> Ant
-Worker ---|> Ant
+Soldier --|> Ant
+Worker --|> Ant
 AntHill --|> Ant
 
 Worker --> Node
@@ -131,19 +139,19 @@ ControlAnt "-graphe\n1 " *-l-> Graph
 ControlAnt  *-r-> "-antList\n0..*" Ant
 
 
-Graph *-r-> "-nodeList \n0..*" Node : composé de >
+Graph *--> "-nodeList \n0..*" Node : composé de >
 
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
-Ant o--> "-position\n1" Node  : est sur un >
-AntHill *---> "-position\n1" Node  : est sur un >
+Ant o---> "-position\n1" Node  : est sur un >
+AntHill *--> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
 Node -l-> STATE : <<uses>>
 
 'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
-Node o-u-> "-pheromones\n..*" Pheromone : contient >
+Node o-l-> "-pheromones\n..*" Pheromone : contient >
 
 
 @enduml
