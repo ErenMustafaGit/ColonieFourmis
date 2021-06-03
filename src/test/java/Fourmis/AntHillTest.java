@@ -25,9 +25,9 @@ class AntHillTest {
     @Test
     @DisplayName(("Reine qui ne doit pas se déplacer"))
     void move() {
-        AntHill antHill = new AntHill(graph.getNoeud(0,0));
+        AntHill antHill = new AntHill(graph.getNode(0,0));
         antHill.move();
-        assertEquals(graph.getNoeud(0,0), antHill.getPosition());
+        assertEquals(graph.getNode(0,0), antHill.getPosition());
     }
 
     @Test

@@ -117,11 +117,11 @@ public class ScenarioTest {
         Graph graph = ((ControlAnt)this.appli).getGraph();
 
         //Récupération des 5 noeuds nécessaires
-        Node centerNode = graph.getNoeud(1,1);
-        Node topNode = graph.getNoeud(0,1);
-        Node bottomNode = graph.getNoeud(2,1);
-        Node rightNode = graph.getNoeud(1,2);
-        Node antHillNode = graph.getNoeud(1,0);
+        Node centerNode = graph.getNode(1,1);
+        Node topNode = graph.getNode(0,1);
+        Node bottomNode = graph.getNode(2,1);
+        Node rightNode = graph.getNode(1,2);
+        Node antHillNode = graph.getNode(1,0);
 
 
         int topCount = 0;

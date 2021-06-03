@@ -111,10 +111,10 @@ class Graph{
  -width:Integer
  -height:Integer
  +Graph(witdh:Integer, height:Integer)
- +getNoeud(row:Integer, column:Integer):Node
+ +getNode(row:Integer, column:Integer):Node
  +putObstacle(row:Integer, column:Integer)
  +createColony(row:Integer,column:Integer)
- +getNoeudList():Node[*]
+ +getNodeList():Node[*]
  +getWidth():Integer
  +getHeight():Integer
 }

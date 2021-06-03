@@ -4,10 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class SoldierTest {
     ControlAnt appli;
     static final int WIDTH = 13;
@@ -47,7 +43,7 @@ class SoldierTest {
         g.putObstacle(1,0);
         g.putObstacle(1,1);
         g.putObstacle(0,1);
-        Node position = g.getNoeud(0,0);
+        Node position = g.getNode(0,0);
 
 
         //Soldier s = new Soldier(g.getNoeud(0,0));
