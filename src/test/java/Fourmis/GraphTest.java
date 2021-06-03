@@ -25,18 +25,18 @@ class GraphTest {
     @DisplayName("Récuperer un noeud pas dans le graphe")
     void getNoeud() {
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graph.getNoeud(HEIGHT, WIDTH);
+            graph.getNode(HEIGHT, WIDTH);
         });
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
-            graph.getNoeud(-1, 0);
+            graph.getNode(-1, 0);
         });
     }
 
     @Test
     void putObstacle() {
         graph.putObstacle(2,1);
-        Node actual = graph.getNoeud(2,1);
+        Node actual = graph.getNode(2,1);
         assertEquals(Node.STATE.OBSTACLE, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
@@ -48,11 +48,11 @@ class GraphTest {
     @Test
     @DisplayName("NoeudList contient tout les noeuds du Graphe")
     void getNoeudList() {
-        List<Node> nodeList = graph.getNoeudList();
+        List<Node> nodeList = graph.getNodeList();
 
         for(int i = 0; i<WIDTH;i++){
             for(int j = 0; j<HEIGHT;j++){
-                assertTrue(nodeList.contains(graph.getNoeud(i,j)));
+                assertTrue(nodeList.contains(graph.getNode(i,j)));
             }
         }
 
@@ -75,7 +75,7 @@ class GraphTest {
     @DisplayName("Nombre de noeud dans le Graphe")
     void nbNoeud()
     {
-        List<Node> nodeList = graph.getNoeudList();
+        List<Node> nodeList = graph.getNodeList();
         assertEquals(WIDTH*HEIGHT, nodeList.size());
     }
 

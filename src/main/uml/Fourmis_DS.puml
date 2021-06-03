@@ -14,10 +14,13 @@ participant "destination:Node" as destination
 participant "backNode:Node" as backNode
 participant "nonVisitedNode:Node[*]" as nonVisitedNode
 participant "freeVoisins:Node[*]" as freeVoisins
+participant "graph.nodeList:Node" as node
+participant "nodeList.pheromone:Pheromone" as pheromones
 participant "recordsPath:Node[*]" as recordsPath
 participant "mostFoodNode:Node" as mostFoodNode
 participant "Pheromone:Pheromone" as pheromone
 participant "colony:Queen" as colony
+participant "controlAnt.graph:Graph" as graph
 entity "rand:Random" as random
 entity "Collections" as collections
 
@@ -34,6 +37,25 @@ main -> controlAnt ++ : play(iteration, boolRecord)
     end
 
     loop 1,iteration
+
+        controlAnt -> controlAnt ++ : getGraph()
+        return graph
+
+        controlAnt -> graph ++ : getNodeList()
+        return nodeList
+
+        loop nodeList
+            controlAnt -> node++: getPheromone()
+            return pheromoneList
+            loop pheromoneList
+                controlAnt -> pheromones ++ : getQuantity()
+                return pheromoneQuantity
+
+                controlAnt -> pheromones : setQuantity(pheromoneQuantity - controlAnt.evaporationQuantity)
+            end
+            controlAnt -> node : updatePheromone()
+        end
+
         loop controlAnt.listeFourmis
         |||
             controlAnt -> ant ++ : move()

@@ -32,15 +32,15 @@ public class Graph {
         for(int x = 0; x < height - 1;x++){
             for(int y = 0;y<width - 1;y++){
                 //Récuperation Noeud actuel
-                Node n = this.getNoeud(x,y);
+                Node n = this.getNode(x,y);
 
                 //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-                Node nRight = this.getNoeud(x+1,y);
+                Node nRight = this.getNode(x+1,y);
                 //Noeud nRight = this.graphe_tab.get(x+y*width+1);
 
 
                 //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-                Node nDown = this.getNoeud(x,y+1);
+                Node nDown = this.getNode(x,y+1);
                 //Noeud nDown = this.graphe_tab.get(x+(y+1)*width);
 
                 //Ajout dans le noeud actuel (n), les voisins du bas et de droite
@@ -57,10 +57,10 @@ public class Graph {
         //Noeud de tout à droite
         for(int x = 0; x<height-1; x++){
             //Récuperation Noeud actuel
-            Node n = this.getNoeud(x,width-1);
+            Node n = this.getNode(x,width-1);
 
             //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-            Node nDown = this.getNoeud(x+1,width-1);
+            Node nDown = this.getNode(x+1,width-1);
 
             //Ajout dans le noeud actuel (n), le voisins du bas
             n.addNoeudVoisin(nDown);
@@ -72,10 +72,10 @@ public class Graph {
         //Noeud de tout en bas
         for(int y = 0; y<width-1; y++){
             //Récuperation Noeud actuel
-            Node n = this.getNoeud(height-1,y);
+            Node n = this.getNode(height-1,y);
 
             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-            Node nRight = this.getNoeud(height-1,y+1);
+            Node nRight = this.getNode(height-1,y+1);
 
             //Ajout dans le noeud actuel (n), le voisins de droite
             n.addNoeudVoisin(nRight);
@@ -92,7 +92,7 @@ public class Graph {
      * @param column : la colonne
      * @return retourne un Noeud
      */
-    public Node getNoeud(Integer row, Integer column){
+    public Node getNode(Integer row, Integer column){
         return nodeList.get(column + row * width);
     }
 
@@ -131,7 +131,7 @@ public class Graph {
      * Permet de récuperer les noeuds contenue dans le graphe
      * @return retourne une Liste de Noeud
      */
-    public List<Node> getNoeudList(){
+    public List<Node> getNodeList(){
         return this.nodeList;
     }
 

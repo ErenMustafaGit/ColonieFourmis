@@ -33,7 +33,7 @@ public class ControlAnt implements AntFacadeController {
      */
     public void putPheromone(int row, int column, int quantity) {
         Pheromone pheromone = new Pheromone(quantity, null);
-        this.graph.getNoeud(row, column).addPheromone(pheromone);
+        this.graph.getNode(row, column).addPheromone(pheromone);
     }
 
     /**
@@ -99,7 +99,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void putFood(int row, int column, int quantity) {
-        Node n = this.graph.getNoeud(row, column);
+        Node n = this.graph.getNode(row, column);
         if(n.getNodeState() == Node.STATE.FREE){
             n.setFood(quantity);
         }else{
@@ -114,7 +114,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void createColony(int row, int column) {
-        AntHill antHill = new AntHill(this.graph.getNoeud(row,column));
+        AntHill antHill = new AntHill(this.graph.getNode(row,column));
         antHill.setPheromoneQuantity(this.pheromoneQuantity);
         antHill.setCollectCapacity(this.collectCapacity);
         antList.add(antHill);
@@ -197,7 +197,7 @@ public class ControlAnt implements AntFacadeController {
         for(int iteration = 0 ; iteration < duration; iteration++){
             //Evaporation des phéromones
             //Récupération de tout les noeuds du graphe
-            for(Node node : this.graph.getNoeudList()){
+            for(Node node : this.graph.getNodeList()){
                 for(Pheromone pheromone : node.getPheromone()){
                     pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
                 }
@@ -226,7 +226,7 @@ public class ControlAnt implements AntFacadeController {
                 for(Ant ant : this.antList){
 
                     //Si c'est un soldat dans la position actuel
-                    if(ant instanceof Soldier && ant.getPosition() == this.graph.getNoeud(row, column)){
+                    if(ant instanceof Soldier && ant.getPosition() == this.graph.getNode(row, column)){
                         compteurSoldier++;
                         if(compteurSoldier > 0){
                             bit_play[row][column].set(2, true);
@@ -234,7 +234,7 @@ public class ControlAnt implements AntFacadeController {
                     }
 
                     //Si c'est un ouvrier dans la position actuel
-                    if(ant instanceof Worker && ant.getPosition() == this.graph.getNoeud(row, column)){
+                    if(ant instanceof Worker && ant.getPosition() == this.graph.getNode(row, column)){
                         compteurWorker++;
                         if(compteurWorker > 0){
                             Worker worker = (Worker)ant;
@@ -252,19 +252,19 @@ public class ControlAnt implements AntFacadeController {
                 }
 
                 //Présence de colonnie
-                if(this.graph.getNoeud(row, column).getNodeState() == Node.STATE.ANTHILL)
+                if(this.graph.getNode(row, column).getNodeState() == Node.STATE.ANTHILL)
                     bit_play[row][column].set(0, true);
 
                     //Présence d'obstacle
-                else if (this.graph.getNoeud(row, column).getNodeState() == Node.STATE.OBSTACLE)
+                else if (this.graph.getNode(row, column).getNodeState() == Node.STATE.OBSTACLE)
                     bit_play[row][column].set(1, true);
 
                     //Présence de nourriture
-                else if (this.graph.getNoeud(row, column).getFood() > 0)
+                else if (this.graph.getNode(row, column).getFood() > 0)
                     bit_play[row][column].set(5, true);
 
                     //Présence de phéromone
-                else if (this.graph.getNoeud(row, column).getPheromone().size() != 0){
+                else if (this.graph.getNode(row, column).getPheromone().size() != 0){
                     bit_play[row][column].set(6, true);
                 }
 
