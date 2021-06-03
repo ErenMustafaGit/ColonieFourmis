@@ -10,6 +10,7 @@ public class ControlAnt implements AntFacadeController {
     private int collectCapacity;
     private int pheromoneQuantity;
     private int evaporationQuantity;
+
     //variables csv
     private List<List<String>> dataFourmis = new ArrayList<>();
     private List<List<String>> dataNeighbour = new ArrayList<>();
@@ -180,6 +181,7 @@ public class ControlAnt implements AntFacadeController {
      *  - le bit n° 4 vaut true s'il y a au moins une ouvrière portant de la nourriture sur le noeud.
      *  - le bit n° 5 vaut true s'il y a de la nourriture sur le noeud ;
      *  - le bit n° 6 vaut true s'il y a des phéromones sur le noeud.
+     * @throws IOException
      */
     @Override
     public BitSet[][] play(int duration, boolean record) throws IOException {

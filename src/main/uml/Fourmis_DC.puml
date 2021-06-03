@@ -22,6 +22,7 @@ interface AntFacadeController <<interface>> {
     +play(duration:Integer,record:boolean):BitSet[][]
 }
 
+
 class Node{
     -food:Integer
     +Node()

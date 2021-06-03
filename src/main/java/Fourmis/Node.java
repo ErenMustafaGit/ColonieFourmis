@@ -79,23 +79,44 @@ public class Node implements Comparable<Node> {
         return temp;
     }
 
+
+    /**
+     * Permet de definir la quantité de nourriture dans le noeud
+     * @param amount : quantité de nourriture à placer dans le noeud.
+     */
     public void setFood(int amount){
         this.food = amount;
     }
 
+
+    /**
+     * Permet d'obtenir la quantité de nourriture sur le noeud.
+     * @return retourne une quantité de nourriture
+     */
     public int getFood(){
         return this.food;
     }
 
+    /**
+     * Permet d'ajouter un phéromone à liste de phéromone (pheromoneList)
+     * @param pheromone : phéromone à ajouter
+     */
     public void addPheromone(Pheromone pheromone){
         if(this.getNodeState() != STATE.ANTHILL)
             this.pheromoneList.add(pheromone);
     }
 
+    /**
+     * Permet d'obtenir les phéromones du noeud
+     * @return retourne une ArrayList de pheromone
+     */
     public ArrayList<Pheromone> getPheromone(){
         return new ArrayList<>(pheromoneList);
     }
 
+    /**
+     * Permet de supprimer les phéromones qui ont une quantité de 0 de la liste des phéromones
+     */
     public void updatePheromone() {
         //Liste temporaire qui contiendra que les phéromones encore existant (+ de 0 de quantité)
         ArrayList<Pheromone> tempList = new ArrayList<>();
@@ -108,6 +129,15 @@ public class Node implements Comparable<Node> {
         this.pheromoneList = new ArrayList<>(tempList);
     }
 
+
+    /**
+     *
+     * @param node : Le noeud à comparer avec l'instance présente
+     * @return
+     *      o : 1 si l'instance a plus de phéromone
+     *      o : 0 si ils ont la quantité de phéromone identique
+     *      o : -1 si node a plus de phéromone
+     */
     @Override
     public int compareTo(Node node) {
         ArrayList<Pheromone> pheromoneList = new ArrayList<>(node.getPheromone());
