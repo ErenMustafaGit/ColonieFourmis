@@ -75,88 +75,93 @@ main -> controlAnt ++ : play(iteration, boolRecord)
             |||
                             ant -> ant  ++ : getPosition()
                             return position
+                            ant -> ant ++: getFoodCollected()
+                            return foodCollected
 
-                            ant -> position ++ : getFreeVoisins()
-                                position -> position ++ : getVoisins()
-                                return voisins
-                                loop voisin : voisins
+                            alt foodCollected != 0
+                                ant -> position ++ : getFreeVoisins()
+                                    position -> position ++ : getVoisins()
+                                    return voisins
+                                    loop voisin : voisins
 
-                                position -> voisin ++ : isObstacle()
-                                return isObstacle
+                                    position -> voisin ++ : isObstacle()
+                                    return isObstacle
 
-                                    alt !isObstacle
-                                        position -> freeVoisins : add(voisin)
+                                        alt !isObstacle
+                                            position -> freeVoisins : add(voisin)
+                                        end
                                     end
-                                end
-                            return freeVoisins
+                                return freeVoisins
 
-                            ant -> freeVoisins ++ : size()
-                            return nbFreeVoisins
-
+                                ant -> freeVoisins ++ : size()
+                                return nbFreeVoisins
 
 
 
 
 
-                            alt nbFreeVoisins != 0
 
-                                ant -> ant ++ : getNonVisitedNode(freeVoisins)
-                                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                return nonVisitedNode
+                                alt nbFreeVoisins != 0
 
-                                ant -> nonVisitedNode ++ : size()
-                                return nbNonVisitedNode
+                                    ant -> ant ++ : getNonVisitedNode(freeVoisins)
+                                    '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    return nonVisitedNode
 
-                                alt nbNonVisitedNode == 0
-                                    'nextInt() en Java
-                                    ant -> freeVoisins ++: size()
-                                    return nbFreeVoisinsSize
-                                    ant -> random ++ : getInt(nbFreeVoisinsSize)
-                                    return randomInt
+                                    ant -> nonVisitedNode ++ : size()
+                                    return nbNonVisitedNode
 
-                                    ant -> freeVoisins ++ : get(randomInt)
-                                    return destination
+                                    alt nbNonVisitedNode == 0
+                                        'nextInt() en Java
+                                        ant -> freeVoisins ++: size()
+                                        return nbFreeVoisinsSize
+                                        ant -> random ++ : getInt(nbFreeVoisinsSize)
+                                        return randomInt
 
-                                    ant -> ant : setPosition(destination)
-
-                                    ant -> destination ++ : getFood()
-                                    return nbFood
-
-                                    alt nbFood > 0
-                                        ref over ant : Execution de Fourmis_DS_Collect
-                                        ant -> ant : setIsBacktracking(true)
-                                    'fin nbFood >0
-                                    end
-                                    ant -> ant : addToRecordsPath(direction)
-
-                                |||
-                                else
-                                    ant -> collections : shuffle(nonVisitedNode)
-                                    ant -> nonVisitedNode ++ : getMostFoodNode()
-                                    return mostFoodNode
-                                    ant -> mostFoodNode ++ : getFood()
-                                    return mostFood
-
-                                    alt mostFood != 0
-                                        ant -> ant : setPosition(mostFoodNode)
-                                        ref over ant : Execution de Fourmis_DS_Collect
-                                        ant -> ant : setIsBacktracking(true)
-                                        ant -> ant : addToRecordsPath(mostFoodNode)
-                                    else
-                                    'Fin mostFood != 0
-                                    'C'est a dire qu'il n'y a aucun noeud
-                                        ant -> collections : sort(nonVisitedNode)
-                                        ant -> ant ++ : getIndexAlgortihme(nonVisitedNode))
-                                        return index
-                                        ant -> nonVisitedNode ++ : get(index)
+                                        ant -> freeVoisins ++ : get(randomInt)
                                         return destination
+
                                         ant -> ant : setPosition(destination)
-                                        ant -> destination ++: getFood()
+
+                                        ant -> destination ++ : getFood()
                                         return nbFood
-                                        ant -> ant : addToRecordsPath(destination)
+
+                                        alt nbFood > 0
+                                            ref over ant : Execution de Fourmis_DS_Collect
+                                            ant -> ant : setIsBacktracking(true)
+                                        'fin nbFood >0
+                                        end
+                                        ant -> ant : addToRecordsPath(direction)
+
+                                    |||
+                                    else
+                                        ant -> collections : shuffle(nonVisitedNode)
+                                        ant -> nonVisitedNode ++ : getMostFoodNode()
+                                        return mostFoodNode
+                                        ant -> mostFoodNode ++ : getFood()
+                                        return mostFood
+
+                                        alt mostFood != 0
+                                            ant -> ant : setPosition(mostFoodNode)
+                                            ref over ant : Execution de Fourmis_DS_Collect
+                                            ant -> ant : setIsBacktracking(true)
+                                            ant -> ant : addToRecordsPath(mostFoodNode)
+                                        else
+                                        'Fin mostFood != 0
+                                        'C'est a dire qu'il n'y a aucun noeud
+                                            ant -> collections : sort(nonVisitedNode)
+                                            ant -> ant ++ : getIndexAlgortihme(nonVisitedNode))
+                                            return index
+                                            ant -> nonVisitedNode ++ : get(index)
+                                            return destination
+                                            ant -> ant : setPosition(destination)
+                                            ant -> destination ++: getFood()
+                                            return nbFood
+                                            ant -> ant : addToRecordsPath(destination)
+                                        end
                                     end
                                 end
 
+                            |||
                             'Lorsque l'ouvrière a de la nourriture
                             else
                                 ant -> recordsPath ++: size()
