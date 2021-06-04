@@ -153,7 +153,7 @@ Ant o---> "-position\n1" Node  : est sur un >
 AntHill *--> "-position\n1" Node  : est sur un >
 Node o-> " #voisins\n0..*"  Node  : est voisin de >
 
-Node -l-> "\n 1 #state\n" State : <<uses>> >
+Node -l-> " #state\n1" State : <<uses>> >
 
 'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
