@@ -24,7 +24,7 @@ interface AntFacadeController <<interface>> {
 
 
 abstract class Node <<abstract>>{
-    -food:Integer
+    #food:Integer
     +Node()
     +getNoeudState():State
     +setNoeudState(State:State)
@@ -33,13 +33,14 @@ abstract class Node <<abstract>>{
     +getFreeVoisins():Node[*]
     +setFood(amount:Integer)
     +getFood():Integer
+    +addPheromone(pheromone:Pheromone)
     +getPheromones():Pheromone[*]
     +updatePheromone()
     '+compareTo(node:Node)<<override>>
 }
 
 class Node2D extends Node{
-
+   +Node2D()
 }
 
 
@@ -76,7 +77,6 @@ class AntHill{
     +setPheromoneQuantity(pheromoneQuantity:Integer)
     +getCollectCapacity():Integer
     +getPheromoneQuantity():Integer
-    +getPosition():Node
     +createSoldiers(amount:Integer)
     +createWorkers((amount:Integer)
 }
@@ -126,7 +126,6 @@ class Graph{
  +Graph(witdh:Integer, height:Integer)
  +getNode(row:Integer, column:Integer):Node
  +putObstacle(row:Integer, column:Integer)
- +createColony(row:Integer,column:Integer)
  +getNodeList():Node[*]
  +getWidth():Integer
  +getHeight():Integer
@@ -152,13 +151,13 @@ Graph *--> "-nodeList \n0..*" Node2D : composé de >
 '"-position 1\n-historique 0..*"
 Ant o---> "-position\n1" Node  : est sur un >
 AntHill *--> "-position\n1" Node  : est sur un >
-Node o-> "-voisins\n0..*"  Node  : est voisin de >
+Node o-> " #voisins\n0..*"  Node  : est voisin de >
 
-Node -l-> State : <<uses>>
+Node -l-> "\n 1 #state\n" State : <<uses>> >
 
 'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
-Node o-l-> "-pheromones\n..*" Pheromone : contient >
+Node o-l-> " #pheromones\n..*" Pheromone : contient >
 
 
 @enduml
