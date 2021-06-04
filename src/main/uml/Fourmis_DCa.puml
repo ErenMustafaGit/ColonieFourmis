@@ -23,7 +23,7 @@ class Graph {
      width
      height
 }
-class Node{
+abstract Node <<abstract>>{
     food
 }
 
