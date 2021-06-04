@@ -6,7 +6,7 @@ import java.util.List;
 public class Graph {
     private int width;
     private int height;
-    private List<Node> nodeList;
+    private List<Node2D> node2DList;
 
 
     /**
@@ -15,7 +15,7 @@ public class Graph {
      * @param height : hauteur
      */
     public Graph(Integer width, Integer height){
-        nodeList = new ArrayList<>();
+        node2DList = new ArrayList<>();
         this.width = width;
         this.height = height;
 
@@ -23,8 +23,8 @@ public class Graph {
         //Erreur dans le sujet : Height et witdh inversé
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
-                Node n = new Node();
-                nodeList.add(n);
+                Node2D n = new Node2D();
+                node2DList.add(n);
             }
         }
 
@@ -32,15 +32,15 @@ public class Graph {
         for(int x = 0; x < height - 1;x++){
             for(int y = 0;y<width - 1;y++){
                 //Récuperation Noeud actuel
-                Node n = this.getNode(x,y);
+                Node2D n = this.getNode(x,y);
 
                 //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-                Node nRight = this.getNode(x+1,y);
+                Node2D nRight = this.getNode(x+1,y);
                 //Noeud nRight = this.graphe_tab.get(x+y*width+1);
 
 
                 //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-                Node nDown = this.getNode(x,y+1);
+                Node2D nDown = this.getNode(x,y+1);
                 //Noeud nDown = this.graphe_tab.get(x+(y+1)*width);
 
                 //Ajout dans le noeud actuel (n), les voisins du bas et de droite
@@ -57,10 +57,10 @@ public class Graph {
         //Noeud de tout à droite
         for(int x = 0; x<height-1; x++){
             //Récuperation Noeud actuel
-            Node n = this.getNode(x,width-1);
+            Node2D n = this.getNode(x,width-1);
 
             //Récuperation Noeud se trouvant en bas du Noeud actuel (n)
-            Node nDown = this.getNode(x+1,width-1);
+            Node2D nDown = this.getNode(x+1,width-1);
 
             //Ajout dans le noeud actuel (n), le voisins du bas
             n.addNoeudVoisin(nDown);
@@ -72,10 +72,10 @@ public class Graph {
         //Noeud de tout en bas
         for(int y = 0; y<width-1; y++){
             //Récuperation Noeud actuel
-            Node n = this.getNode(height-1,y);
+            Node2D n = this.getNode(height-1,y);
 
             //Récuperation Noeud se trouvant à droite du Noeud actuel (n)
-            Node nRight = this.getNode(height-1,y+1);
+            Node2D nRight = this.getNode(height-1,y+1);
 
             //Ajout dans le noeud actuel (n), le voisins de droite
             n.addNoeudVoisin(nRight);
@@ -92,8 +92,8 @@ public class Graph {
      * @param column : la colonne
      * @return retourne un Noeud
      */
-    public Node getNode(Integer row, Integer column){
-        return nodeList.get(column + row * width);
+    public Node2D getNode(Integer row, Integer column){
+        return node2DList.get(column + row * width);
     }
 
     /**
@@ -102,7 +102,7 @@ public class Graph {
      * @param column : la colonne
      */
     public void putObstacle(Integer row, Integer column){
-        Node n = nodeList.get(column+ row * width);
+        Node2D n = node2DList.get(column+ row * width);
 
         //Si le noeud ne possède pas de fourmillière ou de nourriture
         if(n.getNodeState() != State.ANTHILL && n.getFood() <= 0){
@@ -119,8 +119,8 @@ public class Graph {
      * Permet de récuperer les noeuds contenue dans le graphe
      * @return retourne une Liste de Noeud
      */
-    public List<Node> getNodeList(){
-        return this.nodeList;
+    public List<Node2D> getNodeList(){
+        return this.node2DList;
     }
 
     /**

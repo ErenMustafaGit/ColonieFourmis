@@ -7,10 +7,10 @@ public class Soldier extends Ant {
 
     /**
      * Créé un soldat à partir d'un noeud
-     * @param node : emplacement de la reine
+     * @param node2D : emplacement de la reine
      */
-    public Soldier(Node node, AntHill colony) {
-        super(node, colony);
+    public Soldier(Node2D node2D, AntHill colony) {
+        super(node2D, colony);
     }
 
     /**

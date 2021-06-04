@@ -7,14 +7,15 @@ public abstract class Ant {
     /**
      * Créé une fourmis à un noeud donné
      * @param node : emplacement de la fourmis
+     * @param colony : Reine qui a crée cette fourmis
      */
     public Ant(Node node, AntHill colony){
         this.position = node;
         this.colony = colony;
     }
 
-    public Ant(Node node){
-        this.position = node;
+    public Ant(Node node2D){
+        this.position = node2D;
     }
 
 
@@ -33,9 +34,9 @@ public abstract class Ant {
 
     /**
      * Etabli la position d'une fourmis
-     * @param node : nouvelle position
+     * @param node2D : nouvelle position
      */
-    public void setPosition(Node node){
-        this.position = node;
+    public void setPosition(Node node2D){
+        this.position = node2D;
     }
 }

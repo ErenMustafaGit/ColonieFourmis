@@ -2,8 +2,9 @@ package Fourmis;
 
 import java.util.ArrayList;
 
-public abstract class Node implements Comparable<Node> {
-    private ArrayList<Node> voisins;
+public class Node2D extends Node {
+
+    private ArrayList<Node2D> voisins;
     private State nodeState;
     private int food;
     private ArrayList<Pheromone> pheromoneList;
@@ -11,7 +12,7 @@ public abstract class Node implements Comparable<Node> {
     /**
      * Créé un noeud
      */
-    public Node(){
+    public Node2D(){
         nodeState = State.FREE;
         voisins = new ArrayList<>();
         this.food = 0;
@@ -36,16 +37,17 @@ public abstract class Node implements Comparable<Node> {
 
     /**
      * Ajoute le noeud en paramètre à l'ArrayList "voisins"
-     * @param node : Noeud à ajouter à la liste
+     * @param node2D : Noeud à ajouter à la liste
      */
-    public void addNoeudVoisin(Node node){
-        this.voisins.add(node);
+    public void addNoeudVoisin(Node2D node2D){
+        this.voisins.add(node2D);
     }
 
     /**
      * Permet d'obtenir les voisins d'un noeud
      * @return retourne une ArrayList de noeud
      */
+    @Override
     public ArrayList<Node> getVoisins(){
         return new ArrayList<>(this.voisins);
     }
@@ -54,6 +56,7 @@ public abstract class Node implements Comparable<Node> {
      * Permet d'obtenir les voisins libres du noeud
      * @return retourne une ArrayList de noeud
      */
+    @Override
     public ArrayList<Node> getFreeVoisins(){
         ArrayList<Node> temp = new ArrayList<>();
         for(Node n : this.voisins){
@@ -115,35 +118,6 @@ public abstract class Node implements Comparable<Node> {
     }
 
 
-    /**
-     *
-     * @param node : Le noeud à comparer avec l'instance présente
-     * @return
-     *      o : 1 si l'instance a plus de phéromone
-     *      o : 0 si ils ont la quantité de phéromone identique
-     *      o : -1 si node a plus de phéromone
-     */
-    @Override
-    public int compareTo(Node node) {
-        ArrayList<Pheromone> pheromoneList = new ArrayList<>(node.getPheromone());
-        int quantityPheromone = 0;
-        //Ne prend pas en compte les différentes colony, cad que lorsque la fourmis
-        // appel les noeuds voisins, les pheromones ne sont pas distinct
-        for(Pheromone pheromone : pheromoneList){
-            quantityPheromone += pheromone.getQuantity();
-        }
-
-        ArrayList<Pheromone> pheromoneListThis = new ArrayList<>(this.getPheromone());
-        int quantityPheromoneThis = 0;
-        for(Pheromone pheromone : pheromoneListThis){
-            quantityPheromoneThis += pheromone.getQuantity();
-        }
-
-        if(quantityPheromoneThis > quantityPheromone)
-            return 1;
-        else if (quantityPheromoneThis < quantityPheromone)
-            return -1;
-        else
-            return 0;
-    }
 }
+
+

@@ -1,6 +1,5 @@
 package Fourmis;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -96,7 +95,7 @@ public class ControlAnt implements AntFacadeController {
      */
     @Override
     public void putFood(int row, int column, int quantity) {
-        Node n = this.graph.getNode(row, column);
+        Node2D n = this.graph.getNode(row, column);
         if(n.getNodeState() == State.FREE){
             n.setFood(quantity);
         }else{
@@ -129,7 +128,7 @@ public class ControlAnt implements AntFacadeController {
             //Si la fourmis est une reine (donc colonie)
             if(ant instanceof AntHill){
                 for(int i = 0; i < amount; i++){
-                    Soldier s = new Soldier(ant.getPosition(), (AntHill)ant);
+                    Soldier s = new Soldier((Node2D) ant.getPosition(), (AntHill)ant);
                     tempSoldier.add(s);
                 }
             }
@@ -199,11 +198,11 @@ public class ControlAnt implements AntFacadeController {
         for(int iteration = 0 ; iteration < duration; iteration++){
             //Evaporation des phéromones
             //Récupération de tout les noeuds du graphe
-            for(Node node : this.graph.getNodeList()){
-                for(Pheromone pheromone : node.getPheromone()){
+            for(Node2D node2D : this.graph.getNodeList()){
+                for(Pheromone pheromone : node2D.getPheromone()){
                     pheromone.setQuantity(pheromone.getQuantity() - evaporationQuantity);
                 }
-                node.updatePheromone();
+                node2D.updatePheromone();
             }
 
             //Déplacer toutes les fourmis

@@ -63,7 +63,7 @@ class ControlAntTest {
     @Test
     void createColony() {
         appli.createColony(1,2);
-        Node actual = graph.getNode(1,2);
+        Node2D actual = graph.getNode(1,2);
         assertEquals(State.ANTHILL, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{

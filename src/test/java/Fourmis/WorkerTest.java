@@ -32,16 +32,16 @@ class WorkerTest {
                 assertEquals(appli.getGraph().getNode(2,2), worker.getPosition());
         }
 
-        Node position = appli.getGraph().getNode(5,5);
+        Node2D position = appli.getGraph().getNode(5,5);
         Worker worker = new Worker(position, null);
         assertEquals(position, worker.getPosition());
     }
 
     @Test
     void setPosition() {
-        Node position = appli.getGraph().getNode(5,5);
+        Node2D position = appli.getGraph().getNode(5,5);
         Worker worker = new Worker(position, null);
-        Node direction = appli.getGraph().getNode(10,10);
+        Node2D direction = appli.getGraph().getNode(10,10);
         worker.setPosition(direction);
         assertEquals(direction, worker.getPosition());
     }
@@ -53,18 +53,18 @@ class WorkerTest {
         appli.putFood(5,4, 10);
         appli.putFood(6,5, 10);
 
-        Node position = appli.getGraph().getNode(5,5);
+        Node2D position = appli.getGraph().getNode(5,5);
         Worker worker = new Worker(position, colony);
         worker.move();
 
         //Il va vers le noeud avec le plus de nourriture dans ses voisins
-        Node newPosition = appli.getGraph().getNode(4,5);
+        Node2D newPosition = appli.getGraph().getNode(4,5);
         assertEquals(newPosition, worker.getPosition());
     }
 
     @Test
     void collect() {
-        Node position = appli.getGraph().getNode(4,4);
+        Node2D position = appli.getGraph().getNode(4,4);
         AntHill colony = new AntHill(appli.getGraph().getNode(0,0));
         colony.setCollectCapacity(10);
         appli.putFood(4,4, 100);
@@ -84,7 +84,7 @@ class WorkerTest {
         AntHill colony = new AntHill(appli.getGraph().getNode(0,0));
         colony.setPheromoneQuantity(10);
 
-        Node position = appli.getGraph().getNode(4,4);
+        Node2D position = appli.getGraph().getNode(4,4);
         Worker worker = new Worker(position, colony);
 
         assertEquals(0, position.getPheromone().size());
@@ -96,7 +96,7 @@ class WorkerTest {
 
     @Test
     void getFoodCollected() {
-        Node position = appli.getGraph().getNode(4,4);
+        Node2D position = appli.getGraph().getNode(4,4);
         AntHill colony = new AntHill(appli.getGraph().getNode(0,0));
         colony.setCollectCapacity(10);
         appli.putFood(4,4, 100);
@@ -113,7 +113,7 @@ class WorkerTest {
 
     @Test
     void addToRecordsPath() {
-        Node position = appli.getGraph().getNode(4,4);
+        Node2D position = appli.getGraph().getNode(4,4);
         AntHill colony = new AntHill(appli.getGraph().getNode(0,0));
         colony.setCollectCapacity(10);
         appli.putFood(4,4, 100);
@@ -123,8 +123,8 @@ class WorkerTest {
         worker.collect();
 
         //Ajout de 2 chemin dans son historique qu'il va devoir re-parcourir
-        Node n1 = appli.getGraph().getNode(4,3);
-        Node n2 = appli.getGraph().getNode(4,3);
+        Node2D n1 = appli.getGraph().getNode(4,3);
+        Node2D n2 = appli.getGraph().getNode(4,3);
         worker.addToRecordsPath(n1);
         worker.addToRecordsPath(n2);
 

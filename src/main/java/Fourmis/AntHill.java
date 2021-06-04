@@ -6,12 +6,12 @@ public class AntHill extends Ant {
 
     /**
      * Créé une reine à partir d'un noeud donné
-     * @param node : Noeud ou la reine sera créé
+     * @param node2D : Noeud ou la reine sera créé
      */
-    public AntHill(Node node) {
-        super(node);
+    public AntHill(Node node2D) {
+        super(node2D);
         super.colony = this;
-        node.setNodeState(State.ANTHILL);
+        node2D.setNodeState(State.ANTHILL);
     }
 
 
@@ -45,7 +45,7 @@ public class AntHill extends Ant {
      */
     public void createSoldiers(int amount) {
         for(int i = 0; i<amount; i++){
-            Soldier soldier = new Soldier(this.getPosition(), this);
+            Soldier soldier = new Soldier((Node2D) this.getPosition(), this);
         }
     }
 

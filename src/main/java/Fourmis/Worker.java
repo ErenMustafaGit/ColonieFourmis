@@ -15,11 +15,11 @@ public class Worker extends Ant{
     /**
      * Créé une fourmis à un noeud donné
      *
-     * @param node : emplacement de la fourmis
+     * @param node2D : emplacement de la fourmis
      */
 
-    public Worker(Node node, AntHill colony) {
-        super(node, colony);
+    public Worker(Node node2D, AntHill colony) {
+        super(node2D, colony);
         this.isBacktracking = false;
         this.foodCollected = 0;
         this.recordsPath = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Worker extends Ant{
 
                     int foodQuantity = 0;
                     Node mostFood = null;
-                    for(Node node : orderedList){
+                    for(Node node: orderedList){
                         if(node.getFood() > foodQuantity){
                             foodQuantity = node.getFood();
                             mostFood = node;
@@ -221,7 +221,7 @@ public class Worker extends Ant{
         return this.foodCollected;
     }
 
-    public int getIndexAlgorithme(List<Node> nodesPheromone){
+    public int getIndexAlgorithme(ArrayList<Node> nodesPheromone){
         Random rnd = new Random();
         //l'index à i(index) fois plude chance d'être choisi que le premier élement
         int k = 1 + rnd.nextInt(nodesPheromone.size() * (nodesPheromone.size() + 1) / 2);
@@ -235,8 +235,8 @@ public class Worker extends Ant{
         return index;
     }
 
-    public void addToRecordsPath(Node addedNode){
-        this.recordsPath.add(addedNode);
+    public void addToRecordsPath(Node addedNode2D){
+        this.recordsPath.add(addedNode2D);
     }
 
     public void setFoodCollected(int foodCollected) {

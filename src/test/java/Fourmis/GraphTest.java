@@ -36,7 +36,7 @@ class GraphTest {
     @Test
     void putObstacle() {
         graph.putObstacle(2,1);
-        Node actual = graph.getNode(2,1);
+        Node2D actual = graph.getNode(2,1);
         assertEquals(State.OBSTACLE, actual.getNodeState());
 
         assertThrows(IndexOutOfBoundsException.class, ()->{
@@ -48,11 +48,11 @@ class GraphTest {
     @Test
     @DisplayName("NoeudList contient tout les noeuds du Graphe")
     void getNoeudList() {
-        List<Node> nodeList = graph.getNodeList();
+        List<Node2D> node2DList = graph.getNodeList();
 
         for(int i = 0; i<WIDTH;i++){
             for(int j = 0; j<HEIGHT;j++){
-                assertTrue(nodeList.contains(graph.getNode(i,j)));
+                assertTrue(node2DList.contains(graph.getNode(i,j)));
             }
         }
 
@@ -75,8 +75,8 @@ class GraphTest {
     @DisplayName("Nombre de noeud dans le Graphe")
     void nbNoeud()
     {
-        List<Node> nodeList = graph.getNodeList();
-        assertEquals(WIDTH*HEIGHT, nodeList.size());
+        List<Node2D> node2DList = graph.getNodeList();
+        assertEquals(WIDTH*HEIGHT, node2DList.size());
     }
 
 }
