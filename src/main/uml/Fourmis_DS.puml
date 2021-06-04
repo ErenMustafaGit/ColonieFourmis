@@ -21,6 +21,7 @@ participant "mostFoodNode:Node" as mostFoodNode
 participant "Pheromone:Pheromone" as pheromone
 participant "colony:Queen" as colony
 participant "controlAnt.graph:Graph" as graph
+participant "saveFile:SaveIteration" as saveFile
 entity "rand:Random" as random
 entity "Collections" as collections
 
@@ -33,7 +34,7 @@ main -> controlAnt ++ : play(iteration, boolRecord)
 
     'Si le boolean est a true : enregistrement !
     alt boolRecord
-                controlAnt -> controlAnt : recordProcess()
+                controlAnt -> saveFile : recordProcess()
     end
 
     loop 1,iteration
@@ -232,18 +233,18 @@ main -> controlAnt ++ : play(iteration, boolRecord)
                                         ant -> random ++ : getInt(nbFreeVoisinsSize)
                                         return randomInt
                                         ant -> freeVoisins ++ : get(randomInt)
-                                        return direction
-                                        ant -> ant : setPosition(direction)
-                                        ant -> ant : addToRecordsPath(direction)
+                                        return destination
+                                        ant -> ant : setPosition(destination)
+                                        ant -> ant : addToRecordsPath(destination)
                                     else
                                         ant -> random ++ : getInt(nbNonVisitedNode)
                                         return randomInt
                                         ant -> nonVisitedNode ++ : get(nbNonVisitedNode)
-                                        return direction
-                                        ant -> ant : setPosition(direction)
-                                        ant -> ant : addToRecordsPath(direction)
+                                        return destination
+                                        ant -> ant : setPosition(destination)
+                                        ant -> ant : addToRecordsPath(destination)
                                     end
-                                    ant -> direction ++: getFood()
+                                    ant -> destination ++: getFood()
                                     return nbFood
                                     alt nbFood != 0
                                         ant -> colony ++ : getPheromoneQuantity()
@@ -267,7 +268,7 @@ main -> controlAnt ++ : play(iteration, boolRecord)
         end
 
         alt boolRecord
-            controlAnt -> controlAnt : recordProcess()
+            controlAnt -> saveFile : recordProcess()
         end
     end
 |||
