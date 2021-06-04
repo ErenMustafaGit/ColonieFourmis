@@ -94,6 +94,7 @@ class Worker {
     +collect()
     +putPheromone()
     +getFoodCollected():Integer
+    +getIndexAlgorithme(nodesPheromone:Node[*]):Integer
     +addRecordsPath(addNode:Node)
     +setFoodCollected(foodCollected:Integer)
 }
