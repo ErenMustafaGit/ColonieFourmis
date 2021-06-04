@@ -44,6 +44,11 @@ class Soldier extends Ant{
 class Worker extends Ant{
 }
 
+class SaveIteration{
+    antLogFile
+    dataAnt
+    antList
+}
 
 class ControlAnt implements AntFacadeController{
 }
@@ -54,6 +59,7 @@ class Pheromone{
 
 abstract class Node2d extends Node{
 }
+SaveIteration - ControlAnt : Save <
 
 Node - Node : est voisin de >
 ControlAnt -- Graph : possède un >
