@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NodeTest {
+class Node2DTest {
     ControlAnt appli;
     static final int WIDTH = 13;
     static final int HEIGHT = 19;
@@ -54,8 +54,8 @@ class NodeTest {
     @Test
     @DisplayName(("Ajout d'un noeud voisin à un noeud"))
     void testAddNoeudVoisin(){
-        Node n = new Node();
-        Node n2 = new Node();
+        Node2D n = new Node2D();
+        Node2D n2 = new Node2D();
         n.addNoeudVoisin(n2);
         n2.addNoeudVoisin(n);
 
@@ -71,18 +71,18 @@ class NodeTest {
     @DisplayName(("Voisins disponible d'un noeud"))
     void testFreeVoinsinNoeud(){
         //Pas de voisin car le noeud en 0,0 est encerclé
-        Node n = g.getNode(0,0);
+        Node2D n = g.getNode(0,0);
         int nb = n.getFreeVoisins().size();
         assertEquals(0, nb);
 
         //Noeud non encerclé
-        Node n2 = g.getNode(4,4);
+        Node2D n2 = g.getNode(4,4);
         int nb2 = n2.getFreeVoisins().size();
         assertEquals(4, nb2);
 
         //Noeud en corner
-        Node nodeCorner = g.getNode(HEIGHT-1,WIDTH-1);
-        int nbCorner = nodeCorner.getFreeVoisins().size();
+        Node2D node2DCorner = g.getNode(HEIGHT-1,WIDTH-1);
+        int nbCorner = node2DCorner.getFreeVoisins().size();
         assertEquals(2, nbCorner);
     }
 
@@ -105,34 +105,34 @@ class NodeTest {
         appli.putPheromone(2,1, 10);
         appli.putPheromone(3,2, 20);
 
-        Node position = appli.getGraph().getNode(2,2);
-        List<Node> nodeVoisins = position.getFreeVoisins();
+        Node2D position = appli.getGraph().getNode(2,2);
+        List<Node> node2DVoisins = position.getFreeVoisins();
 
-        for(Node node : nodeVoisins){
+        for(Node node2D : node2DVoisins){
             int pheromoneQuantity = 0;
-            for(Pheromone pheromone : node.getPheromone()){
+            for(Pheromone pheromone : node2D.getPheromone()){
                 pheromoneQuantity += pheromone.getQuantity();
             }
-            System.out.println(node + "| ph : " + pheromoneQuantity);
+            System.out.println(node2D + "| ph : " + pheromoneQuantity);
         }
 
-        Collections.shuffle(nodeVoisins);
-        Collections.sort(nodeVoisins);
+        Collections.shuffle(node2DVoisins);
+        Collections.sort(node2DVoisins);
 
         System.out.println("\n\nTRIE !");
-        for(Node node : nodeVoisins){
+        for(Node node2D : node2DVoisins){
             int pheromoneQuantity = 0;
-            for(Pheromone pheromone : node.getPheromone()){
+            for(Pheromone pheromone : node2D.getPheromone()){
                 pheromoneQuantity += pheromone.getQuantity();
             }
-            System.out.println(node + "| ph : " + pheromoneQuantity);
+            System.out.println(node2D + "| ph : " + pheromoneQuantity);
         }
 
         //Ordre attendue :
-        assertEquals(appli.getGraph().getNode(2,3),nodeVoisins.get(0) ); //0 de pheromone
-        assertEquals(appli.getGraph().getNode(2,1),nodeVoisins.get(1) ); //10 de pheromone
-        assertEquals(appli.getGraph().getNode(3,2),nodeVoisins.get(2) ); //20 de pheromone
-        assertEquals(appli.getGraph().getNode(1,2),nodeVoisins.get(3) ); //40 de pheromone
+        assertEquals(appli.getGraph().getNode(2,3), node2DVoisins.get(0) ); //0 de pheromone
+        assertEquals(appli.getGraph().getNode(2,1), node2DVoisins.get(1) ); //10 de pheromone
+        assertEquals(appli.getGraph().getNode(3,2), node2DVoisins.get(2) ); //20 de pheromone
+        assertEquals(appli.getGraph().getNode(1,2), node2DVoisins.get(3) ); //40 de pheromone
 
     }
 

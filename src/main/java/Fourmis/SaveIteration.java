@@ -44,19 +44,19 @@ public class SaveIteration {
 
 
             //Information concernant les noeuds voisin du noeud courant
-            ArrayList<Node> nodeVoisin = new ArrayList<>(ant.getPosition().getVoisins());
+            ArrayList<Node> node2DVoisin = new ArrayList<>(ant.getPosition().getVoisins());
             String nodeNeighboor = "Neighbor of " + ant.getPosition().toString();
-            if (nodeVoisin.size() != 0) {
-                for (Node node : nodeVoisin) {
+            if (node2DVoisin.size() != 0) {
+                for (Node node2D : node2DVoisin) {
                     //quantité de phéromone sur le noeud voisin en question
                     int quantityOfPheromoneNodeNeighBour = 0;
                     for (Pheromone pheromone : ant.getPosition().getPheromone()) {
                         quantityOfPheromoneNodeNeighBour += pheromone.getQuantity();
                     }
                     //Contient les informations des noeuds voisins de la fourmis
-                    nodeNeighboor += "\n"+node.toString() + " | ";
-                    nodeNeighboor += node.getNodeState().toString() + " | ";
-                    nodeNeighboor += "QF"+ "[" + node.getFood() + "]"+ " | ";
+                    nodeNeighboor += "\n"+ node2D.toString() + " | ";
+                    nodeNeighboor += node2D.getNodeState().toString() + " | ";
+                    nodeNeighboor += "QF"+ "[" + node2D.getFood() + "]"+ " | ";
                     nodeNeighboor += "QP[" + quantityOfPheromoneNodeNeighBour + "]" + " | ";
                 }
                 dataAnt.add(Arrays.asList(nodeNeighboor+"\n"));

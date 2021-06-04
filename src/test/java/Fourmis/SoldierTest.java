@@ -43,7 +43,7 @@ class SoldierTest {
         g.putObstacle(1,0);
         g.putObstacle(1,1);
         g.putObstacle(0,1);
-        Node position = g.getNode(0,0);
+        Node2D position = g.getNode(0,0);
 
 
         //Soldier s = new Soldier(g.getNoeud(0,0));

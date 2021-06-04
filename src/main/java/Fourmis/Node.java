@@ -1,18 +1,12 @@
 package Fourmis;
 
-import com.sun.nio.sctp.PeerAddressChangeNotification;
-
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.concurrent.Semaphore;
 
-public class Node implements Comparable<Node> {
-
-    private ArrayList<Node> voisins;
-    private State nodeState;
-    private int food;
-    private ArrayList<Pheromone> pheromoneList;
+public abstract class Node implements Comparable<Node> {
+    protected ArrayList<Node> voisins;
+    protected State nodeState;
+    protected int food;
+    protected ArrayList<Pheromone> pheromoneList;
 
     /**
      * Créé un noeud
@@ -153,5 +147,3 @@ public class Node implements Comparable<Node> {
             return 0;
     }
 }
-
-

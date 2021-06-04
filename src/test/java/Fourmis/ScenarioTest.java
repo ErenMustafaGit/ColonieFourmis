@@ -117,11 +117,11 @@ public class ScenarioTest {
         Graph graph = ((ControlAnt)this.appli).getGraph();
 
         //Récupération des 5 noeuds nécessaires
-        Node centerNode = graph.getNode(1,1);
-        Node topNode = graph.getNode(0,1);
-        Node bottomNode = graph.getNode(2,1);
-        Node rightNode = graph.getNode(1,2);
-        Node antHillNode = graph.getNode(1,0);
+        Node2D centerNode2D = graph.getNode(1,1);
+        Node2D topNode2D = graph.getNode(0,1);
+        Node2D bottomNode2D = graph.getNode(2,1);
+        Node2D rightNode2D = graph.getNode(1,2);
+        Node2D antHillNode2D = graph.getNode(1,0);
 
 
         int topCount = 0;
@@ -132,20 +132,20 @@ public class ScenarioTest {
         for(int i = 0; i<6000; i++){
 
             //Instanciation d'un ouvrier dans le noeud central
-            Worker worker = new Worker(centerNode, null);
+            Worker worker = new Worker(centerNode2D, null);
 
             //Ajout du noeud de gauche à son historique de noeud, afin qu'il n'y aille pas car il est censé venir de la bas
-            worker.addToRecordsPath(antHillNode);
+            worker.addToRecordsPath(antHillNode2D);
 
             //Déplacement de l'ouvrier
             worker.move();
 
             //Enregistrement de sa position dans un des 3 compteurs
-            if(worker.getPosition() == topNode)
+            if(worker.getPosition() == topNode2D)
                 topCount++;
-            else if(worker.getPosition() == bottomNode)
+            else if(worker.getPosition() == bottomNode2D)
                 bottomCount++;
-            else if(worker.getPosition() == rightNode)
+            else if(worker.getPosition() == rightNode2D)
                 rightCount++;
         }
 
