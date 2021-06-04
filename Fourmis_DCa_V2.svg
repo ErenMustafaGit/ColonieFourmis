@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="686px" preserveAspectRatio="none" style="width:772px;height:686px;" version="1.1" viewBox="0 0 772 686" width="772px" zoomAndPan="magnify"><defs/><g><!--MD5=[e5168f4970614e1706ed633636598618]
+class AntFacadeController--><rect codeLine="10" fill="#FEFECE" height="53.9375" id="AntFacadeController" style="stroke:#A80036;stroke-width:1.5;" width="146" x="238" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="67" x="277.5" y="23.1387">«interface»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="140" x="241" y="37.1074">AntFacadeController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="239" x2="383" y1="44.9375" y2="44.9375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="239" x2="383" y1="52.9375" y2="52.9375"/><!--MD5=[60d6b92408f98aed8df94d5c6e04aa63]
+class State--><rect codeLine="14" fill="#FEFECE" height="92.3516" id="State" style="stroke:#A80036;stroke-width:1.5;" width="72" x="264" y="587"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49" x="275.5" y="603.1387">«enum»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="281.5" y="617.1074">State</text><line style="stroke:#A80036;stroke-width:1.5;" x1="265" x2="335" y1="624.9375" y2="624.9375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="270" y="639.1479">FREE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="270" y="651.9526">OBSTACLE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="46" x="270" y="664.7573">ANTHILL</text><line style="stroke:#A80036;stroke-width:1.5;" x1="265" x2="335" y1="671.3516" y2="671.3516"/><!--MD5=[706e73df52f3df32f52be1ce9adb217e]
+class Graph--><rect codeLine="21" fill="#FEFECE" height="65.5781" id="Graph" style="stroke:#A80036;stroke-width:1.5;" width="48" x="649" y="347"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="652" y="363.1387">Graph</text><line style="stroke:#A80036;stroke-width:1.5;" x1="650" x2="696" y1="370.9688" y2="370.9688"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="655" y="385.1792">width</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="35" x="655" y="397.9839">height</text><line style="stroke:#A80036;stroke-width:1.5;" x1="650" x2="696" y1="404.5781" y2="404.5781"/><!--MD5=[3fee75583bb7a64f68d843a3c9534ab3]
+class Node--><rect codeLine="25" fill="#FEFECE" height="66.7422" id="Node" style="stroke:#A80036;stroke-width:1.5;" width="66" x="267" y="443"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="64" x="268" y="459.1387">«abstract»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="35" x="282.5" y="473.1074">Node</text><line style="stroke:#A80036;stroke-width:1.5;" x1="268" x2="332" y1="480.9375" y2="480.9375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="25" x="273" y="495.1479">food</text><line style="stroke:#A80036;stroke-width:1.5;" x1="268" x2="332" y1="501.7422" y2="501.7422"/><!--MD5=[10c50c2e3150e634e5ce95ceba89a534]
+class Ant--><rect codeLine="31" fill="#FEFECE" height="53.9375" id="Ant" style="stroke:#A80036;stroke-width:1.5;" width="66" x="91" y="449.5"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="64" x="92" y="465.6387">«abstract»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="24" x="112" y="479.6074">Ant</text><line style="stroke:#A80036;stroke-width:1.5;" x1="92" x2="156" y1="487.4375" y2="487.4375"/><line style="stroke:#A80036;stroke-width:1.5;" x1="92" x2="156" y1="495.4375" y2="495.4375"/><!--MD5=[e5785e38f0946d6b7ba0391c145c537c]
+class AntHill--><rect codeLine="35" fill="#FEFECE" height="39.9688" id="AntHill" style="stroke:#A80036;stroke-width:1.5;" width="52" x="285" y="277"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="46" x="288" y="293.1387">AntHill</text><line style="stroke:#A80036;stroke-width:1.5;" x1="286" x2="336" y1="300.9688" y2="300.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="286" x2="336" y1="308.9688" y2="308.9688"/><!--MD5=[ab18ab109d20d07a46d8dcc7319a218d]
+class Soldier--><rect codeLine="39" fill="#FEFECE" height="39.9688" id="Soldier" style="stroke:#A80036;stroke-width:1.5;" width="54" x="136" y="613"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="48" x="139" y="629.1387">Soldier</text><line style="stroke:#A80036;stroke-width:1.5;" x1="137" x2="189" y1="636.9688" y2="636.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="137" x2="189" y1="644.9688" y2="644.9688"/><!--MD5=[7b5bd88a8a025decccf0c9eac4aaabe9]
+class Worker--><rect codeLine="43" fill="#FEFECE" height="39.9688" id="Worker" style="stroke:#A80036;stroke-width:1.5;" width="55" x="45.5" y="613"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="49" x="48.5" y="629.1387">Worker</text><line style="stroke:#A80036;stroke-width:1.5;" x1="46.5" x2="99.5" y1="636.9688" y2="636.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="46.5" x2="99.5" y1="644.9688" y2="644.9688"/><!--MD5=[4cd4868f8fb00fb1f0f16cbeaa8b2692]
+class SaveIteration--><rect codeLine="46" fill="#FEFECE" height="78.3828" id="SaveIteration" style="stroke:#A80036;stroke-width:1.5;" width="98" x="7" y="122"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="92" x="10" y="138.1387">SaveIteration</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="104" y1="145.9688" y2="145.9688"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="13" y="160.1792">antLogFile</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="13" y="172.9839">dataAnt</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="37" x="13" y="185.7886">antList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="104" y1="192.3828" y2="192.3828"/><!--MD5=[9bc19fadb5fbcea8e0ad391b542b362d]
+class ControlAnt--><rect codeLine="52" fill="#FEFECE" height="39.9688" id="ControlAnt" style="stroke:#A80036;stroke-width:1.5;" width="80" x="271" y="141"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="74" x="274" y="157.1387">ControlAnt</text><line style="stroke:#A80036;stroke-width:1.5;" x1="272" x2="350" y1="164.9688" y2="164.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="272" x2="350" y1="172.9688" y2="172.9688"/><!--MD5=[03a8d271f23acb716d928fdb53328ac5]
+class Pheromone--><rect codeLine="55" fill="#FEFECE" height="52.7734" id="Pheromone" style="stroke:#A80036;stroke-width:1.5;" width="84" x="562" y="450"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="78" x="565" y="466.1387">Pheromone</text><line style="stroke:#A80036;stroke-width:1.5;" x1="563" x2="645" y1="473.9688" y2="473.9688"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="46" x="568" y="488.1792">quantity</text><line style="stroke:#A80036;stroke-width:1.5;" x1="563" x2="645" y1="494.7734" y2="494.7734"/><!--MD5=[0fedb01c51e4a48c0e9518ef141c73c4]
+class Node2d--><rect codeLine="59" fill="#FEFECE" height="39.9688" id="Node2d" style="stroke:#A80036;stroke-width:1.5;" width="58" x="588" y="613"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="52" x="591" y="629.1387">Node2d</text><line style="stroke:#A80036;stroke-width:1.5;" x1="589" x2="645" y1="636.9688" y2="636.9688"/><line style="stroke:#A80036;stroke-width:1.5;" x1="589" x2="645" y1="644.9688" y2="644.9688"/><!--MD5=[aa722b09dfa1cf5a63ede336d4349abe]
+reverse link Ant to Soldier--><path d="M135.6759,523.3532 C143.0792,553.0613 152.2862,590.0075 157.8989,612.5303 " fill="none" id="Ant-backto-Soldier" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="128.8372,524.8594,130.7933,503.7602,142.4218,521.474,128.8372,524.8594" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c8892067b2ec4d30e44d5d5d2177d5b0]
+reverse link Ant to Worker--><path d="M108.8717,522.9232 C99.1667,552.704 87.0458,589.8987 79.6706,612.5303 " fill="none" id="Ant-backto-Worker" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="102.2641,520.6071,115.1165,503.7602,115.5751,524.9449,102.2641,520.6071" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ec5b6763ef85bdc9e5bae8dc40bc12c1]
+reverse link AntFacadeController to ControlAnt--><path d="M311,81.3959 C311,101.9485 311,124.9111 311,140.8721 " fill="none" id="AntFacadeController-backto-ControlAnt" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="304.0001,81.2447,311,61.2447,318.0001,81.2447,304.0001,81.2447" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[066a15d3a9f0162c4e28b362f69fca65]
+reverse link Node to Node2d--><path d="M350.9708,501.6638 C418.0713,534.7907 533.8228,591.9362 587.7589,618.5639 " fill="none" id="Node-backto-Node2d" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="347.8622,507.9358,333.0275,492.8054,354.0598,495.3823,347.8622,507.9358" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7500f5cf3502e490fbb69e622f324964]
+link SaveIteration to ControlAnt--><path codeLine="61" d="M105.1666,161 C153.3605,161 225.9339,161 270.7879,161 " fill="none" id="SaveIteration-ControlAnt" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="122.5,149.5664,131.5451,152.5053,131.5451,146.6275,122.5,149.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="136.5" y="154.0669">sauvegarde (.csv)</text><!--MD5=[fb7add3d04029a548e9a9a347d9aecd1]
+link Node to Node--><path codeLine="63" d="M333.2367,463.6007 C351.3811,461.3018 368,465.6016 368,476.5 C368,487.3984 351.3811,491.6982 333.2367,489.3993 " fill="none" id="Node-Node" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="372.3715,481.5268,376.4241,472.9228,370.5928,472.184,372.3715,481.5268" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="387" y="481.0669">est voisin de</text><!--MD5=[e361e0ddab4ffa591fd2417aaf2f2025]
+link ControlAnt to Graph--><path codeLine="64" d="M344.0847,181.0154 C416.1693,224.6245 585.9762,327.353 648.9486,365.4496 " fill="none" id="ControlAnt-Graph" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="455.2781,241.1545,449.0602,233.958,446.0177,238.9872,455.2781,241.1545" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="460" y="243.0669">possède un</text><!--MD5=[42aa1678406e0a1c0ab74f7eb572cf90]
+link ControlAnt to Ant--><path codeLine="65" d="M276.7833,181.1723 C245.0346,201.5578 198.6411,235.8681 171,277 C134.977,330.6048 126.4085,408.4801 124.4722,449.2662 " fill="none" id="ControlAnt-Ant" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="173.5301,301.4138,180.5535,295.001,175.4428,292.0975,173.5301,301.4138" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="185" y="301.5669">possède des</text><!--MD5=[16ac4a6b421b0eb8ec25fd8f023254a0]
+link ControlAnt to AntHill--><path codeLine="66" d="M311,181.0673 C311,206.7803 311,251.0977 311,276.8504 " fill="none" id="ControlAnt-AntHill" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="316,243.5664,318.9389,234.5213,313.0611,234.5213,316,243.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="325" y="243.0669">possède des</text><!--MD5=[2ee544e0bfcc1a0a0713281076a68a70]
+link Graph to Node2d--><path codeLine="67" d="M673.001,413.2329 C672.3918,439.7249 670.1503,477.6181 663,510 C654.7414,547.4008 637.5117,588.6847 626.6421,612.648 " fill="none" id="Graph-Node2d" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="674.8678,481.4365,679.7785,473.2919,674.0534,471.9609,674.8678,481.4365" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="79" x="685" y="481.0669">composé de</text><!--MD5=[44a0082c4d57b8b9ae054de3f547280a]
+link Ant to Node--><path codeLine="68" d="M157.1043,476.5 C188.4707,476.5 235.3297,476.5 266.7455,476.5 " fill="none" id="Ant-Node" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="184.5,465.0664,175.4549,462.1275,175.4549,468.0053,184.5,465.0664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="188.5" y="469.5669">est sur le</text><!--MD5=[8e529f8cfe4b1c63472b1e1b31a35497]
+link Node to State--><path codeLine="69" d="M300,510.0732 C300,532.4369 300,562.1225 300,586.7189 " fill="none" id="Node-State" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="305,553.5664,307.9389,544.5213,302.0611,544.5213,305,553.5664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="314" y="553.0669">est</text><!--MD5=[03523ac7047cdbd7a980ae407d4303cc]
+link Node to Pheromone--><path codeLine="70" d="M333.112,476.5 C388.7422,476.5 500.8577,476.5 561.9627,476.5 " fill="none" id="Node-Pheromone" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="423.5,465.0664,414.4549,462.1275,414.4549,468.0053,423.5,465.0664" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="427.5" y="469.5669">contient</text><!--MD5=[dade9983dacd3f01656737f74ddeb862]
+link Node to AntHill--><path codeLine="71" d="M302.0585,442.9094 C304.3229,405.9578 307.8885,347.7738 309.7595,317.242 " fill="none" id="Node-AntHill" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="312.6942,385.057,316.1808,376.2087,310.314,375.8491,312.6942,385.057" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="322" y="384.5669">est sur le</text><!--MD5=[64100d7bc289e8259cb39f02a89ee479]
+link AntHill to Ant--><path codeLine="73" d="M284.5834,305.3043 C262.2867,313.3016 230.4931,327.1263 208,347 C175.1653,376.011 150.008,420.7883 136.1148,449.3592 " fill="none" id="AntHill-Ant" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="216.5885,376.5846,208.0503,380.774,212.1434,384.9925,216.5885,376.5846" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="222" y="384.5669">provient de</text><!--MD5=[539ea9c7ce42761ad6c64718d308d2a8]
+link Pheromone to AntHill--><path codeLine="74" d="M561.9874,450.7619 C500.4902,413.087 387.7717,344.0325 337.0018,312.9294 " fill="none" id="Pheromone-AntHill" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#000000" points="493.7365,377.4544,499.914,384.6856,502.9845,379.6735,493.7365,377.4544" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="507" y="384.5669">provient de</text><!--MD5=[ca01716b72b0eb8a999bb988dfcdf75a]
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam circledCharacterRadius 0
+skinparam circledCharacterFontSize 0
+skinparam classFontStyle Bold
+'autonumber
+
+
+interface AntFacadeController<<interface>>{
+
+}
+
+enum State <<enum>> {
+    FREE
+    OBSTACLE
+    ANTHILL
+}
+
+
+class Graph {
+     width
+     height
+}
+abstract Node <<abstract>>{
+    food
+}
+
+
+
+abstract Ant <<abstract>>{
+
+}
+
+class AntHill {
+
+}
+
+class Soldier extends Ant{
+
+}
+
+class Worker extends Ant{
+}
+
+class SaveIteration{
+    antLogFile
+    dataAnt
+    antList
+}
+
+class ControlAnt implements AntFacadeController{
+}
+
+class Pheromone{
+    quantity
+}
+
+abstract class Node2d extends Node{
+}
+SaveIteration - ControlAnt : sauvegarde (.csv) <
+
+Node - Node : est voisin de >
+ControlAnt - - Graph : possède un >
+ControlAnt - - - Ant : possède des >
+ControlAnt - - AntHill : possède des >
+Graph - - Node2d : composé de >
+Ant  - Node : est sur le >
+Node - -  State : est >
+Node - Pheromone : contient >
+Node - AntHill : est sur le <
+
+Ant -u- AntHill : provient de >
+Pheromone - AntHill : provient de >
+
+
+@enduml
+
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam circledCharacterRadius 0
+skinparam circledCharacterFontSize 0
+skinparam classFontStyle Bold
+
+
+interface AntFacadeController<<interface>>{
+
+}
+
+enum State <<enum>> {
+    FREE
+    OBSTACLE
+    ANTHILL
+}
+
+
+class Graph {
+     width
+     height
+}
+abstract Node <<abstract>>{
+    food
+}
+
+
+
+abstract Ant <<abstract>>{
+
+}
+
+class AntHill {
+
+}
+
+class Soldier extends Ant{
+
+}
+
+class Worker extends Ant{
+}
+
+class SaveIteration{
+    antLogFile
+    dataAnt
+    antList
+}
+
+class ControlAnt implements AntFacadeController{
+}
+
+class Pheromone{
+    quantity
+}
+
+abstract class Node2d extends Node{
+}
+SaveIteration - ControlAnt : sauvegarde (.csv) <
+
+Node - Node : est voisin de >
+ControlAnt - - Graph : possède un >
+ControlAnt - - - Ant : possède des >
+ControlAnt - - AntHill : possède des >
+Graph - - Node2d : composé de >
+Ant  - Node : est sur le >
+Node - -  State : est >
+Node - Pheromone : contient >
+Node - AntHill : est sur le <
+
+Ant -u- AntHill : provient de >
+Pheromone - AntHill : provient de >
+
+
+@enduml
+
+PlantUML version 1.2021.2(Sun Mar 07 12:10:27 CET 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: fr
+Country: FR
+--></g></svg>

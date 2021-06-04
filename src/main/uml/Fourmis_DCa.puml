@@ -59,7 +59,7 @@ class Pheromone{
 
 abstract class Node2d extends Node{
 }
-SaveIteration - ControlAnt : Save <
+SaveIteration - ControlAnt : sauvegarde (.csv) <
 
 Node - Node : est voisin de >
 ControlAnt -- Graph : possède un >
