@@ -61,7 +61,7 @@ ControlAnt --- Ant : possède des >
 ControlAnt -- AntHill : possède des >
 Graph -- Node2d : composé de >
 Ant  - Node : est sur le >
-Node --  STATE : est >
+Node --  State : est >
 Node - Pheromone : contient >
 Node - AntHill : est sur le <
 
