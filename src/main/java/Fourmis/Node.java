@@ -3,10 +3,10 @@ package Fourmis;
 import java.util.ArrayList;
 
 public abstract class Node implements Comparable<Node> {
-    private ArrayList<Node> voisins;
-    private State nodeState;
-    private int food;
-    private ArrayList<Pheromone> pheromoneList;
+    protected ArrayList<Node> voisins;
+    protected State nodeState;
+    protected int food;
+    protected ArrayList<Pheromone> pheromoneList;
 
     /**
      * Créé un noeud

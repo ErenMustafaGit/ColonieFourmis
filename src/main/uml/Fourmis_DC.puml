@@ -23,11 +23,11 @@ interface AntFacadeController <<interface>> {
 }
 
 
-class Node{
+abstract class Node <<abstract>>{
     -food:Integer
     +Node()
-    +getNoeudState():STATE
-    +setNoeudState(State:STATE)
+    +getNoeudState():State
+    +setNoeudState(State:State)
     +addNoeudVoisin(noeud:Noeud)
     +getVoisins():Node[*]
     +getFreeVoisins():Node[*]
@@ -38,9 +38,12 @@ class Node{
     '+compareTo(node:Node)<<override>>
 }
 
+class Node2D extends Node{
+
+}
 
 
-enum STATE <<enum>> {
+enum State <<enum>> {
     FREE
     OBSTACLE
     ANTHILL
@@ -128,7 +131,10 @@ class Graph{
  +getWidth():Integer
  +getHeight():Integer
 }
-SaveIteration <- "Save?" ControlAnt
+
+
+
+SaveIteration <-- "Save?" ControlAnt
 
 Soldier --|> Ant
 Worker --|> Ant
@@ -140,7 +146,7 @@ ControlAnt "-graphe\n1 " *-l-> Graph
 ControlAnt  *-r-> "-antList\n0..*" Ant
 
 
-Graph *--> "-nodeList \n0..*" Node : composé de >
+Graph *--> "-nodeList \n0..*" Node2D : composé de >
 
 'historique = liste de noeud déjà passé par la fourmi
 '"-position 1\n-historique 0..*"
@@ -148,7 +154,7 @@ Ant o---> "-position\n1" Node  : est sur un >
 AntHill *--> "-position\n1" Node  : est sur un >
 Node o-> "-voisins\n0..*"  Node  : est voisin de >
 
-Node -l-> STATE : <<uses>>
+Node -l-> State : <<uses>>
 
 'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
