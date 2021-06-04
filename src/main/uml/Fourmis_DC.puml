@@ -113,7 +113,7 @@ class SaveIteration {
     -antLogFile:String
     -dataAnt:String[*]
     -antList:Ant[*]
-    +SaveIteration(dataAnt:String[*], dataNeighbour:String[*], antList:Ant[*])
+    +SaveIteration(dataAnt:String[*], antList:Ant[*])
     +recordProcess(iteration:Integer)
     +setSaveLocation(location:String)
     +writeProcess()
@@ -134,7 +134,7 @@ class Graph{
 
 
 
-SaveIteration <-- "Save?" ControlAnt
+SaveIteration -- ControlAnt : sauvegarde (.csv) <
 
 Soldier --|> Ant
 Worker --|> Ant
