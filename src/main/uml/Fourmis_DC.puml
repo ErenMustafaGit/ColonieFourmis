@@ -134,7 +134,7 @@ class Graph{
 
 
 
-SaveIteration <-- ControlAnt : sauvegarde (.csv) <
+SaveIteration "-saveIteration\n1" <--* ControlAnt : sauvegarde (.csv) >
 
 Soldier --|> Ant
 Worker --|> Ant
