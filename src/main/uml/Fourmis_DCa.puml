@@ -12,7 +12,7 @@ interface AntFacadeController<<interface>>{
 
 }
 
-enum STATE <<enum>> {
+enum State <<enum>> {
     FREE
     OBSTACLE
     ANTHILL
