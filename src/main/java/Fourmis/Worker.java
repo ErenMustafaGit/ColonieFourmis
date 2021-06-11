@@ -26,6 +26,11 @@ public class Worker extends Ant{
         recordsPath.add(this.getPosition());
     }
 
+    /**
+     * Permet d'obtenir une liste de noeud des noeud non visité par la fourmis ouvrière
+     * @param freeVoisins la liste des noeuds voisin libre
+     * @return retourne la liste des noeuds voinsins non encore visité
+     */
     public ArrayList<Node> getNonVisitedNode(ArrayList<Node> freeVoisins){
         ArrayList<Node> noneVisitedNode = new ArrayList<>();
 
@@ -39,6 +44,9 @@ public class Worker extends Ant{
         return new ArrayList<>(noneVisitedNode);
     }
 
+    /**
+     * Permet à l'ouvrière de bouger
+     */
     @Override
     public void move() {
         Node position = this.getPosition();
@@ -189,6 +197,9 @@ public class Worker extends Ant{
 
     }
 
+    /**
+     * Permet à la fourmis ouvrière de récuperer de la nourriture sur un noeud lorsqu'il y en a
+     */
     public void collect(){
 
         //Collecte seulement si il n'a rien collecté
@@ -212,15 +223,28 @@ public class Worker extends Ant{
         }
     }
 
+    /**
+     * Permet d'établir de la phéromone sur un noeud
+     */
     public void putPheromone(){
         Pheromone pheromone = new Pheromone(super.colony.getPheromoneQuantity(), this.colony);
         this.getPosition().addPheromone(pheromone);
     }
 
+    /**
+     * Récupère le nombre de nourriture collecté par la fourmis ouvrière
+     * @return la quantité de nourriture récuperé par la fourmi ouvrière
+     */
     public int getFoodCollected(){
         return this.foodCollected;
     }
 
+    /**
+     * Permet de récuperer au hasard un noeud d'une liste trié par ordre croissant de phéromone
+     * Merci à Mazo d'avoir fournit cet algorithme !
+     * @param nodesPheromone la liste des phéromones trié par ordre croissant
+     * @return l'index
+     */
     public int getIndexAlgorithme(ArrayList<Node> nodesPheromone){
         Random rnd = new Random();
         //l'index à i(index) fois plude chance d'être choisi que le premier élement
@@ -235,10 +259,18 @@ public class Worker extends Ant{
         return index;
     }
 
+    /**
+     * Ajoute un noeud à la liste historique
+     * @param addedNode2D noeud à ajouter dans l'historique
+     */
     public void addToRecordsPath(Node addedNode2D){
         this.recordsPath.add(addedNode2D);
     }
 
+    /**
+     * Définis la capacité de recolte de nourriture
+     * @param foodCollected la capacité de récolte de nourriture
+     */
     public void setFoodCollected(int foodCollected) {
         this.foodCollected = foodCollected;
     }

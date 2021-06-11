@@ -23,18 +23,34 @@ public class AntHill extends Ant {
     }
 
 
+    /**
+     * Permet de définir la capcacitée de collecte pour une fourmis ouvrière
+     * @param capacity valeur à attribuer pour définir la capacité de collecte
+     */
     public void setCollectCapacity(int capacity){
         this.collectCapacity = capacity;
     }
 
+    /**
+     * Permet de définir la quantité de phéromone
+     * @param pheromoneQuantity quantité qui vas définir la quantité de phéromone
+     */
     public void setPheromoneQuantity(int pheromoneQuantity){
         this.pheromoneQuantity = pheromoneQuantity;
     }
 
+    /**
+     * Permet de récuperer la quantité de phéromone établi
+     * @return retourne la quantité de phéromone établi au sein de la colonnie
+     */
     public int getPheromoneQuantity(){
         return this.pheromoneQuantity;
     }
 
+    /**
+     * Permet de récuperer la capacité de collecte
+     * @return retour la capacité de collecte définis
+     */
     public int getCollectCapacity(){
         return this.collectCapacity;
     }

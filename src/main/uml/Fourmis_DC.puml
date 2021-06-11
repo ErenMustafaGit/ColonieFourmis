@@ -24,7 +24,7 @@ interface AntFacadeController <<interface>> {
 
 
 abstract class Node <<abstract>>{
-    -food:Integer
+    #food:Integer
     +Node()
     +getNoeudState():State
     +setNoeudState(State:State)
@@ -33,13 +33,14 @@ abstract class Node <<abstract>>{
     +getFreeVoisins():Node[*]
     +setFood(amount:Integer)
     +getFood():Integer
+    +addPheromone(pheromone:Pheromone)
     +getPheromones():Pheromone[*]
     +updatePheromone()
     '+compareTo(node:Node)<<override>>
 }
 
 class Node2D extends Node{
-
+   +Node2D()
 }
 
 
@@ -76,7 +77,6 @@ class AntHill{
     +setPheromoneQuantity(pheromoneQuantity:Integer)
     +getCollectCapacity():Integer
     +getPheromoneQuantity():Integer
-    +getPosition():Node
     +createSoldiers(amount:Integer)
     +createWorkers((amount:Integer)
 }
@@ -94,6 +94,7 @@ class Worker {
     +collect()
     +putPheromone()
     +getFoodCollected():Integer
+    +getIndexAlgorithme(nodesPheromone:Node[*]):Integer
     +addRecordsPath(addNode:Node)
     +setFoodCollected(foodCollected:Integer)
 }
@@ -113,7 +114,7 @@ class SaveIteration {
     -antLogFile:String
     -dataAnt:String[*]
     -antList:Ant[*]
-    +SaveIteration(dataAnt:String[*], dataNeighbour:String[*], antList:Ant[*])
+    +SaveIteration(dataAnt:String[*], antList:Ant[*])
     +recordProcess(iteration:Integer)
     +setSaveLocation(location:String)
     +writeProcess()
@@ -126,7 +127,6 @@ class Graph{
  +Graph(witdh:Integer, height:Integer)
  +getNode(row:Integer, column:Integer):Node
  +putObstacle(row:Integer, column:Integer)
- +createColony(row:Integer,column:Integer)
  +getNodeList():Node[*]
  +getWidth():Integer
  +getHeight():Integer
@@ -134,7 +134,7 @@ class Graph{
 
 
 
-SaveIteration <-- "Save?" ControlAnt
+SaveIteration "-saveIteration\n1" <--* ControlAnt : sauvegarde (.csv) >
 
 Soldier --|> Ant
 Worker --|> Ant
@@ -152,13 +152,13 @@ Graph *--> "-nodeList \n0..*" Node2D : composé de >
 '"-position 1\n-historique 0..*"
 Ant o---> "-position\n1" Node  : est sur un >
 AntHill *--> "-position\n1" Node  : est sur un >
-Node o-> "-voisins\n0..*"  Node  : est voisin de >
+Node o-> " #voisins\n0..*"  Node  : est voisin de >
 
-Node -l-> State : <<uses>>
+Node -l-> " #state\n1" State : <<uses>> >
 
 'Ant *-> "-colony\n1" AntHill : provient de >
 Pheromone *-u-> "-colony\n1" AntHill : provient de >
-Node o-l-> "-pheromones\n..*" Pheromone : contient >
+Node o-l-> " #pheromones\n..*" Pheromone : contient >
 
 
 @enduml
